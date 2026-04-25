@@ -61,7 +61,8 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
   }
 
   return (
-    <aside className="w-60 shrink-0 h-screen bg-gray-950 flex flex-col">
+    <aside className="relative w-60 shrink-0 h-screen bg-surface-0/80 backdrop-blur-xl border-r border-white/[0.07] flex flex-col">
+      <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent pointer-events-none" />
       <div className="px-6 py-5 border-b border-white/[0.07] flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center">

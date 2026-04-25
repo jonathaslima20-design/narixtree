@@ -7,6 +7,7 @@ import { useAuth } from '../../lib/AuthContext';
 import { SubscriptionProvider, useSubscriptionCtx } from '../../lib/SubscriptionContext';
 import { PricingModal } from '../ui/PricingModal';
 import { BrainLoader } from '../ui/BrainLoader';
+import { AmbientBackground } from '../ui/AmbientBackground';
 
 export function UserLayout() {
   const { user, profile, loading } = useAuth();
@@ -30,7 +31,7 @@ function UserLayoutInner() {
   const accountDisabled = profile?.is_enabled === false;
 
   return (
-    <div className="flex min-h-screen bg-gray-50/80 font-sans">
+    <div className="relative flex min-h-screen bg-surface-0 font-sans text-white"><AmbientBackground intensity="subtle" />
       {/* Desktop sidebar */}
       <div className="hidden lg:block sticky top-0 h-screen">
         <UserSidebar />
@@ -60,12 +61,12 @@ function UserLayoutInner() {
         )}
       </AnimatePresence>
 
-      <div className="flex-1 flex flex-col overflow-auto">
+      <div className="relative flex-1 flex flex-col overflow-auto">
         {/* Mobile header */}
-        <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200 px-4 py-3 flex items-center gap-3 lg:hidden">
+        <div className="sticky top-0 z-30 bg-surface-0/80 backdrop-blur-xl border-b border-white/10 px-4 py-3 flex items-center gap-3 lg:hidden">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-2 -ml-1 rounded-xl text-gray-900 hover:bg-gray-100 transition-colors"
+            className="p-2 -ml-1 rounded-xl text-white hover:bg-white/10 transition-colors"
           >
             <Menu size={20} />
           </button>
@@ -74,22 +75,22 @@ function UserLayoutInner() {
           <Outlet />
         </main>
         <div className="py-6 flex items-center justify-center gap-2 lg:hidden">
-          <div className="w-8 h-8 bg-gray-800 rounded-xl flex items-center justify-center">
+          <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center ring-1 ring-white/10">
             <Brain size={16} className="text-white" />
           </div>
-          <span className="font-semibold text-gray-700">BrainLead</span>
+          <span className="font-semibold text-white/80">BrainLead</span>
         </div>
       </div>
 
       {/* Account disabled overlay */}
       {accountDisabled && (
-        <div className="fixed inset-0 z-[60] bg-white/95 backdrop-blur-sm flex items-center justify-center p-6">
+        <div className="fixed inset-0 z-[60] bg-surface-0/95 backdrop-blur-md flex items-center justify-center p-6">
           <div className="text-center max-w-sm">
-            <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <ShieldOff size={24} className="text-red-500" />
+            <div className="w-14 h-14 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <ShieldOff size={24} className="text-red-400" />
             </div>
-            <h2 className="text-xl font-bold text-gray-900 mb-2">Conta desativada</h2>
-            <p className="text-sm text-gray-500">
+            <h2 className="text-xl font-bold text-white mb-2">Conta desativada</h2>
+            <p className="text-sm text-white/60">
               Sua conta foi desativada pelo administrador. Entre em contato com o suporte para mais informacoes.
             </p>
           </div>
@@ -119,10 +120,10 @@ function UserLayoutInner() {
 
 function LoadingScreen() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
+    <div className="min-h-screen bg-surface-0 flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
         <BrainLoader size="lg" />
-        <p className="text-sm text-gray-400">Carregando...</p>
+        <p className="text-sm text-white/50">Carregando...</p>
       </div>
     </div>
   );

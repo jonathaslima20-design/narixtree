@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AdminSidebar } from './AdminSidebar';
 import { useAuth } from '../../lib/AuthContext';
 import { BrainLoader } from '../ui/BrainLoader';
+import { AmbientBackground } from '../ui/AmbientBackground';
 
 export function AdminLayout() {
   const { user, profile, loading } = useAuth();
@@ -15,7 +16,7 @@ export function AdminLayout() {
   if (profile && profile.role !== 'admin') return <Navigate to="/dashboard" replace />;
 
   return (
-    <div className="flex min-h-screen bg-gray-950 font-sans">
+    <div className="relative flex min-h-screen bg-surface-0 font-sans text-white"><AmbientBackground intensity="subtle" />
       {/* Desktop sidebar */}
       <div className="hidden lg:block sticky top-0 h-screen">
         <AdminSidebar />
@@ -45,12 +46,12 @@ export function AdminLayout() {
         )}
       </AnimatePresence>
 
-      <div className="flex-1 flex flex-col overflow-auto bg-gray-50">
+      <div className="relative flex-1 flex flex-col overflow-auto">
         {/* Mobile header */}
-        <div className="sticky top-0 z-30 bg-gray-950/90 backdrop-blur-md border-b border-gray-800 px-4 py-3 flex items-center gap-3 lg:hidden">
+        <div className="sticky top-0 z-30 bg-surface-0/80 backdrop-blur-xl border-b border-white/10 px-4 py-3 flex items-center gap-3 lg:hidden">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-2 -ml-1 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 -ml-1 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-colors"
           >
             <Menu size={20} />
           </button>
@@ -67,10 +68,10 @@ export function AdminLayout() {
 
 function LoadingScreen() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
+    <div className="min-h-screen bg-surface-0 flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
         <BrainLoader size="lg" />
-        <p className="text-sm text-gray-400">Carregando...</p>
+        <p className="text-sm text-white/50">Carregando...</p>
       </div>
     </div>
   );

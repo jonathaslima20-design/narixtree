@@ -8,14 +8,14 @@ interface BadgeProps {
 
 export function Badge({ children, variant = 'neutral', size = 'sm' }: BadgeProps) {
   const variants = {
-    hot: 'bg-red-50 text-red-600 border border-red-100',
-    warm: 'bg-amber-50 text-amber-600 border border-amber-100',
-    cold: 'bg-blue-50 text-blue-600 border border-blue-100',
-    success: 'bg-emerald-50 text-emerald-600 border border-emerald-100',
-    warning: 'bg-yellow-50 text-yellow-600 border border-yellow-100',
-    error: 'bg-red-50 text-red-600 border border-red-100',
-    neutral: 'bg-gray-100 text-gray-600 border border-gray-200',
-    info: 'bg-sky-50 text-sky-600 border border-sky-100',
+    hot: 'bg-red-500/10 text-red-300 border border-red-500/20',
+    warm: 'bg-amber-500/10 text-amber-300 border border-amber-500/20',
+    cold: 'bg-sky-500/10 text-sky-300 border border-sky-500/20',
+    success: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20',
+    warning: 'bg-yellow-500/10 text-yellow-300 border border-yellow-500/20',
+    error: 'bg-red-500/10 text-red-300 border border-red-500/20',
+    neutral: 'bg-white/[0.06] text-white/70 border border-white/10',
+    info: 'bg-sky-500/10 text-sky-300 border border-sky-500/20',
   };
 
   const sizes = {
