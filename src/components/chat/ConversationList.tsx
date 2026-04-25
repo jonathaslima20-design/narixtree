@@ -165,7 +165,7 @@ export function ConversationList({
                     backgroundColor: isFlashing
                       ? 'rgba(16, 185, 129, 0.08)'
                       : active
-                      ? 'rgb(249, 250, 251)'
+                      ? 'rgba(255, 255, 255, 0.10)'
                       : 'rgba(255, 255, 255, 0)',
                   }}
                   transition={{ backgroundColor: { duration: 0.6 } }}
