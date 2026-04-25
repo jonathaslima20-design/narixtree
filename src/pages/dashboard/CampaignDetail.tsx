@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -53,6 +54,7 @@ const TYPE_ICONS: Record<string, typeof Type> = {
 };
 
 export function CampaignDetail() {
+  usePageTitle('Detalhes da Campanha — BrainLead');
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();

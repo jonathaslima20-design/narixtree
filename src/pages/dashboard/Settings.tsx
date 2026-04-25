@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { Settings as SettingsIcon, Smartphone, Layers } from 'lucide-react';
 import { ConnectWhatsApp } from './ConnectWhatsApp';
@@ -12,6 +13,7 @@ const tabs = [
 type TabId = (typeof tabs)[number]['id'];
 
 export function Settings() {
+  usePageTitle('Configurações — BrainLead');
   const [activeTab, setActiveTab] = useState<TabId>('connections');
 
   return (

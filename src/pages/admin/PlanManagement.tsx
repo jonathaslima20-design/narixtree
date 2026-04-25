@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   CreditCard,
@@ -88,6 +89,7 @@ function slugify(text: string) {
 }
 
 export function PlanManagement() {
+  usePageTitle('Planos — BrainLead Admin');
   const { plans, loading, createPlan, updatePlan, deletePlan, togglePlanActive } = usePlans();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import {
   Users,
@@ -68,6 +69,7 @@ function pctChange(now: number, prev: number): { label: string; direction: 'up' 
 }
 
 export function AdminOverview() {
+  usePageTitle('Visão Geral — BrainLead Admin');
   const [period, setPeriod] = useState('30d');
   const [stats, setStats] = useState<Stats>({
     totalUsers: 0,

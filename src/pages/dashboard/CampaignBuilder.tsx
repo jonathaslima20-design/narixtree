@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -107,6 +108,7 @@ function readAudioDuration(file: File): Promise<number> {
 }
 
 export function CampaignBuilder() {
+  usePageTitle('Nova Campanha — BrainLead');
   const { user } = useAuth();
   const navigate = useNavigate();
   const { categories } = useLeadCategories();

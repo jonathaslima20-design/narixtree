@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Navigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, User, Brain, ArrowRight, ArrowLeft } from 'lucide-react';
@@ -19,6 +19,11 @@ export function AuthPage() {
   const [form, setForm] = useState({ email: '', password: '', full_name: '' });
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    document.title = mode === 'register' ? 'Criar Conta — BrainLead' : 'Entrar — BrainLead';
+    return () => { document.title = 'BrainLead'; };
+  }, [mode]);
 
   if (loading) return (
     <div className="min-h-screen bg-surface-0 flex items-center justify-center">

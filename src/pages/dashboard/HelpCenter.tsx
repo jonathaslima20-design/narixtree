@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ChevronDown, ChevronRight, HelpCircle, MessageCircle, Users, Megaphone, Settings, Smartphone, Zap, AlertCircle, CheckCircle, Info, ArrowLeft, Tag, Filter, Download, Upload, Clock, Send, BarChart2, Shuffle, Star, Archive, Trash2, Plus, CreditCard as Edit3 } from 'lucide-react';
 
@@ -815,6 +816,7 @@ function SupportBanner() {
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export function HelpCenter() {
+  usePageTitle('Central de Ajuda — BrainLead');
   const [query, setQuery] = useState('');
   const [openCategories, setOpenCategories] = useState<Set<string>>(new Set([CATEGORIES[0].id]));
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);

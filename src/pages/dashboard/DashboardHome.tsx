@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { Users, TrendingUp, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -21,6 +22,7 @@ const item = {
 };
 
 export function DashboardHome() {
+  usePageTitle('Inicio — BrainLead');
   const { profile } = useAuth();
   const { categories } = useLeadCategories();
   const [allLeads, setAllLeads] = useState<Lead[]>([]);

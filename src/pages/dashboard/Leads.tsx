@@ -347,10 +347,10 @@ export function Leads() {
   const totalUnread = leads.reduce((sum, l) => sum + (l.unread_count ?? 0), 0);
 
   useEffect(() => {
-    const base = 'Chat';
+    const base = 'Chat — BrainLead';
     document.title = totalUnread > 0 ? `(${totalUnread}) ${base}` : base;
     return () => {
-      document.title = base;
+      document.title = 'BrainLead';
     };
   }, [totalUnread]);
 

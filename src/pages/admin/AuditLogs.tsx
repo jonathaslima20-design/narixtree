@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { FileClock, Search, ChevronDown, Download, User, Filter } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -34,6 +35,7 @@ function actionVariant(action: string): 'success' | 'warning' | 'error' | 'info'
 }
 
 export function AuditLogs() {
+  usePageTitle('Auditoria — BrainLead Admin');
   const [logs, setLogs] = useState<AdminAuditLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');

@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users,
@@ -79,6 +80,7 @@ function formatDate(iso: string | null | undefined) {
 }
 
 export function ClientManagement() {
+  usePageTitle('Clientes — BrainLead Admin');
   const { plans } = usePlans();
   const [clients, setClients] = useState<ClientRow[]>([]);
   const [loading, setLoading] = useState(true);

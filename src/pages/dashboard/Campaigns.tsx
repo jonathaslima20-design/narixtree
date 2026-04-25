@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Megaphone,
@@ -55,6 +56,7 @@ const TYPE_LABELS: Record<CampaignMessageType, string> = {
 type FilterTab = 'all' | CampaignStatus;
 
 export function Campaigns() {
+  usePageTitle('Campanhas — BrainLead');
   const { user } = useAuth();
   const { campaigns, loading, deleteCampaign, updateStatus } = useCampaigns(user?.id);
   const navigate = useNavigate();

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { Users, Plus, Download, Upload, Search, LayoutGrid, Rows2 as Rows, Star, Archive, Tag as TagIcon, MessageSquare, X } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -51,6 +52,7 @@ function sortLeads(list: Lead[]): Lead[] {
 }
 
 export function LeadManagement() {
+  usePageTitle('CRM — BrainLead');
   const { user } = useAuth();
   const { categories: catRows, loading: catsLoading } = useLeadCategories();
   const CATEGORIES = useMemo<CategoryColumn[]>(() => catRows.map((r) => ({

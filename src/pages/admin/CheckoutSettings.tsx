@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageTitle } from '../../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { Link2, Save, ExternalLink } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -11,6 +12,7 @@ function isValidUrl(str: string) {
 }
 
 export function CheckoutSettings() {
+  usePageTitle('Checkout — BrainLead Admin');
   const [linkMensal, setLinkMensal] = useState('');
   const [linkAnual, setLinkAnual] = useState('');
   const [loading, setLoading] = useState(true);
