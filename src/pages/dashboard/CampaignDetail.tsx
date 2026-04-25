@@ -149,7 +149,7 @@ export function CampaignDetail() {
   if (loading || !campaign) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-white/10 border-t-gray-600 rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
       </div>
     );
   }
@@ -158,14 +158,14 @@ export function CampaignDetail() {
   const TypeIcon = TYPE_ICONS[campaign.message_type] || Type;
 
   return (
-    <div className="flex-1 overflow-auto bg-white/[0.04]/50">
+    <div className="flex-1 overflow-auto bg-surface-0">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 sm:mb-8">
           <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
             <button
               onClick={() => navigate('/dashboard/campaigns')}
-              className="p-2 rounded-xl hover:bg-white hover:shadow-sm transition-all text-white/55 shrink-0"
+              className="p-2 rounded-xl hover:bg-white/[0.06] transition-all text-white/55 shrink-0"
             >
               <ArrowLeft size={18} />
             </button>
@@ -215,15 +215,15 @@ export function CampaignDetail() {
 
         {/* Error banner */}
         {sendError && (
-          <div className="mb-4 flex items-start gap-3 bg-red-50 border border-red-200 rounded-2xl p-4">
-            <AlertTriangle size={18} className="text-red-500 mt-0.5 shrink-0" />
+          <div className="mb-4 flex items-start gap-3 bg-red-500/10 border border-red-500/20 rounded-2xl p-4">
+            <AlertTriangle size={18} className="text-red-400 mt-0.5 shrink-0" />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-red-800">Falha ao enviar campanha</p>
-              <p className="text-xs text-red-600 mt-0.5">{sendError}</p>
+              <p className="text-sm font-medium text-red-300">Falha ao enviar campanha</p>
+              <p className="text-xs text-red-400/80 mt-0.5">{sendError}</p>
             </div>
             <button
               onClick={() => setSendError(null)}
-              className="p-1 rounded-lg hover:bg-red-100 text-red-400 shrink-0"
+              className="p-1 rounded-lg hover:bg-red-500/20 text-red-400 shrink-0"
             >
               <X size={14} />
             </button>
@@ -233,10 +233,10 @@ export function CampaignDetail() {
         {/* Progress ring + stats */}
         <div className="grid grid-cols-1 sm:grid-cols-6 gap-4 mb-6">
           {/* Big progress card */}
-          <div className="sm:col-span-2 bg-white rounded-2xl border border-white/10 p-6 flex flex-col items-center justify-center">
+          <div className="sm:col-span-2 bg-surface-1 rounded-2xl border border-white/10 p-6 flex flex-col items-center justify-center">
             <div className="relative w-28 h-28 mb-3">
               <svg className="w-28 h-28 -rotate-90" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="42" fill="none" stroke="#f3f4f6" strokeWidth="8" />
+                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="8" />
                 <motion.circle
                   cx="50"
                   cy="50"
@@ -264,11 +264,11 @@ export function CampaignDetail() {
           <div className="sm:col-span-4 grid grid-cols-2 sm:grid-cols-2 gap-3">
             {[
               { label: 'Total', value: stats.total, icon: Users, color: 'text-white', bg: 'bg-white/[0.04]' },
-              { label: 'Enviados', value: stats.sent, icon: Send, color: 'text-sky-700', bg: 'bg-sky-50' },
-              { label: 'Entregues', value: stats.delivered, icon: CheckCircle2, color: 'text-emerald-700', bg: 'bg-emerald-50' },
-              { label: 'Lidos', value: stats.read, icon: Eye, color: 'text-teal-700', bg: 'bg-teal-50' },
-              { label: 'Falhas', value: stats.failed, icon: XCircle, color: 'text-red-700', bg: 'bg-red-50' },
-              { label: 'Pendentes', value: stats.pending, icon: Clock, color: 'text-amber-700', bg: 'bg-amber-50' },
+              { label: 'Enviados', value: stats.sent, icon: Send, color: 'text-sky-400', bg: 'bg-sky-500/10' },
+              { label: 'Entregues', value: stats.delivered, icon: CheckCircle2, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+              { label: 'Lidos', value: stats.read, icon: Eye, color: 'text-teal-400', bg: 'bg-teal-500/10' },
+              { label: 'Falhas', value: stats.failed, icon: XCircle, color: 'text-red-400', bg: 'bg-red-500/10' },
+              { label: 'Pendentes', value: stats.pending, icon: Clock, color: 'text-amber-400', bg: 'bg-amber-500/10' },
             ].map((s) => (
               <div key={s.label} className={`${s.bg} rounded-xl p-4 flex items-center gap-3`}>
                 <s.icon size={18} className={s.color} />
@@ -288,16 +288,16 @@ export function CampaignDetail() {
 
         {/* Message preview */}
         {(campaign.content || campaign.caption) && (
-          <div className="bg-white rounded-2xl border border-white/10 p-5 mb-6">
+          <div className="bg-surface-1 rounded-2xl border border-white/10 p-5 mb-6">
             <h3 className="text-sm font-semibold text-white mb-3">Mensagem</h3>
-            <div className="bg-white/[0.04] rounded-xl p-4">
+            <div className="bg-white/[0.06] rounded-xl p-4">
               <p className="text-sm text-white/85 whitespace-pre-wrap">{campaign.content || campaign.caption}</p>
             </div>
           </div>
         )}
 
         {/* Recipients table */}
-        <div className="bg-white rounded-2xl border border-white/10">
+        <div className="bg-surface-1 rounded-2xl border border-white/10">
           <div className="px-4 sm:px-5 py-4 border-b border-white/[0.06] flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
             <h3 className="text-sm font-semibold text-white">Destinatários ({recipients.length})</h3>
             <div className="flex items-center gap-1 bg-white/[0.04] rounded-lg p-0.5 overflow-x-auto">
@@ -306,7 +306,7 @@ export function CampaignDetail() {
                   key={f}
                   onClick={() => setRecipientFilter(f)}
                   className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
-                    recipientFilter === f ? 'bg-white shadow-sm text-white' : 'text-white/55 hover:text-white/85'
+                    recipientFilter === f ? 'bg-white/[0.10] text-white shadow-sm' : 'text-white/55 hover:text-white/85'
                   }`}
                 >
                   {f === 'all' ? 'Todos' : RECIPIENT_STATUS[f]?.label || f}
@@ -316,7 +316,7 @@ export function CampaignDetail() {
           </div>
           <div className="max-h-[500px] overflow-auto">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 bg-white/[0.04]/90 backdrop-blur-sm">
+              <thead className="sticky top-0 bg-surface-2/90 backdrop-blur-sm">
                 <tr className="text-left text-xs text-white/55 font-medium">
                   <th className="px-5 py-2.5">Nome</th>
                   <th className="px-5 py-2.5">Telefone</th>
@@ -336,7 +336,7 @@ export function CampaignDetail() {
                         key={r.id}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="hover:bg-white/[0.04]/50 transition-colors"
+                        className="hover:bg-white/[0.04] transition-colors"
                       >
                         <td className="px-5 py-3 font-medium text-white">{r.lead_name || '-'}</td>
                         <td className="px-5 py-3 text-white/55">{r.phone}</td>
@@ -349,7 +349,7 @@ export function CampaignDetail() {
                         <td className="px-5 py-3 text-xs text-white/55">{formatDate(r.sent_at)}</td>
                         <td className="px-5 py-3 text-xs text-white/55">{formatDate(r.delivered_at)}</td>
                         <td className="px-5 py-3 text-xs text-white/55">{formatDate(r.read_at)}</td>
-                        <td className="px-5 py-3 text-xs text-red-500 max-w-[200px] truncate">{r.error_message || '-'}</td>
+                        <td className="px-5 py-3 text-xs text-red-400 max-w-[200px] truncate">{r.error_message || '-'}</td>
                       </motion.tr>
                     );
                   })}
