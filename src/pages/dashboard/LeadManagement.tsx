@@ -435,7 +435,7 @@ export function LeadManagement() {
 function StatPill({ label, value, iconName, tone }: { label: string; value: number; iconName: string; tone: string }) {
   const Icon = iconName === 'Users' ? Users : resolveIcon(iconName);
   const toneClasses: Record<string, string> = {
-    gray: 'bg-white/[0.04] text-white/70',
+    gray: 'bg-white/[0.10] text-white/70',
     red: 'bg-red-500/10 text-red-400',
     amber: 'bg-amber-500/10 text-amber-400',
     sky: 'bg-sky-500/10 text-sky-400',
