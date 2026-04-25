@@ -23,6 +23,17 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
+function LogoMark({ size = 32 }: { size?: number }) {
+  return (
+    <div
+      className="rounded-lg flex items-center justify-center shadow-lg shadow-black/40 ring-1 ring-white/10"
+      style={{ width: size, height: size, background: '#111827' }}
+    >
+      <Brain className="text-white" style={{ width: size * 0.55, height: size * 0.55 }} strokeWidth={2.4} />
+    </div>
+  );
+}
+
 function Navbar() {
   const navigate = useNavigate();
   return (
@@ -32,11 +43,9 @@ function Navbar() {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between rounded-2xl border border-white/5 bg-[#0B0E11]/70 backdrop-blur-xl px-4 sm:px-6 py-3">
+      <div className="max-w-7xl mx-auto flex items-center justify-between rounded-2xl border border-white/10 bg-[#0B0E11]/70 backdrop-blur-xl px-4 sm:px-6 py-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#13A877] to-[#0c7a55] flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <Brain className="w-4.5 h-4.5 text-white" strokeWidth={2.5} />
-          </div>
+          <LogoMark size={32} />
           <span className="text-white font-bold text-lg tracking-tight">BrainLead</span>
         </div>
         <nav className="hidden md:flex items-center gap-8 text-sm text-white/70">
@@ -74,17 +83,17 @@ function Hero() {
   return (
     <section ref={ref} className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 px-4 sm:px-8 overflow-hidden">
       <div
-        className="absolute inset-0 -z-10 opacity-60"
+        className="absolute inset-0 -z-10 opacity-70"
         style={{
           background:
-            'radial-gradient(60% 50% at 50% 0%, rgba(19, 168, 119, 0.18) 0%, rgba(11, 14, 17, 0) 70%)',
+            'radial-gradient(60% 50% at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(11, 14, 17, 0) 70%)',
         }}
       />
       <div
-        className="absolute inset-0 -z-10 opacity-[0.07]"
+        className="absolute inset-0 -z-10 opacity-[0.06]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)',
+            'linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)',
           backgroundSize: '64px 64px',
           maskImage: 'radial-gradient(ellipse at 50% 0%, black 30%, transparent 70%)',
         }}
@@ -95,9 +104,9 @@ function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur text-xs text-white/70 mb-8"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur text-xs text-white/70 mb-8"
         >
-          <Sparkles className="w-3.5 h-3.5 text-[#13A877]" />
+          <Sparkles className="w-3.5 h-3.5 text-white" />
           Conecte. Organize. Converta.
         </motion.div>
 
@@ -109,7 +118,7 @@ function Hero() {
         >
           Transforme leads em
           <br />
-          <span className="bg-gradient-to-r from-[#13A877] via-emerald-300 to-[#13A877] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
             vendas reais.
           </span>
         </motion.h1>
@@ -131,7 +140,7 @@ function Hero() {
         >
           <button
             onClick={() => navigate('/login')}
-            className="group inline-flex items-center gap-2 bg-[#13A877] hover:bg-[#0fa06d] text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02]"
+            className="group inline-flex items-center gap-2 bg-white text-black hover:bg-white/90 font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-white/10 transition-all hover:scale-[1.02]"
           >
             Começar gratuitamente
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -153,7 +162,7 @@ function Hero() {
         transition={{ delay: 0.7, duration: 0.9, ease: 'easeOut' }}
         className="relative max-w-6xl mx-auto mt-16 sm:mt-20"
       >
-        <div className="absolute -inset-4 bg-gradient-to-r from-[#13A877]/20 via-emerald-400/10 to-[#13A877]/20 blur-3xl rounded-[2.5rem]" />
+        <div className="absolute -inset-4 bg-gradient-to-r from-white/10 via-white/5 to-white/10 blur-3xl rounded-[2.5rem]" />
         <div className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-xl p-2 shadow-2xl">
           <div className="rounded-xl overflow-hidden border border-white/5 bg-[#0B0E11]">
             <img
@@ -177,14 +186,14 @@ function BentoGrid() {
       description: 'Conecte seu WhatsApp e centralize sua coleta de leads em um único painel.',
       span: 'lg:col-span-2',
       visual: (
-        <div className="absolute right-6 bottom-6 flex flex-col gap-2 opacity-90">
-          <div className="self-end max-w-[70%] bg-[#13A877] text-white text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-emerald-500/20">
+        <div className="absolute right-6 bottom-6 flex flex-col gap-2 opacity-95">
+          <div className="self-end max-w-[70%] bg-white text-black text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-black/40">
             Olá! Tenho interesse na proposta.
           </div>
-          <div className="self-start max-w-[70%] bg-white/10 backdrop-blur text-white text-xs px-3 py-2 rounded-2xl rounded-bl-sm border border-white/5">
+          <div className="self-start max-w-[70%] bg-white/10 backdrop-blur text-white text-xs px-3 py-2 rounded-2xl rounded-bl-sm border border-white/10">
             Perfeito! Posso te enviar agora.
           </div>
-          <div className="self-end max-w-[70%] bg-[#13A877] text-white text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-emerald-500/20">
+          <div className="self-end max-w-[70%] bg-white text-black text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-black/40">
             Vamos fechar.
           </div>
         </div>
@@ -198,9 +207,9 @@ function BentoGrid() {
       visual: (
         <div className="absolute right-5 bottom-5 flex gap-1.5">
           {[
-            { label: 'Novo', count: 12, c: 'bg-white/10' },
-            { label: 'Quente', count: 7, c: 'bg-amber-500/20 border-amber-500/30' },
-            { label: 'Fechado', count: 4, c: 'bg-[#13A877]/20 border-[#13A877]/40' },
+            { label: 'Novo', count: 12, c: 'bg-white/[0.04]' },
+            { label: 'Quente', count: 7, c: 'bg-white/[0.08]' },
+            { label: 'Fechado', count: 4, c: 'bg-white/[0.14]' },
           ].map((col) => (
             <div
               key={col.label}
@@ -209,7 +218,7 @@ function BentoGrid() {
               <div className="text-[9px] text-white/70 mb-1">{col.label}</div>
               <div className="space-y-1">
                 {Array.from({ length: 3 }).map((_, i) => (
-                  <div key={i} className="h-1.5 bg-white/15 rounded" />
+                  <div key={i} className="h-1.5 bg-white/20 rounded" />
                 ))}
               </div>
             </div>
@@ -231,7 +240,7 @@ function BentoGrid() {
               whileInView={{ height: `${h}%` }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06, duration: 0.5, ease: 'easeOut' }}
-              className="w-3 bg-gradient-to-t from-[#13A877] to-emerald-300 rounded-t"
+              className="w-3 bg-gradient-to-t from-white/30 to-white rounded-t"
             />
           ))}
         </div>
@@ -271,7 +280,7 @@ function BentoGrid() {
         className="max-w-6xl mx-auto"
       >
         <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
-          <span className="text-xs uppercase tracking-[0.18em] text-[#13A877] font-semibold">
+          <span className="text-xs uppercase tracking-[0.18em] text-white/60 font-semibold">
             Recursos
           </span>
           <h2 className="mt-3 text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
@@ -296,12 +305,12 @@ function BentoGrid() {
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
                     background:
-                      'radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(19,168,119,0.12), transparent 70%)',
+                      'radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.08), transparent 70%)',
                   }}
                 />
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-xl bg-[#13A877]/10 border border-[#13A877]/30 flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-[#13A877]" strokeWidth={2.2} />
+                  <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-white" strokeWidth={2.2} />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{f.title}</h3>
                   <p className="text-sm text-white/55 leading-relaxed max-w-sm">{f.description}</p>
@@ -345,7 +354,7 @@ function HowItWorks() {
         className="max-w-6xl mx-auto"
       >
         <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="text-center mb-12">
-          <span className="text-xs uppercase tracking-[0.18em] text-[#13A877] font-semibold">
+          <span className="text-xs uppercase tracking-[0.18em] text-white/60 font-semibold">
             Como funciona
           </span>
           <h2 className="mt-3 text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
@@ -366,7 +375,7 @@ function HowItWorks() {
                   0{i + 1}
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-[#13A877]" />
+                  <Icon className="w-5 h-5 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-1.5">{s.title}</h3>
                 <p className="text-sm text-white/55 leading-relaxed">{s.desc}</p>
@@ -420,10 +429,10 @@ function Pricing() {
   return (
     <section id="planos" className="relative px-4 sm:px-8 py-24 sm:py-32">
       <div
-        className="absolute inset-0 -z-10 opacity-50"
+        className="absolute inset-0 -z-10 opacity-60"
         style={{
           background:
-            'radial-gradient(50% 50% at 50% 50%, rgba(19,168,119,0.10) 0%, rgba(11,14,17,0) 70%)',
+            'radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(11,14,17,0) 70%)',
         }}
       />
       <motion.div
@@ -434,7 +443,7 @@ function Pricing() {
         className="max-w-6xl mx-auto"
       >
         <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="text-center mb-14">
-          <span className="text-xs uppercase tracking-[0.18em] text-[#13A877] font-semibold">
+          <span className="text-xs uppercase tracking-[0.18em] text-white/60 font-semibold">
             Planos
           </span>
           <h2 className="mt-3 text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
@@ -454,12 +463,26 @@ function Pricing() {
               whileHover={{ y: -6 }}
               className={`relative rounded-2xl p-7 backdrop-blur-xl flex flex-col ${
                 plan.highlight
-                  ? 'bg-gradient-to-b from-[#13A877]/[0.08] to-white/[0.02] border-2 border-[#13A877] shadow-2xl shadow-emerald-500/10'
+                  ? 'bg-gradient-to-b from-white/[0.10] to-white/[0.02] border-2 border-white shadow-2xl shadow-white/10'
                   : 'bg-white/[0.03] border border-white/10'
               }`}
             >
+              {plan.highlight && (
+                <div
+                  className="pointer-events-none absolute -inset-px rounded-2xl opacity-60"
+                  style={{
+                    background:
+                      'linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0) 40%)',
+                    mask: 'linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)',
+                    WebkitMask: 'linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)',
+                    maskComposite: 'exclude',
+                    WebkitMaskComposite: 'xor',
+                    padding: 1,
+                  }}
+                />
+              )}
               {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#13A877] text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg shadow-emerald-500/30">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-semibold px-3 py-1 rounded-full shadow-lg shadow-black/40">
                   {plan.badge}
                 </div>
               )}
@@ -475,8 +498,8 @@ function Pricing() {
               <ul className="mt-6 space-y-3 flex-1">
                 {features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-white/75">
-                    <span className="mt-0.5 w-4 h-4 rounded-full bg-[#13A877]/15 border border-[#13A877]/40 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-2.5 h-2.5 text-[#13A877]" strokeWidth={3} />
+                    <span className="mt-0.5 w-4 h-4 rounded-full bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
                     </span>
                     {f}
                   </li>
@@ -487,7 +510,7 @@ function Pricing() {
                 onClick={() => navigate('/login')}
                 className={`mt-7 w-full font-semibold py-3 rounded-xl transition-all hover:scale-[1.02] ${
                   plan.highlight
-                    ? 'bg-[#13A877] hover:bg-[#0fa06d] text-white shadow-lg shadow-emerald-500/30'
+                    ? 'bg-white hover:bg-white/90 text-black shadow-lg shadow-white/15'
                     : 'bg-black hover:bg-black/80 text-white border border-white/10'
                 }`}
               >
@@ -510,13 +533,13 @@ function CTA() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#13A877]/15 via-white/[0.03] to-white/[0.02] backdrop-blur-xl p-10 sm:p-16 text-center"
+        className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.02] backdrop-blur-xl p-10 sm:p-16 text-center"
       >
         <div
-          className="absolute inset-0 -z-10 opacity-60"
+          className="absolute inset-0 -z-10 opacity-70"
           style={{
             background:
-              'radial-gradient(50% 80% at 50% 100%, rgba(19,168,119,0.25) 0%, rgba(11,14,17,0) 70%)',
+              'radial-gradient(50% 80% at 50% 100%, rgba(255,255,255,0.18) 0%, rgba(11,14,17,0) 70%)',
           }}
         />
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
@@ -527,7 +550,7 @@ function CTA() {
         </p>
         <button
           onClick={() => navigate('/login')}
-          className="group mt-8 inline-flex items-center gap-2 bg-[#13A877] hover:bg-[#0fa06d] text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-emerald-500/30 transition-all hover:scale-[1.02]"
+          className="group mt-8 inline-flex items-center gap-2 bg-white hover:bg-white/90 text-black font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-white/10 transition-all hover:scale-[1.02]"
         >
           Começar Agora
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -542,9 +565,7 @@ function Footer() {
     <footer className="px-4 sm:px-8 py-10 border-t border-white/5">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#13A877] to-[#0c7a55] flex items-center justify-center">
-            <Brain className="w-4 h-4 text-white" strokeWidth={2.5} />
-          </div>
+          <LogoMark size={28} />
           <span className="text-white/80 font-semibold text-sm">BrainLead</span>
         </div>
         <p className="text-xs text-white/40">
