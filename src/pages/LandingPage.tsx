@@ -81,7 +81,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
 
   return (
-    <section ref={ref} className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 px-4 sm:px-8 overflow-hidden">
+    <section ref={ref} className="relative pt-36 pb-10 sm:pt-44 sm:pb-16 px-4 sm:px-8 overflow-hidden">
       <div
         className="absolute inset-0 -z-10 opacity-70"
         style={{
@@ -271,7 +271,7 @@ function BentoGrid() {
   ];
 
   return (
-    <section id="recursos" className="relative px-4 sm:px-8 py-24 sm:py-32">
+    <section id="recursos" className="relative px-4 sm:px-8 pt-10 sm:pt-16 pb-24 sm:pb-32">
       <motion.div
         variants={stagger}
         initial="hidden"
