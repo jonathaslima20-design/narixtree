@@ -678,7 +678,7 @@ export function CampaignBuilder() {
                                   </div>
                                 </div>
                                 <div className="flex items-center justify-between mt-1 pl-10">
-                                  <span className="text-[10px] text-white/55 tabular-nums">
+                                  <span className="text-[10px] text-gray-500 tabular-nums">
                                     {formatDuration(form.audioDurationSeconds)}
                                   </span>
                                   <Mic size={10} className="text-[#075e54]/60" />
@@ -688,24 +688,24 @@ export function CampaignBuilder() {
                             {form.message_type === 'document' && form.mediaFile && (
                               <div className="bg-[#dcf8c6] rounded-lg p-3 mb-1 flex items-center gap-2">
                                 <FileText size={18} className="text-[#075e54]" />
-                                <span className="text-xs text-white/85 truncate">{form.mediaFile.name}</span>
+                                <span className="text-xs text-gray-900 truncate">{form.mediaFile.name}</span>
                               </div>
                             )}
                             {(form.content || form.caption) && (
                               <div className="bg-[#dcf8c6] rounded-lg px-3 py-2">
-                                <p className="text-[13px] text-white whitespace-pre-wrap break-words">
+                                <p className="text-[13px] text-gray-900 whitespace-pre-wrap break-words">
                                   {(form.message_type === 'image' || form.message_type === 'document' ? form.caption : form.content)
                                     .replace(/\{nome\}/gi, 'João')
                                     .replace(/\{telefone\}/gi, '(11) 99999-0000') || (
-                                    <span className="text-white/40 italic">Sua mensagem aqui...</span>
+                                    <span className="text-gray-500 italic">Sua mensagem aqui...</span>
                                   )}
                                 </p>
-                                <p className="text-[10px] text-white/55 text-right mt-0.5">12:00</p>
+                                <p className="text-[10px] text-gray-500 text-right mt-0.5">12:00</p>
                               </div>
                             )}
                             {!form.content && !form.caption && form.message_type === 'text' && (
                               <div className="bg-[#dcf8c6] rounded-lg px-3 py-2">
-                                <p className="text-[13px] text-white/40 italic">Sua mensagem aqui...</p>
+                                <p className="text-[13px] text-gray-500 italic">Sua mensagem aqui...</p>
                               </div>
                             )}
                           </div>
@@ -1167,15 +1167,15 @@ export function CampaignBuilder() {
                             </div>
                           </div>
                           <div className="flex items-center justify-between mt-1 pl-11">
-                            <span className="text-[10px] text-white/55 tabular-nums">
+                            <span className="text-[10px] text-gray-500 tabular-nums">
                               {formatDuration(form.audioDurationSeconds)}
                             </span>
-                            <span className="text-[10px] text-white/55">12:00</span>
+                            <span className="text-[10px] text-gray-500">12:00</span>
                           </div>
                         </div>
                       ) : (
                         <div className="bg-[#dcf8c6] rounded-lg px-3 py-2">
-                          <p className="text-sm text-white whitespace-pre-wrap">
+                          <p className="text-sm text-gray-900 whitespace-pre-wrap">
                             {(form.message_type === 'image' || form.message_type === 'document' ? form.caption : form.content)
                               .replace(/\{nome\}/gi, 'João Silva')
                               .replace(/\{telefone\}/gi, '(11) 99999-0000')}
