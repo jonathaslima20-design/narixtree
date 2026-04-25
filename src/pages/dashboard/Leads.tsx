@@ -292,22 +292,39 @@ export function Leads() {
 
     subscribeAll();
 
-    function handleVisibility() {
-      if (document.visibilityState === 'visible') {
+    let lastHiddenAt: number | null = null;
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === 'hidden') {
+        lastHiddenAt = Date.now();
+        return;
+      }
+      const hiddenFor = lastHiddenAt ? Date.now() - lastHiddenAt : 0;
+      lastHiddenAt = null;
+      if (!leadsSubscribed || !messagesSubscribed) {
         fetchLeads();
-        if (!leadsSubscribed || !messagesSubscribed) subscribeAll();
+        subscribeAll();
+        return;
+      }
+      if (hiddenFor > 5000) fetchLeads();
+    }
+
+    function handleReconnect() {
+      if (!leadsSubscribed || !messagesSubscribed) {
+        fetchLeads();
+        subscribeAll();
       }
     }
 
-    document.addEventListener('visibilitychange', handleVisibility);
-    window.addEventListener('focus', handleVisibility);
-    window.addEventListener('online', handleVisibility);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleReconnect);
+    window.addEventListener('online', handleReconnect);
 
     return () => {
       cancelled = true;
-      document.removeEventListener('visibilitychange', handleVisibility);
-      window.removeEventListener('focus', handleVisibility);
-      window.removeEventListener('online', handleVisibility);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleReconnect);
+      window.removeEventListener('online', handleReconnect);
       stopPolling();
       if (reconnectTimer) clearTimeout(reconnectTimer);
       if (leadsChannel) supabase.removeChannel(leadsChannel);
