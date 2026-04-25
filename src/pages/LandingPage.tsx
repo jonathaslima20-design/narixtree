@@ -186,14 +186,14 @@ function BentoGrid() {
       description: 'Conecte seu WhatsApp e centralize sua coleta de leads em um único painel.',
       span: 'lg:col-span-2',
       visual: (
-        <div className="absolute right-6 bottom-6 flex flex-col gap-2 opacity-95">
-          <div className="self-end max-w-[70%] bg-white text-black text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-black/40">
+        <div className="flex flex-col gap-2 w-full max-w-[280px] ml-auto">
+          <div className="self-end max-w-[80%] bg-white text-black text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-black/40">
             Olá! Tenho interesse na proposta.
           </div>
-          <div className="self-start max-w-[70%] bg-white/10 backdrop-blur text-white text-xs px-3 py-2 rounded-2xl rounded-bl-sm border border-white/10">
+          <div className="self-start max-w-[80%] bg-white/10 backdrop-blur text-white text-xs px-3 py-2 rounded-2xl rounded-bl-sm border border-white/10">
             Perfeito! Posso te enviar agora.
           </div>
-          <div className="self-end max-w-[70%] bg-white text-black text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-black/40">
+          <div className="self-end max-w-[60%] bg-white text-black text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow-lg shadow-black/40">
             Vamos fechar.
           </div>
         </div>
@@ -205,17 +205,17 @@ function BentoGrid() {
       description: 'Organize e categorize seus contatos conforme o momento da negociação.',
       span: '',
       visual: (
-        <div className="absolute right-5 bottom-5 flex gap-1.5">
+        <div className="flex gap-1.5 justify-end">
           {[
-            { label: 'Novo', count: 12, c: 'bg-white/[0.04]' },
-            { label: 'Quente', count: 7, c: 'bg-white/[0.08]' },
-            { label: 'Fechado', count: 4, c: 'bg-white/[0.14]' },
+            { label: 'Novo', c: 'bg-white/[0.04]' },
+            { label: 'Quente', c: 'bg-white/[0.08]' },
+            { label: 'Fechado', c: 'bg-white/[0.14]' },
           ].map((col) => (
             <div
               key={col.label}
               className={`${col.c} border border-white/10 rounded-lg p-2 w-16`}
             >
-              <div className="text-[9px] text-white/70 mb-1">{col.label}</div>
+              <div className="text-[9px] text-white/70 mb-1 truncate">{col.label}</div>
               <div className="space-y-1">
                 {Array.from({ length: 3 }).map((_, i) => (
                   <div key={i} className="h-1.5 bg-white/20 rounded" />
@@ -232,7 +232,7 @@ function BentoGrid() {
       description: 'Realize campanhas de massa e alcance seu público com agilidade.',
       span: '',
       visual: (
-        <div className="absolute right-6 bottom-6 flex items-end gap-1.5 h-20">
+        <div className="flex items-end justify-end gap-1.5 h-20">
           {[40, 65, 50, 80, 70, 95, 60].map((h, i) => (
             <motion.div
               key={i}
@@ -252,7 +252,7 @@ function BentoGrid() {
       description: 'Categorize automaticamente seus contatos e priorize quem está pronto para comprar.',
       span: 'lg:col-span-2',
       visual: (
-        <div className="absolute right-6 bottom-6 flex flex-wrap gap-1.5 max-w-[260px] justify-end">
+        <div className="flex flex-wrap gap-1.5 justify-end">
           {['Hot', 'Warm', 'VIP', 'Novo', 'Reativar', 'Cliente'].map((t, i) => (
             <motion.span
               key={t}
@@ -299,7 +299,7 @@ function BentoGrid() {
                 variants={fadeUp}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
                 whileHover={{ y: -4 }}
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02] backdrop-blur-xl p-6 sm:p-7 min-h-[260px] sm:min-h-[300px] ${f.span}`}
+                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02] backdrop-blur-xl p-6 sm:p-7 flex flex-col gap-6 lg:min-h-[300px] ${f.span}`}
               >
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -315,7 +315,7 @@ function BentoGrid() {
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{f.title}</h3>
                   <p className="text-sm text-white/55 leading-relaxed max-w-sm">{f.description}</p>
                 </div>
-                {f.visual}
+                <div className="relative mt-auto pointer-events-none">{f.visual}</div>
               </motion.div>
             );
           })}
