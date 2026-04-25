@@ -259,13 +259,13 @@ export function PlanManagement() {
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-white flex items-center gap-3">
                 <div className="w-10 h-10 bg-gray-900 rounded-2xl flex items-center justify-center">
                   <CreditCard size={18} className="text-white" />
                 </div>
                 Gestão de Planos
               </h1>
-              <p className="text-sm text-gray-500 mt-1.5 ml-[52px]">
+              <p className="text-sm text-white/55 mt-1.5 ml-[52px]">
                 {plans.length} {plans.length === 1 ? 'plano configurado' : 'planos configurados'}
               </p>
             </div>
@@ -284,8 +284,8 @@ export function PlanManagement() {
                     <DollarSign size={18} className="text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-xl font-bold text-gray-900">{formatBRL(totalMRR)}</p>
-                    <p className="text-xs text-gray-500">MRR projetado</p>
+                    <p className="text-xl font-bold text-white">{formatBRL(totalMRR)}</p>
+                    <p className="text-xs text-white/55">MRR projetado</p>
                   </div>
                 </div>
               </Card>
@@ -295,10 +295,10 @@ export function PlanManagement() {
                     <Users size={18} className="text-sky-600" />
                   </div>
                   <div>
-                    <p className="text-xl font-bold text-gray-900">
+                    <p className="text-xl font-bold text-white">
                       {Object.values(subscriberCounts).reduce((a, b) => a + b, 0)}
                     </p>
-                    <p className="text-xs text-gray-500">Assinantes ativos</p>
+                    <p className="text-xs text-white/55">Assinantes ativos</p>
                   </div>
                 </div>
               </Card>
@@ -308,10 +308,10 @@ export function PlanManagement() {
                     <CreditCard size={18} className="text-amber-600" />
                   </div>
                   <div>
-                    <p className="text-xl font-bold text-gray-900">
+                    <p className="text-xl font-bold text-white">
                       {plans.filter((p) => p.is_active).length} / {plans.length}
                     </p>
-                    <p className="text-xs text-gray-500">Planos ativos</p>
+                    <p className="text-xs text-white/55">Planos ativos</p>
                   </div>
                 </div>
               </Card>
@@ -322,16 +322,16 @@ export function PlanManagement() {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[...Array(2)].map((_, i) => (
-                <div key={i} className="h-64 bg-white rounded-2xl border border-gray-100 animate-pulse" />
+                <div key={i} className="h-64 bg-white rounded-2xl border border-white/10 animate-pulse" />
               ))}
             </div>
           ) : plans.length === 0 ? (
             <Card className="text-center py-16">
-              <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <CreditCard size={28} className="text-gray-400" />
+              <div className="w-16 h-16 bg-white/[0.06] rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <CreditCard size={28} className="text-white/40" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">Nenhum plano cadastrado</h3>
-              <p className="text-sm text-gray-500 mb-6">Crie seu primeiro plano para começar a gerenciar assinaturas.</p>
+              <h3 className="text-lg font-semibold text-white mb-1">Nenhum plano cadastrado</h3>
+              <p className="text-sm text-white/55 mb-6">Crie seu primeiro plano para começar a gerenciar assinaturas.</p>
               <Button onClick={openCreate}>
                 <Plus size={16} />
                 Criar primeiro plano
@@ -403,7 +403,7 @@ export function PlanManagement() {
               onChange={(e) => setForm((f) => ({ ...f, price_reais: e.target.value }))}
             />
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-medium text-gray-700">Período</label>
+              <label className="text-sm font-medium text-white/85">Período</label>
               <div className="flex gap-2">
                 <button
                   type="button"
@@ -411,7 +411,7 @@ export function PlanManagement() {
                   className={`flex-1 py-2.5 rounded-2xl text-sm font-medium border transition-all ${
                     form.billing_period === 'monthly'
                       ? 'bg-gray-900 text-white border-gray-900'
-                      : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
+                      : 'bg-white text-white/70 border-white/10 hover:border-white/15'
                   }`}
                 >
                   Mensal
@@ -422,7 +422,7 @@ export function PlanManagement() {
                   className={`flex-1 py-2.5 rounded-2xl text-sm font-medium border transition-all ${
                     form.billing_period === 'yearly'
                       ? 'bg-gray-900 text-white border-gray-900'
-                      : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
+                      : 'bg-white text-white/70 border-white/10 hover:border-white/15'
                   }`}
                 >
                   Anual
@@ -432,15 +432,15 @@ export function PlanManagement() {
           </div>
 
           <div>
-            <p className="text-sm font-medium text-gray-700 mb-3">Limites do plano</p>
+            <p className="text-sm font-medium text-white/85 mb-3">Limites do plano</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {LIMIT_FIELDS.map(({ key, label, icon: Icon }) => {
                 const value = form[key] as number;
                 const isUnlimited = value === -1;
                 return (
-                  <div key={key} className="flex items-center gap-3 bg-gray-50 rounded-xl px-3 py-2.5">
-                    <Icon size={14} className="text-gray-400 shrink-0" />
-                    <span className="text-xs text-gray-600 flex-1 min-w-0 truncate">{label}</span>
+                  <div key={key} className="flex items-center gap-3 bg-white/[0.04] rounded-xl px-3 py-2.5">
+                    <Icon size={14} className="text-white/40 shrink-0" />
+                    <span className="text-xs text-white/70 flex-1 min-w-0 truncate">{label}</span>
                     <button
                       type="button"
                       onClick={() =>
@@ -449,7 +449,7 @@ export function PlanManagement() {
                       className={`text-xs px-2 py-0.5 rounded-full font-medium transition-colors ${
                         isUnlimited
                           ? 'bg-emerald-100 text-emerald-700'
-                          : 'bg-gray-200 text-gray-500 hover:bg-gray-300'
+                          : 'bg-white/[0.10] text-white/55 hover:bg-gray-300'
                       }`}
                     >
                       {isUnlimited ? 'Ilimitado' : 'Limitar'}
@@ -462,7 +462,7 @@ export function PlanManagement() {
                         onChange={(e) =>
                           setForm((f) => ({ ...f, [key]: parseInt(e.target.value) || 0 }))
                         }
-                        className="w-20 px-2 py-1 text-xs border border-gray-200 rounded-lg text-right focus:outline-none focus:ring-1 focus:ring-gray-400"
+                        className="w-20 px-2 py-1 text-xs border border-white/10 rounded-lg text-right focus:outline-none focus:ring-1 focus:ring-gray-400"
                       />
                     )}
                   </div>
@@ -511,8 +511,8 @@ export function PlanManagement() {
               className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Excluir plano?</h3>
-              <p className="text-sm text-gray-500 mb-6">
+              <h3 className="text-lg font-semibold text-white mb-2">Excluir plano?</h3>
+              <p className="text-sm text-white/55 mb-6">
                 Este plano será removido permanentemente. Só é possível excluir planos sem clientes vinculados.
               </p>
               <div className="flex gap-3">
@@ -558,29 +558,29 @@ function PlanCard({
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-md transition-shadow"
+      className="bg-white rounded-2xl border border-white/10 p-6 hover:shadow-md transition-shadow"
     >
       <div className="flex items-start justify-between mb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-lg font-bold text-gray-900">{plan.name}</h3>
+            <h3 className="text-lg font-bold text-white">{plan.name}</h3>
             <Badge variant={plan.is_active ? 'success' : 'neutral'}>
               {plan.is_active ? 'Ativo' : 'Inativo'}
             </Badge>
           </div>
           {plan.description && (
-            <p className="text-xs text-gray-500 max-w-xs">{plan.description}</p>
+            <p className="text-xs text-white/55 max-w-xs">{plan.description}</p>
           )}
         </div>
         <div className="text-right">
-          <p className="text-2xl font-bold text-gray-900">{formatBRL(plan.price_cents)}</p>
-          <p className="text-xs text-gray-400">{periodLabel}</p>
+          <p className="text-2xl font-bold text-white">{formatBRL(plan.price_cents)}</p>
+          <p className="text-xs text-white/40">{periodLabel}</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mb-4 px-3 py-2 bg-gray-50 rounded-xl">
-        <Users size={13} className="text-gray-400" />
-        <span className="text-xs text-gray-600">
+      <div className="flex items-center gap-2 mb-4 px-3 py-2 bg-white/[0.04] rounded-xl">
+        <Users size={13} className="text-white/40" />
+        <span className="text-xs text-white/70">
           {subscriberCount} {subscriberCount === 1 ? 'cliente' : 'clientes'}
         </span>
         <span className="ml-auto text-xs font-semibold text-emerald-600">
@@ -592,23 +592,23 @@ function PlanCard({
         {LIMIT_FIELDS.slice(0, 4).map(({ key, label, icon: Icon }) => {
           const value = plan[key as keyof Plan] as number;
           return (
-            <div key={key} className="flex items-center gap-1.5 text-xs text-gray-500">
-              <Icon size={11} className="text-gray-400" />
+            <div key={key} className="flex items-center gap-1.5 text-xs text-white/55">
+              <Icon size={11} className="text-white/40" />
               <span className="truncate">{label}:</span>
               {value === -1 ? (
                 <Infinity size={11} className="text-emerald-500 shrink-0" />
               ) : (
-                <span className="font-semibold text-gray-700">{value.toLocaleString()}</span>
+                <span className="font-semibold text-white/85">{value.toLocaleString()}</span>
               )}
             </div>
           );
         })}
       </div>
 
-      <div className="flex items-center gap-2 pt-4 border-t border-gray-100 flex-wrap">
+      <div className="flex items-center gap-2 pt-4 border-t border-white/10 flex-wrap">
         <button
           onClick={onEdit}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white/70 bg-white/[0.04] hover:bg-white/[0.06] transition-colors"
         >
           <Pencil size={12} />
           Editar

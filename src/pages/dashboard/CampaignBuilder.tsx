@@ -343,19 +343,19 @@ export function CampaignBuilder() {
   const estimatedMinutes = Math.ceil(estimatedSeconds / 60);
 
   return (
-    <div className="flex-1 overflow-auto bg-gray-50/50">
+    <div className="flex-1 overflow-auto bg-white/[0.04]/50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
         <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/dashboard/campaigns')}
-            className="p-2 rounded-xl hover:bg-white hover:shadow-sm transition-all text-gray-500"
+            className="p-2 rounded-xl hover:bg-white hover:shadow-sm transition-all text-white/55"
           >
             <ArrowLeft size={18} />
           </button>
           <div>
-            <h1 className="text-lg sm:text-xl font-bold text-gray-900">Nova Campanha</h1>
-            <p className="text-xs sm:text-sm text-gray-500 hidden sm:block">Crie e envie mensagens em massa para seus leads</p>
+            <h1 className="text-lg sm:text-xl font-bold text-white">Nova Campanha</h1>
+            <p className="text-xs sm:text-sm text-white/55 hidden sm:block">Crie e envie mensagens em massa para seus leads</p>
           </div>
         </div>
 
@@ -371,13 +371,13 @@ export function CampaignBuilder() {
                     ? 'bg-gray-900 text-white'
                     : i < step
                       ? 'bg-emerald-50 text-emerald-700 cursor-pointer hover:bg-emerald-100'
-                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-white/[0.06] text-white/40 cursor-not-allowed'
                 }`}
               >
                 {i < step ? <Check size={14} /> : <span className="w-5 h-5 rounded-full bg-current/10 flex items-center justify-center text-xs">{i + 1}</span>}
                 <span className="hidden sm:inline">{s}</span>
               </button>
-              {i < STEPS.length - 1 && <div className="w-4 sm:w-8 h-px bg-gray-200" />}
+              {i < STEPS.length - 1 && <div className="w-4 sm:w-8 h-px bg-white/[0.10]" />}
             </div>
           ))}
         </div>
@@ -389,20 +389,20 @@ export function CampaignBuilder() {
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3 space-y-5">
                   {/* Campaign name */}
-                  <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Nome da campanha</label>
+                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                    <label className="block text-sm font-medium text-white/85 mb-2">Nome da campanha</label>
                     <input
                       type="text"
                       value={form.name}
                       onChange={(e) => updateForm({ name: e.target.value })}
                       placeholder="Ex: Promoção de Natal 2026"
-                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300"
+                      className="w-full px-4 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-white/15"
                     />
                   </div>
 
                   {/* Message type */}
-                  <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">Tipo de mensagem</label>
+                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                    <label className="block text-sm font-medium text-white/85 mb-3">Tipo de mensagem</label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {([
                         { type: 'text' as const, icon: Type, label: 'Texto' },
@@ -421,11 +421,11 @@ export function CampaignBuilder() {
                           className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
                             form.message_type === type
                               ? 'border-gray-900 bg-gray-900/5'
-                              : 'border-gray-100 hover:border-gray-300'
+                              : 'border-white/10 hover:border-white/15'
                           }`}
                         >
-                          <Icon size={20} className={form.message_type === type ? 'text-gray-900' : 'text-gray-400'} />
-                          <span className={`text-xs font-medium ${form.message_type === type ? 'text-gray-900' : 'text-gray-500'}`}>{label}</span>
+                          <Icon size={20} className={form.message_type === type ? 'text-white' : 'text-white/40'} />
+                          <span className={`text-xs font-medium ${form.message_type === type ? 'text-white' : 'text-white/55'}`}>{label}</span>
                         </button>
                       ))}
                     </div>
@@ -433,8 +433,8 @@ export function CampaignBuilder() {
 
                   {/* Content -- hidden for audio since voice notes have no caption */}
                   {form.message_type !== 'audio' && (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                    <label className="block text-sm font-medium text-white/85 mb-2">
                       {form.message_type === 'text' ? 'Mensagem' : form.message_type === 'image' ? 'Legenda (opcional)' : 'Texto da mensagem'}
                     </label>
                     <textarea
@@ -446,20 +446,20 @@ export function CampaignBuilder() {
                       }
                       placeholder={form.message_type === 'text' ? 'Olá {nome}, temos uma oferta especial para você!' : 'Legenda para a mídia...'}
                       rows={5}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300"
+                      className="w-full px-4 py-3 rounded-xl border border-white/10 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-white/15"
                     />
                     <div className="flex items-center gap-2 mt-2">
-                      <span className="text-xs text-gray-400">Variáveis:</span>
+                      <span className="text-xs text-white/40">Variáveis:</span>
                       {['{nome}'].map((v) => (
                         <button
                           key={v}
                           onClick={() => insertVariable(v)}
-                          className="px-2 py-0.5 rounded-md bg-gray-100 text-xs text-gray-600 hover:bg-gray-200 transition-colors font-mono"
+                          className="px-2 py-0.5 rounded-md bg-white/[0.06] text-xs text-white/70 hover:bg-white/[0.10] transition-colors font-mono"
                         >
                           {v}
                         </button>
                       ))}
-                      <span className="ml-auto text-xs text-gray-400">
+                      <span className="ml-auto text-xs text-white/40">
                         {(form.message_type === 'image' || form.message_type === 'document' ? form.caption : form.content).length} caracteres
                       </span>
                     </div>
@@ -468,8 +468,8 @@ export function CampaignBuilder() {
 
                   {/* Media upload */}
                   {form.message_type !== 'text' && (
-                    <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                    <div className="bg-white rounded-2xl border border-white/10 p-5">
+                      <label className="block text-sm font-medium text-white/85 mb-3">
                         {form.message_type === 'image' ? 'Imagem' : form.message_type === 'audio' ? 'Nota de Voz' : 'Documento'}
                       </label>
 
@@ -536,12 +536,12 @@ export function CampaignBuilder() {
                           </div>
                           <div className="flex items-center gap-2">
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs font-medium text-gray-600 truncate">{form.mediaFile.name}</p>
-                              <p className="text-[11px] text-gray-400">{(form.mediaFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                              <p className="text-xs font-medium text-white/70 truncate">{form.mediaFile.name}</p>
+                              <p className="text-[11px] text-white/40">{(form.mediaFile.size / 1024 / 1024).toFixed(2)} MB</p>
                             </div>
                             <button
                               onClick={clearMedia}
-                              className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors"
+                              className="p-1.5 rounded-lg hover:bg-red-50 text-white/40 hover:text-red-500 transition-colors"
                               title="Remover audio"
                             >
                               <Trash2 size={16} />
@@ -561,23 +561,23 @@ export function CampaignBuilder() {
                               <Mic size={22} className="text-emerald-600" />
                             </div>
                             <div className="text-left">
-                              <p className="text-sm font-semibold text-gray-900">Gravar nota de voz</p>
-                              <p className="text-xs text-gray-500">Clique para iniciar a gravacao</p>
+                              <p className="text-sm font-semibold text-white">Gravar nota de voz</p>
+                              <p className="text-xs text-white/55">Clique para iniciar a gravacao</p>
                             </div>
                           </button>
                           <div className="flex items-center gap-3">
-                            <div className="flex-1 h-px bg-gray-200" />
-                            <span className="text-[11px] font-medium text-gray-400 uppercase">ou</span>
-                            <div className="flex-1 h-px bg-gray-200" />
+                            <div className="flex-1 h-px bg-white/[0.10]" />
+                            <span className="text-[11px] font-medium text-white/40 uppercase">ou</span>
+                            <div className="flex-1 h-px bg-white/[0.10]" />
                           </div>
                           <button
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full flex items-center justify-center gap-3 border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-gray-400 hover:bg-gray-50 transition-all"
+                            className="w-full flex items-center justify-center gap-3 border-2 border-dashed border-white/10 rounded-xl p-4 text-center hover:border-gray-400 hover:bg-white/[0.04] transition-all"
                           >
-                            <Upload size={18} className="text-gray-400" />
+                            <Upload size={18} className="text-white/40" />
                             <div className="text-left">
-                              <p className="text-sm font-medium text-gray-600">Fazer upload de arquivo</p>
-                              <p className="text-xs text-gray-400">OGG, MP3, WAV, M4A (max 16 MB)</p>
+                              <p className="text-sm font-medium text-white/70">Fazer upload de arquivo</p>
+                              <p className="text-xs text-white/40">OGG, MP3, WAV, M4A (max 16 MB)</p>
                             </div>
                           </button>
                           {recorder.error && (
@@ -590,17 +590,17 @@ export function CampaignBuilder() {
 
                       {/* Image/Document: existing file preview */}
                       {form.message_type !== 'audio' && form.mediaFile && (
-                        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                        <div className="flex items-center gap-3 p-3 bg-white/[0.04] rounded-xl">
                           {form.mediaPreview && (
                             <img src={form.mediaPreview} alt="" className="w-16 h-16 rounded-lg object-cover" />
                           )}
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 truncate">{form.mediaFile.name}</p>
-                            <p className="text-xs text-gray-500">{(form.mediaFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                            <p className="text-sm font-medium text-white truncate">{form.mediaFile.name}</p>
+                            <p className="text-xs text-white/55">{(form.mediaFile.size / 1024 / 1024).toFixed(2)} MB</p>
                           </div>
                           <button
                             onClick={clearMedia}
-                            className="p-1.5 rounded-lg hover:bg-gray-200 text-gray-400"
+                            className="p-1.5 rounded-lg hover:bg-white/[0.10] text-white/40"
                           >
                             <X size={16} />
                           </button>
@@ -611,11 +611,11 @@ export function CampaignBuilder() {
                       {form.message_type !== 'audio' && !form.mediaFile && (
                         <button
                           onClick={() => fileInputRef.current?.click()}
-                          className="w-full border-2 border-dashed border-gray-200 rounded-xl p-8 text-center hover:border-gray-400 hover:bg-gray-50 transition-all"
+                          className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:border-gray-400 hover:bg-white/[0.04] transition-all"
                         >
-                          <Upload size={24} className="mx-auto mb-2 text-gray-400" />
-                          <p className="text-sm text-gray-600 font-medium">Clique para fazer upload</p>
-                          <p className="text-xs text-gray-400 mt-1">
+                          <Upload size={24} className="mx-auto mb-2 text-white/40" />
+                          <p className="text-sm text-white/70 font-medium">Clique para fazer upload</p>
+                          <p className="text-xs text-white/40 mt-1">
                             {form.message_type === 'image' ? 'PNG, JPG, WEBP (max 16 MB)' : 'PDF, DOCX, XLSX (max 16 MB)'}
                           </p>
                         </button>
@@ -637,7 +637,7 @@ export function CampaignBuilder() {
                 {/* Phone preview */}
                 <div className="hidden lg:block lg:col-span-2">
                   <div className="sticky top-8">
-                    <p className="text-xs font-medium text-gray-500 mb-3 uppercase tracking-wider">Pré-visualização</p>
+                    <p className="text-xs font-medium text-white/55 mb-3 uppercase tracking-wider">Pré-visualização</p>
                     <div className="bg-gray-900 rounded-[2rem] p-3 shadow-2xl">
                       <div className="bg-[#e5ddd5] rounded-[1.5rem] overflow-hidden">
                         {/* WhatsApp header */}
@@ -676,7 +676,7 @@ export function CampaignBuilder() {
                                   </div>
                                 </div>
                                 <div className="flex items-center justify-between mt-1 pl-10">
-                                  <span className="text-[10px] text-gray-500 tabular-nums">
+                                  <span className="text-[10px] text-white/55 tabular-nums">
                                     {formatDuration(form.audioDurationSeconds)}
                                   </span>
                                   <Mic size={10} className="text-[#075e54]/60" />
@@ -686,24 +686,24 @@ export function CampaignBuilder() {
                             {form.message_type === 'document' && form.mediaFile && (
                               <div className="bg-[#dcf8c6] rounded-lg p-3 mb-1 flex items-center gap-2">
                                 <FileText size={18} className="text-[#075e54]" />
-                                <span className="text-xs text-gray-700 truncate">{form.mediaFile.name}</span>
+                                <span className="text-xs text-white/85 truncate">{form.mediaFile.name}</span>
                               </div>
                             )}
                             {(form.content || form.caption) && (
                               <div className="bg-[#dcf8c6] rounded-lg px-3 py-2">
-                                <p className="text-[13px] text-gray-800 whitespace-pre-wrap break-words">
+                                <p className="text-[13px] text-white whitespace-pre-wrap break-words">
                                   {(form.message_type === 'image' || form.message_type === 'document' ? form.caption : form.content)
                                     .replace(/\{nome\}/gi, 'João')
                                     .replace(/\{telefone\}/gi, '(11) 99999-0000') || (
-                                    <span className="text-gray-400 italic">Sua mensagem aqui...</span>
+                                    <span className="text-white/40 italic">Sua mensagem aqui...</span>
                                   )}
                                 </p>
-                                <p className="text-[10px] text-gray-500 text-right mt-0.5">12:00</p>
+                                <p className="text-[10px] text-white/55 text-right mt-0.5">12:00</p>
                               </div>
                             )}
                             {!form.content && !form.caption && form.message_type === 'text' && (
                               <div className="bg-[#dcf8c6] rounded-lg px-3 py-2">
-                                <p className="text-[13px] text-gray-400 italic">Sua mensagem aqui...</p>
+                                <p className="text-[13px] text-white/40 italic">Sua mensagem aqui...</p>
                               </div>
                             )}
                           </div>
@@ -722,12 +722,12 @@ export function CampaignBuilder() {
               <div className="space-y-5">
                 {/* Instance selector (when > 1 instance) */}
                 {connectedInstances.length > 1 && (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-2">
-                      <Smartphone size={16} className="text-gray-500" />
+                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                    <h3 className="text-sm font-semibold text-white mb-1 flex items-center gap-2">
+                      <Smartphone size={16} className="text-white/55" />
                       Instâncias de envio
                     </h3>
-                    <p className="text-xs text-gray-500 mb-4">
+                    <p className="text-xs text-white/55 mb-4">
                       Escolha de quais números a campanha será enviada. Os destinatários serão distribuídos entre as instâncias selecionadas. Se nenhuma for escolhida, todas serão usadas.
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -741,25 +741,25 @@ export function CampaignBuilder() {
                             className={`flex items-center gap-3 p-3 rounded-xl border-2 text-left transition-all ${
                               selected
                                 ? 'border-gray-900 bg-gray-900/5'
-                                : 'border-gray-100 hover:border-gray-300'
+                                : 'border-white/10 hover:border-white/15'
                             }`}
                           >
                             <div
                               className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 border ${
                                 selected
                                   ? 'bg-gray-900 border-gray-900 text-white'
-                                  : 'border-gray-300 bg-white'
+                                  : 'border-white/15 bg-white'
                               }`}
                             >
                               {selected && <Check size={12} />}
                             </div>
-                            <Smartphone size={16} className="text-gray-400 shrink-0" />
+                            <Smartphone size={16} className="text-white/40 shrink-0" />
                             <div className="min-w-0 flex-1">
-                              <p className="text-sm font-medium text-gray-900 truncate">
+                              <p className="text-sm font-medium text-white truncate">
                                 {instanceDisplayName(inst)}
                               </p>
                               {inst.phone_number && inst.label && (
-                                <p className="text-[11px] text-gray-400 truncate">{inst.phone_number}</p>
+                                <p className="text-[11px] text-white/40 truncate">{inst.phone_number}</p>
                               )}
                             </div>
                             <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 shrink-0">
@@ -770,7 +770,7 @@ export function CampaignBuilder() {
                       })}
                     </div>
                     {form.instance_ids.length === 0 && (
-                      <p className="text-[11px] text-gray-400 mt-3">
+                      <p className="text-[11px] text-white/40 mt-3">
                         Nenhuma selecionada — a campanha será distribuída entre todas as instâncias conectadas.
                       </p>
                     )}
@@ -778,22 +778,22 @@ export function CampaignBuilder() {
                 )}
 
                 {/* Filters */}
-                <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <Users size={16} className="text-gray-500" />
+                <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                    <Users size={16} className="text-white/55" />
                     Filtrar destinatários
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                     {/* Category */}
                     <div>
-                      <label className="block text-xs font-medium text-gray-500 mb-2">Categoria</label>
+                      <label className="block text-xs font-medium text-white/55 mb-2">Categoria</label>
                       <div className="flex flex-wrap gap-2">
                         <button
                           onClick={() => updateForm({ filter_category: '' })}
                           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                             !form.filter_category
                               ? 'bg-gray-900 text-white'
-                              : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                              : 'bg-white/[0.04] text-white/70 hover:bg-white/[0.06]'
                           }`}
                         >
                           <Users size={12} />
@@ -808,7 +808,7 @@ export function CampaignBuilder() {
                               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                                 form.filter_category === cat.key
                                   ? 'bg-gray-900 text-white'
-                                  : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                                  : 'bg-white/[0.04] text-white/70 hover:bg-white/[0.06]'
                               }`}
                             >
                               <Icon size={12} />
@@ -821,7 +821,7 @@ export function CampaignBuilder() {
 
                     {/* Exclude recent */}
                     <div>
-                      <label className="block text-xs font-medium text-gray-500 mb-2">Excluir recentes</label>
+                      <label className="block text-xs font-medium text-white/55 mb-2">Excluir recentes</label>
                       <div className="flex items-center gap-2">
                         <input
                           type="number"
@@ -830,9 +830,9 @@ export function CampaignBuilder() {
                           value={form.exclude_recent_days || ''}
                           onChange={(e) => updateForm({ exclude_recent_days: Number(e.target.value) || 0 })}
                           placeholder="0"
-                          className="w-20 px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                          className="w-20 px-3 py-2 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                         />
-                        <span className="text-xs text-gray-500">dias desde última campanha</span>
+                        <span className="text-xs text-white/55">dias desde última campanha</span>
                       </div>
                     </div>
                   </div>
@@ -840,7 +840,7 @@ export function CampaignBuilder() {
                   {/* Tags */}
                   {allTags.length > 0 && (
                     <div className="mt-4">
-                      <label className="block text-xs font-medium text-gray-500 mb-2">Tags</label>
+                      <label className="block text-xs font-medium text-white/55 mb-2">Tags</label>
                       <div className="flex flex-wrap gap-2">
                         {allTags.map((tag) => (
                           <button
@@ -849,7 +849,7 @@ export function CampaignBuilder() {
                             className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
                               form.filter_tags.includes(tag)
                                 ? 'bg-gray-900 text-white'
-                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                : 'bg-white/[0.06] text-white/70 hover:bg-white/[0.10]'
                             }`}
                           >
                             {tag}
@@ -868,7 +868,7 @@ export function CampaignBuilder() {
                     </div>
                     <div>
                       <p className="text-white font-semibold">{filteredLeads.length} leads selecionados</p>
-                      <p className="text-gray-400 text-xs">
+                      <p className="text-white/40 text-xs">
                         {form.excludedLeadIds.size > 0 && `${form.excludedLeadIds.size} excluídos manualmente`}
                         {form.excludedLeadIds.size === 0 && `de ${leads.length} leads no total`}
                       </p>
@@ -883,29 +883,29 @@ export function CampaignBuilder() {
                 </div>
 
                 {/* Recipient list */}
-                <div className="bg-white rounded-2xl border border-gray-100 p-5">
+                <div className="bg-white rounded-2xl border border-white/10 p-5">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                    <h3 className="text-sm font-semibold text-gray-900">Lista de destinatários</h3>
+                    <h3 className="text-sm font-semibold text-white">Lista de destinatários</h3>
                     <div className="relative w-full sm:w-60">
-                      <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                      <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
                       <input
                         type="text"
                         placeholder="Buscar lead..."
                         value={leadSearch}
                         onChange={(e) => setLeadSearch(e.target.value)}
-                        className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-white/10 text-xs focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                       />
                     </div>
                   </div>
                   {leadsLoading ? (
                     <div className="flex justify-center py-8">
-                      <div className="w-5 h-5 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-white/10 border-t-gray-600 rounded-full animate-spin" />
                     </div>
                   ) : (
-                    <div className="max-h-72 overflow-auto rounded-xl border border-gray-100">
+                    <div className="max-h-72 overflow-auto rounded-xl border border-white/10">
                       <table className="w-full text-sm">
-                        <thead className="sticky top-0 bg-gray-50">
-                          <tr className="text-left text-xs text-gray-500 font-medium">
+                        <thead className="sticky top-0 bg-white/[0.04]">
+                          <tr className="text-left text-xs text-white/55 font-medium">
                             <th className="px-3 py-2 w-8" />
                             <th className="px-3 py-2">Nome</th>
                             <th className="px-3 py-2">Telefone</th>
@@ -916,21 +916,21 @@ export function CampaignBuilder() {
                           {searchedLeads.slice(0, 100).map((l) => {
                             const excluded = form.excludedLeadIds.has(l.id);
                             return (
-                              <tr key={l.id} className={`${excluded ? 'opacity-40' : ''} hover:bg-gray-50 transition-colors`}>
+                              <tr key={l.id} className={`${excluded ? 'opacity-40' : ''} hover:bg-white/[0.04] transition-colors`}>
                                 <td className="px-3 py-2">
                                   <input
                                     type="checkbox"
                                     checked={!excluded}
                                     onChange={() => toggleExclude(l.id)}
-                                    className="rounded border-gray-300"
+                                    className="rounded border-white/15"
                                   />
                                 </td>
-                                <td className="px-3 py-2 font-medium text-gray-900">{leadDisplayName(l) || '-'}</td>
-                                <td className="px-3 py-2 text-gray-500">{l.phone}</td>
+                                <td className="px-3 py-2 font-medium text-white">{leadDisplayName(l) || '-'}</td>
+                                <td className="px-3 py-2 text-white/55">{l.phone}</td>
                                 <td className="px-3 py-2">
                                   {(() => {
                                     const cat = categories.find((c) => c.key === l.category);
-                                    if (!cat) return <span className="text-xs text-gray-400">-</span>;
+                                    if (!cat) return <span className="text-xs text-white/40">-</span>;
                                     const CatIcon = resolveIcon(cat.icon);
                                     return (
                                       <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${cat.color}`}>
@@ -946,7 +946,7 @@ export function CampaignBuilder() {
                         </tbody>
                       </table>
                       {searchedLeads.length > 100 && (
-                        <p className="text-center text-xs text-gray-400 py-2">
+                        <p className="text-center text-xs text-white/40 py-2">
                           Exibindo 100 de {searchedLeads.length} leads
                         </p>
                       )}
@@ -973,41 +973,41 @@ export function CampaignBuilder() {
                       className={`p-5 rounded-2xl border-2 text-left transition-all ${
                         form.schedule_mode === mode
                           ? 'border-gray-900 bg-gray-900/5'
-                          : 'border-gray-100 bg-white hover:border-gray-300'
+                          : 'border-white/10 bg-white hover:border-white/15'
                       }`}
                     >
-                      <Icon size={22} className={form.schedule_mode === mode ? 'text-gray-900 mb-3' : 'text-gray-400 mb-3'} />
-                      <p className={`font-semibold text-sm ${form.schedule_mode === mode ? 'text-gray-900' : 'text-gray-600'}`}>{title}</p>
-                      <p className="text-xs text-gray-500 mt-1">{desc}</p>
+                      <Icon size={22} className={form.schedule_mode === mode ? 'text-white mb-3' : 'text-white/40 mb-3'} />
+                      <p className={`font-semibold text-sm ${form.schedule_mode === mode ? 'text-white' : 'text-white/70'}`}>{title}</p>
+                      <p className="text-xs text-white/55 mt-1">{desc}</p>
                     </button>
                   ))}
                 </div>
 
                 {/* Date/time picker */}
                 {form.schedule_mode === 'later' && (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                      <Calendar size={16} className="text-gray-500" />
+                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                    <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                      <Calendar size={16} className="text-white/55" />
                       Data e horário
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 mb-1.5">Data</label>
+                        <label className="block text-xs font-medium text-white/55 mb-1.5">Data</label>
                         <input
                           type="date"
                           value={form.scheduled_date}
                           onChange={(e) => updateForm({ scheduled_date: e.target.value })}
                           min={new Date().toISOString().split('T')[0]}
-                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                          className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-gray-500 mb-1.5">Horário</label>
+                        <label className="block text-xs font-medium text-white/55 mb-1.5">Horário</label>
                         <input
                           type="time"
                           value={form.scheduled_time}
                           onChange={(e) => updateForm({ scheduled_time: e.target.value })}
-                          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                          className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                         />
                       </div>
                     </div>
@@ -1015,38 +1015,38 @@ export function CampaignBuilder() {
                 )}
 
                 {/* Send window */}
-                <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1 flex items-center gap-2">
-                    <Clock size={16} className="text-gray-500" />
+                <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <h3 className="text-sm font-semibold text-white mb-1 flex items-center gap-2">
+                    <Clock size={16} className="text-white/55" />
                     Janela de envio (opcional)
                   </h3>
-                  <p className="text-xs text-gray-500 mb-4">Enviar apenas dentro de um horário comercial específico</p>
+                  <p className="text-xs text-white/55 mb-4">Enviar apenas dentro de um horário comercial específico</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-gray-500 mb-1.5">Início</label>
+                      <label className="block text-xs font-medium text-white/55 mb-1.5">Início</label>
                       <input
                         type="time"
                         value={form.send_window_start}
                         onChange={(e) => updateForm({ send_window_start: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-gray-500 mb-1.5">Fim</label>
+                      <label className="block text-xs font-medium text-white/55 mb-1.5">Fim</label>
                       <input
                         type="time"
                         value={form.send_window_end}
                         onChange={(e) => updateForm({ send_window_end: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Delay */}
-                <div className="bg-white rounded-2xl border border-gray-100 p-5">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1">Intervalo entre mensagens</h3>
-                  <p className="text-xs text-gray-500 mb-3">
+                <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <h3 className="text-sm font-semibold text-white mb-1">Intervalo entre mensagens</h3>
+                  <p className="text-xs text-white/55 mb-3">
                     O sistema aguarda um tempo aleatório entre os dois valores definidos. Intervalos maiores reduzem o risco de bloqueio pelo WhatsApp.
                   </p>
                   <RangeSlider
@@ -1059,7 +1059,7 @@ export function CampaignBuilder() {
                     onChange={(lo, hi) => updateForm({ delay_ms: lo, delay_ms_max: hi })}
                     formatLabel={(v) => `${Math.round(v / 1000)}s`}
                   />
-                  <div className="flex justify-between text-[10px] text-gray-400 mt-2 px-0.5">
+                  <div className="flex justify-between text-[10px] text-white/40 mt-2 px-0.5">
                     <span>15s (mínimo)</span>
                     <span>120s (máximo)</span>
                   </div>
@@ -1072,26 +1072,26 @@ export function CampaignBuilder() {
           {step === 3 && (
             <motion.div key="step-3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}>
               <div className="max-w-2xl space-y-5">
-                <div className="bg-white rounded-2xl border border-gray-100 p-6">
-                  <h3 className="text-lg font-bold text-gray-900 mb-5 flex items-center gap-2">
-                    <Megaphone size={20} className="text-gray-500" />
+                <div className="bg-white rounded-2xl border border-white/10 p-6">
+                  <h3 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
+                    <Megaphone size={20} className="text-white/55" />
                     Resumo da campanha
                   </h3>
 
                   <div className="space-y-4">
                     <div className="flex justify-between py-3 border-b border-gray-50">
-                      <span className="text-sm text-gray-500">Nome</span>
-                      <span className="text-sm font-medium text-gray-900">{form.name}</span>
+                      <span className="text-sm text-white/55">Nome</span>
+                      <span className="text-sm font-medium text-white">{form.name}</span>
                     </div>
                     <div className="flex justify-between py-3 border-b border-gray-50">
-                      <span className="text-sm text-gray-500">Tipo de mensagem</span>
-                      <span className="text-sm font-medium text-gray-900 capitalize">{form.message_type === 'text' ? 'Texto' : form.message_type === 'image' ? 'Imagem' : form.message_type === 'audio' ? 'Áudio' : 'Documento'}</span>
+                      <span className="text-sm text-white/55">Tipo de mensagem</span>
+                      <span className="text-sm font-medium text-white capitalize">{form.message_type === 'text' ? 'Texto' : form.message_type === 'image' ? 'Imagem' : form.message_type === 'audio' ? 'Áudio' : 'Documento'}</span>
                     </div>
                     {form.mediaFile && form.message_type === 'audio' && (
                       <div className="py-3 border-b border-gray-50">
                         <div className="flex justify-between mb-3">
-                          <span className="text-sm text-gray-500">Nota de voz</span>
-                          <span className="text-sm font-medium text-gray-900">{formatDuration(form.audioDurationSeconds)}</span>
+                          <span className="text-sm text-white/55">Nota de voz</span>
+                          <span className="text-sm font-medium text-white">{formatDuration(form.audioDurationSeconds)}</span>
                         </div>
                         {form.audioObjectUrl && (
                           <div className="bg-emerald-50 rounded-xl p-3">
@@ -1106,40 +1106,40 @@ export function CampaignBuilder() {
                     )}
                     {form.mediaFile && form.message_type !== 'audio' && (
                       <div className="flex justify-between py-3 border-b border-gray-50">
-                        <span className="text-sm text-gray-500">Arquivo</span>
-                        <span className="text-sm font-medium text-gray-900">{form.mediaFile.name}</span>
+                        <span className="text-sm text-white/55">Arquivo</span>
+                        <span className="text-sm font-medium text-white">{form.mediaFile.name}</span>
                       </div>
                     )}
                     <div className="flex justify-between py-3 border-b border-gray-50">
-                      <span className="text-sm text-gray-500">Destinatários</span>
-                      <span className="text-sm font-semibold text-gray-900">{filteredLeads.length} leads</span>
+                      <span className="text-sm text-white/55">Destinatários</span>
+                      <span className="text-sm font-semibold text-white">{filteredLeads.length} leads</span>
                     </div>
                     <div className="flex justify-between py-3 border-b border-gray-50">
-                      <span className="text-sm text-gray-500">Agendamento</span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span className="text-sm text-white/55">Agendamento</span>
+                      <span className="text-sm font-medium text-white">
                         {form.schedule_mode === 'now' ? 'Envio imediato' : `${form.scheduled_date} às ${form.scheduled_time}`}
                       </span>
                     </div>
                     {form.send_window_start && form.send_window_end && (
                       <div className="flex justify-between py-3 border-b border-gray-50">
-                        <span className="text-sm text-gray-500">Janela de envio</span>
-                        <span className="text-sm font-medium text-gray-900">{form.send_window_start} - {form.send_window_end}</span>
+                        <span className="text-sm text-white/55">Janela de envio</span>
+                        <span className="text-sm font-medium text-white">{form.send_window_start} - {form.send_window_end}</span>
                       </div>
                     )}
                     <div className="flex justify-between py-3 border-b border-gray-50">
-                      <span className="text-sm text-gray-500">Intervalo</span>
-                      <span className="text-sm font-medium text-gray-900">entre {Math.round(form.delay_ms / 1000)}s e {Math.round(form.delay_ms_max / 1000)}s (aleatório)</span>
+                      <span className="text-sm text-white/55">Intervalo</span>
+                      <span className="text-sm font-medium text-white">entre {Math.round(form.delay_ms / 1000)}s e {Math.round(form.delay_ms_max / 1000)}s (aleatório)</span>
                     </div>
                     <div className="flex justify-between py-3">
-                      <span className="text-sm text-gray-500">Tempo estimado</span>
-                      <span className="text-sm font-semibold text-gray-900">~{estimatedMinutes} min</span>
+                      <span className="text-sm text-white/55">Tempo estimado</span>
+                      <span className="text-sm font-semibold text-white">~{estimatedMinutes} min</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Message preview */}
-                <div className="bg-white rounded-2xl border border-gray-100 p-6">
-                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Prévia da mensagem</h4>
+                <div className="bg-white rounded-2xl border border-white/10 p-6">
+                  <h4 className="text-sm font-semibold text-white mb-3">Prévia da mensagem</h4>
                   <div className="bg-[#e5ddd5] rounded-xl p-4">
                     <div className="max-w-[80%] ml-auto">
                       {form.mediaPreview && (
@@ -1165,15 +1165,15 @@ export function CampaignBuilder() {
                             </div>
                           </div>
                           <div className="flex items-center justify-between mt-1 pl-11">
-                            <span className="text-[10px] text-gray-500 tabular-nums">
+                            <span className="text-[10px] text-white/55 tabular-nums">
                               {formatDuration(form.audioDurationSeconds)}
                             </span>
-                            <span className="text-[10px] text-gray-500">12:00</span>
+                            <span className="text-[10px] text-white/55">12:00</span>
                           </div>
                         </div>
                       ) : (
                         <div className="bg-[#dcf8c6] rounded-lg px-3 py-2">
-                          <p className="text-sm text-gray-800 whitespace-pre-wrap">
+                          <p className="text-sm text-white whitespace-pre-wrap">
                             {(form.message_type === 'image' || form.message_type === 'document' ? form.caption : form.content)
                               .replace(/\{nome\}/gi, 'João Silva')
                               .replace(/\{telefone\}/gi, '(11) 99999-0000')}
@@ -1202,7 +1202,7 @@ export function CampaignBuilder() {
         </AnimatePresence>
 
         {/* Navigation buttons */}
-        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-100">
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/10">
           <Button
             variant="ghost"
             onClick={() => (step === 0 ? navigate('/dashboard/campaigns') : setStep(step - 1))}

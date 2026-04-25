@@ -20,15 +20,15 @@ export function Settings() {
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
             <div className="flex items-center gap-2.5 mb-1">
-              <SettingsIcon size={22} className="text-gray-400" />
-              <h1 className="text-2xl font-bold text-gray-900">Configuracoes</h1>
+              <SettingsIcon size={22} className="text-white/40" />
+              <h1 className="text-2xl font-bold text-white">Configuracoes</h1>
             </div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-white/55">
               Gerencie suas conexoes e personalize as categorias do seu funil.
             </p>
           </div>
 
-          <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-xl w-fit mb-6 sm:mb-8 overflow-x-auto">
+          <div className="flex items-center gap-1 p-1 bg-white/[0.06] rounded-xl w-fit mb-6 sm:mb-8 overflow-x-auto">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -37,7 +37,7 @@ export function Settings() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`relative flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ${
-                    isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                    isActive ? 'text-white' : 'text-white/55 hover:text-white/85'
                   }`}
                 >
                   {isActive && (

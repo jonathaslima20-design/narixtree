@@ -9,7 +9,7 @@ import { useLeadCategories, LeadCategoryRow } from '../../lib/useLeadCategories'
 import { resolveIcon, ICON_OPTIONS } from '../../lib/iconMap';
 
 const COLOR_PRESETS: { label: string; value: string }[] = [
-  { label: 'Cinza', value: 'bg-gray-100 text-gray-700' },
+  { label: 'Cinza', value: 'bg-white/[0.06] text-white/85' },
   { label: 'Azul', value: 'bg-sky-100 text-sky-700' },
   { label: 'Amarelo', value: 'bg-amber-100 text-amber-700' },
   { label: 'Verde', value: 'bg-emerald-100 text-emerald-700' },
@@ -21,7 +21,7 @@ const COLOR_PRESETS: { label: string; value: string }[] = [
 ];
 
 function colorDot(colorClass: string) {
-  const bg = colorClass.split(' ')[0] || 'bg-gray-100';
+  const bg = colorClass.split(' ')[0] || 'bg-white/[0.06]';
   return bg.replace('-100', '-400');
 }
 
@@ -79,7 +79,7 @@ function CategoryRow({
       onDragEnd={onDragEnd}
       onDrop={onDrop}
       className={`flex items-center gap-4 px-5 py-4 border-b border-gray-50 last:border-b-0 group transition-colors ${
-        isDragOver ? 'bg-gray-50 border-t-2 border-t-gray-900' : ''
+        isDragOver ? 'bg-white/[0.04] border-t-2 border-t-gray-900' : ''
       }`}
     >
       <GripVertical size={16} className="text-gray-300 shrink-0 cursor-grab active:cursor-grabbing" />
@@ -102,7 +102,7 @@ function CategoryRow({
                 initial={{ opacity: 0, scale: 0.9, y: -4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: -4 }}
-                className="absolute left-0 top-full mt-2 z-20 bg-white border border-gray-100 rounded-2xl shadow-lg p-3 grid grid-cols-5 gap-1.5 w-56"
+                className="absolute left-0 top-full mt-2 z-20 bg-white border border-white/10 rounded-2xl shadow-lg p-3 grid grid-cols-5 gap-1.5 w-56"
               >
                 {ICON_OPTIONS.map((opt) => {
                   const Ic = opt.component;
@@ -113,12 +113,12 @@ function CategoryRow({
                         onIconChange(cat.key, opt.name);
                         setShowIcons(false);
                       }}
-                      className={`w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-gray-50 ${
-                        opt.name === cat.icon ? 'ring-2 ring-gray-900 ring-offset-1 bg-gray-50' : ''
+                      className={`w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-white/[0.04] ${
+                        opt.name === cat.icon ? 'ring-2 ring-gray-900 ring-offset-1 bg-white/[0.04]' : ''
                       }`}
                       title={opt.name}
                     >
-                      <Ic size={16} className="text-gray-700" />
+                      <Ic size={16} className="text-white/85" />
                     </button>
                   );
                 })}
@@ -144,7 +144,7 @@ function CategoryRow({
                 initial={{ opacity: 0, scale: 0.9, y: -4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: -4 }}
-                className="absolute left-0 top-full mt-2 z-20 bg-white border border-gray-100 rounded-2xl shadow-lg p-3 grid grid-cols-3 gap-2 w-48"
+                className="absolute left-0 top-full mt-2 z-20 bg-white border border-white/10 rounded-2xl shadow-lg p-3 grid grid-cols-3 gap-2 w-48"
               >
                 {COLOR_PRESETS.map((preset) => (
                   <button
@@ -153,7 +153,7 @@ function CategoryRow({
                       onColorChange(cat.key, preset.value);
                       setShowColors(false);
                     }}
-                    className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors hover:bg-gray-50 ${
+                    className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors hover:bg-white/[0.04] ${
                       preset.value === cat.color ? 'ring-2 ring-gray-900 ring-offset-1' : ''
                     }`}
                   >
@@ -180,12 +180,12 @@ function CategoryRow({
               if (e.key === 'Escape') { setDraft(cat.label); setEditing(false); }
             }}
             maxLength={30}
-            className="w-full text-sm font-medium text-gray-900 bg-gray-50 border border-gray-200 rounded-xl px-3 py-1.5 outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+            className="w-full text-sm font-medium text-white bg-white/[0.04] border border-white/10 rounded-xl px-3 py-1.5 outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
           />
         ) : (
           <button
             onClick={() => { setDraft(cat.label); setEditing(true); }}
-            className="text-sm font-medium text-gray-900 hover:text-gray-600 transition-colors text-left"
+            className="text-sm font-medium text-white hover:text-white/70 transition-colors text-left"
           >
             {cat.label}
           </button>
@@ -298,10 +298,10 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
   const content = (
     <>
       <Card padding="none">
-            <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between gap-3">
+            <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between gap-3">
               <div>
-                <h2 className="text-sm font-semibold text-gray-900">Categorias de Leads</h2>
-                <p className="text-xs text-gray-400 mt-0.5">
+                <h2 className="text-sm font-semibold text-white">Categorias de Leads</h2>
+                <p className="text-xs text-white/40 mt-0.5">
                   Arraste para reordenar. Clique no nome para editar. Clique no icone ou na cor para alterar.
                 </p>
               </div>
@@ -318,7 +318,7 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
             {loading ? (
               <div className="p-5 space-y-4">
                 {Array.from({ length: 4 }).map((_, i) => (
-                  <div key={i} className="h-10 bg-gray-50 rounded-xl animate-pulse" />
+                  <div key={i} className="h-10 bg-white/[0.04] rounded-xl animate-pulse" />
                 ))}
               </div>
             ) : (
@@ -342,17 +342,17 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
               </div>
             )}
 
-            <div className="px-5 py-3 border-t border-gray-100 flex items-center justify-between">
-              <p className="text-xs text-gray-400">
+            <div className="px-5 py-3 border-t border-white/10 flex items-center justify-between">
+              <p className="text-xs text-white/40">
                 {categories.length} categoria{categories.length !== 1 ? 's' : ''} configurada{categories.length !== 1 ? 's' : ''}
               </p>
               <p className="text-xs text-gray-300">As alteracoes sao salvas automaticamente.</p>
             </div>
           </Card>
 
-      <div className="mt-4 p-4 bg-gray-50 rounded-2xl">
-        <p className="text-xs text-gray-700 font-medium mb-1">Como funciona</p>
-        <p className="text-xs text-gray-500">
+      <div className="mt-4 p-4 bg-white/[0.04] rounded-2xl">
+        <p className="text-xs text-white/85 font-medium mb-1">Como funciona</p>
+        <p className="text-xs text-white/55">
           As categorias organizam seus leads no Kanban e nos detalhes de cada contato.
           A primeira categoria da lista sera usada como padrao para novos leads.
           Ao excluir uma categoria, todos os leads nela serao movidos para a que voce escolher.
@@ -371,7 +371,7 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
           />
 
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-2">Icone</label>
+            <label className="text-sm font-medium text-white/85 block mb-2">Icone</label>
             <div className="grid grid-cols-5 gap-1.5">
               {ICON_OPTIONS.map((opt) => {
                 const Ic = opt.component;
@@ -382,12 +382,12 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
                     onClick={() => setAddForm((f) => ({ ...f, icon: opt.name }))}
                     className={`w-10 h-10 flex items-center justify-center rounded-xl border-2 transition ${
                       addForm.icon === opt.name
-                        ? 'border-gray-900 bg-gray-50'
-                        : 'border-gray-100 hover:border-gray-200'
+                        ? 'border-gray-900 bg-white/[0.04]'
+                        : 'border-white/10 hover:border-white/10'
                     }`}
                     title={opt.name}
                   >
-                    <Ic size={18} className="text-gray-700" />
+                    <Ic size={18} className="text-white/85" />
                   </button>
                 );
               })}
@@ -395,7 +395,7 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700 block mb-2">Cor</label>
+            <label className="text-sm font-medium text-white/85 block mb-2">Cor</label>
             <div className="grid grid-cols-3 gap-2">
               {COLOR_PRESETS.map((preset) => (
                 <button
@@ -404,8 +404,8 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
                   onClick={() => setAddForm((f) => ({ ...f, color: preset.value }))}
                   className={`flex items-center gap-2 px-3 py-2 rounded-xl border-2 text-xs font-medium transition ${
                     addForm.color === preset.value
-                      ? 'border-gray-900 bg-gray-50'
-                      : 'border-gray-100 hover:border-gray-200'
+                      ? 'border-gray-900 bg-white/[0.04]'
+                      : 'border-white/10 hover:border-white/10'
                   }`}
                 >
                   <span className={`w-3 h-3 rounded-full ${colorDot(preset.value)}`} />
@@ -415,8 +415,8 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
             </div>
           </div>
 
-          <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-xl">
-            <span className="text-xs text-gray-500">Preview:</span>
+          <div className="flex items-center gap-2 p-3 bg-white/[0.04] rounded-xl">
+            <span className="text-xs text-white/55">Preview:</span>
             <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${addForm.color}`}>
               <AddIcon size={12} />
               {addForm.label || 'Nova categoria'}
@@ -451,7 +451,7 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
             </div>
 
             <div>
-              <label className="text-sm font-medium text-gray-700 block mb-2">Mover leads para:</label>
+              <label className="text-sm font-medium text-white/85 block mb-2">Mover leads para:</label>
               <div className="space-y-2">
                 {othersForDelete.map((c) => {
                   const Ic = resolveIcon(c.icon);
@@ -462,14 +462,14 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
                       onClick={() => setMigrateTo(c.key)}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border-2 text-left transition ${
                         migrateTo === c.key
-                          ? 'border-gray-900 bg-gray-50'
-                          : 'border-gray-100 hover:border-gray-200'
+                          ? 'border-gray-900 bg-white/[0.04]'
+                          : 'border-white/10 hover:border-white/10'
                       }`}
                     >
                       <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${c.color}`}>
                         <Ic size={14} />
                       </span>
-                      <span className="text-sm font-medium text-gray-900">{c.label}</span>
+                      <span className="text-sm font-medium text-white">{c.label}</span>
                     </button>
                   );
                 })}
@@ -498,10 +498,10 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-1">
-              <Layers size={20} className="text-gray-400" />
-              <h1 className="text-2xl font-bold text-gray-900">Categorias</h1>
+              <Layers size={20} className="text-white/40" />
+              <h1 className="text-2xl font-bold text-white">Categorias</h1>
             </div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-white/55">
               Crie, edite, reordene e exclua as categorias do seu funil de vendas.
             </p>
           </div>

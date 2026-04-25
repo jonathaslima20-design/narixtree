@@ -193,8 +193,8 @@ export function ConnectWhatsApp({ embedded = false }: { embedded?: boolean } = {
       {loading ? (
         <Card>
           <div className="flex flex-col items-center py-8 gap-3">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-gray-900 rounded-full animate-spin" />
-            <p className="text-sm text-gray-400">Carregando...</p>
+            <div className="w-8 h-8 border-2 border-white/10 border-t-gray-900 rounded-full animate-spin" />
+            <p className="text-sm text-white/40">Carregando...</p>
           </div>
         </Card>
       ) : activeInstance ? (
@@ -230,8 +230,8 @@ export function ConnectWhatsApp({ embedded = false }: { embedded?: boolean } = {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Conectar WhatsApp</h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <h1 className="text-2xl font-bold text-white">Conectar WhatsApp</h1>
+        <p className="text-sm text-white/55 mt-1">
           Gerencie suas instâncias de WhatsApp. Você pode conectar múltiplos números conforme o limite do seu plano.
         </p>
       </div>
@@ -270,8 +270,8 @@ function InstanceList({
       <Card>
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <div>
-            <p className="text-sm font-semibold text-gray-900">Instâncias do WhatsApp</p>
-            <p className="text-xs text-gray-500 mt-0.5">Uso: {limitLabel}</p>
+            <p className="text-sm font-semibold text-white">Instâncias do WhatsApp</p>
+            <p className="text-xs text-white/55 mt-0.5">Uso: {limitLabel}</p>
           </div>
           <Button
             size="sm"
@@ -293,11 +293,11 @@ function InstanceList({
       {instances.length === 0 ? (
         <Card>
           <div className="flex flex-col items-center text-center py-8">
-            <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-3">
-              <Smartphone size={28} className="text-gray-400" />
+            <div className="w-16 h-16 bg-white/[0.04] rounded-2xl flex items-center justify-center mb-3">
+              <Smartphone size={28} className="text-white/40" />
             </div>
-            <h3 className="text-base font-semibold text-gray-900 mb-1">Nenhuma instância conectada</h3>
-            <p className="text-sm text-gray-500 mb-4 max-w-xs">
+            <h3 className="text-base font-semibold text-white mb-1">Nenhuma instância conectada</h3>
+            <p className="text-sm text-white/55 mb-4 max-w-xs">
               Crie sua primeira instância para começar a usar o WhatsApp.
             </p>
             <Button onClick={() => setShowCreate(true)} disabled={atLimit}>
@@ -336,8 +336,8 @@ function InstanceList({
               className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Nova instância</h3>
-              <p className="text-sm text-gray-500 mb-4">
+              <h3 className="text-lg font-semibold text-white mb-2">Nova instância</h3>
+              <p className="text-sm text-white/55 mb-4">
                 Dê um nome para identificar este número (ex: Vendas, Suporte).
               </p>
               <Input
@@ -387,7 +387,7 @@ function InstanceCard({
       ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
       : status === 'connecting'
         ? 'bg-amber-50 text-amber-600 border border-amber-100'
-        : 'bg-gray-50 text-gray-500 border border-gray-100';
+        : 'bg-white/[0.04] text-white/55 border border-white/10';
   const statusLabel =
     status === 'connected'
       ? 'Conectado'
@@ -399,7 +399,7 @@ function InstanceCard({
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white border border-gray-100 rounded-2xl p-5 hover:shadow-sm transition-shadow cursor-pointer"
+      className="bg-white border border-white/10 rounded-2xl p-5 hover:shadow-sm transition-shadow cursor-pointer"
       onClick={onSelect}
     >
       <div className="flex items-start justify-between mb-3">
@@ -410,16 +410,16 @@ function InstanceCard({
           {statusLabel}
         </span>
       </div>
-      <p className="text-sm font-semibold text-gray-900 truncate">
+      <p className="text-sm font-semibold text-white truncate">
         {instance.label?.trim() || 'Sem nome'}
       </p>
-      <p className="text-xs text-gray-500 truncate mt-0.5">
+      <p className="text-xs text-white/55 truncate mt-0.5">
         {instance.phone_number || 'Não conectado'}
       </p>
-      <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-100">
+      <div className="flex items-center gap-2 mt-4 pt-3 border-t border-white/10">
         <button
           onClick={(e) => { e.stopPropagation(); onRename(); }}
-          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-white/70 hover:bg-white/[0.06] transition-colors"
         >
           <Pencil size={12} /> Renomear
         </button>
@@ -561,7 +561,7 @@ function InstanceDetail({
     <div className="space-y-4">
       <button
         onClick={onBack}
-        className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
+        className="flex items-center gap-1.5 text-sm text-white/55 hover:text-white transition-colors"
       >
         <ArrowLeft size={14} /> Voltar para instâncias
       </button>
@@ -571,8 +571,8 @@ function InstanceDetail({
           <Smartphone size={18} className="text-white" />
         </div>
         <div className="flex-1">
-          <p className="text-base font-semibold text-gray-900">{instance.label?.trim() || 'Sem nome'}</p>
-          <p className="text-xs text-gray-500">{instance.phone_number || 'Não conectado'}</p>
+          <p className="text-base font-semibold text-white">{instance.label?.trim() || 'Sem nome'}</p>
+          <p className="text-xs text-white/55">{instance.phone_number || 'Não conectado'}</p>
         </div>
         <button
           onClick={remove}
@@ -612,8 +612,8 @@ function ConnectedState({ instance, onDisconnect }: { instance: WhatsAppInstance
         <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-4">
           <CheckCircle2 size={28} className="text-emerald-500" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-1">WhatsApp Conectado</h3>
-        <p className="text-sm text-gray-500 mb-1">
+        <h3 className="text-lg font-semibold text-white mb-1">WhatsApp Conectado</h3>
+        <p className="text-sm text-white/55 mb-1">
           {instance.phone_number || 'Número conectado com sucesso'}
         </p>
         <div className="flex items-center gap-1.5 mb-6">
@@ -654,11 +654,11 @@ function QRCodeState({
   return (
     <Card>
       <div className="flex flex-col items-center text-center">
-        <h3 className="text-base font-semibold text-gray-900 mb-1">Escaneie o QR Code</h3>
-        <p className="text-sm text-gray-500 mb-5">
+        <h3 className="text-base font-semibold text-white mb-1">Escaneie o QR Code</h3>
+        <p className="text-sm text-white/55 mb-5">
           Abra o WhatsApp no seu celular, toque em <strong>Dispositivos vinculados</strong> e escaneie o código.
         </p>
-        <div className="relative w-56 h-56 bg-white border border-gray-100 rounded-2xl flex items-center justify-center mb-4 p-2">
+        <div className="relative w-56 h-56 bg-white border border-white/10 rounded-2xl flex items-center justify-center mb-4 p-2">
           <img
             src={qrSrc}
             alt="QR Code"
@@ -667,7 +667,7 @@ function QRCodeState({
           />
           {expired && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xs font-semibold text-gray-600 bg-white/90 px-3 py-1.5 rounded-full border border-gray-200">
+              <span className="text-xs font-semibold text-white/70 bg-white/90 px-3 py-1.5 rounded-full border border-white/10">
                 QR expirado
               </span>
             </div>
@@ -675,7 +675,7 @@ function QRCodeState({
         </div>
         <div className="flex items-center gap-2 mb-4">
           <div className={`w-2 h-2 rounded-full ${expired ? 'bg-gray-300' : 'bg-amber-400 animate-pulse'}`} />
-          <span className="text-xs font-medium text-gray-600">
+          <span className="text-xs font-medium text-white/70">
             {expired
               ? 'Gerando novo código...'
               : `Aguardando leitura... expira em ${secondsLeft}s`}
@@ -714,11 +714,11 @@ function DisconnectedState({
   return (
     <Card>
       <div className="flex flex-col items-center text-center py-6">
-        <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-4">
-          <Smartphone size={28} className="text-gray-400" />
+        <div className="w-16 h-16 bg-white/[0.04] rounded-2xl flex items-center justify-center mb-4">
+          <Smartphone size={28} className="text-white/40" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Instância desconectada</h3>
-        <p className="text-sm text-gray-500 mb-6 max-w-xs">
+        <h3 className="text-lg font-semibold text-white mb-2">Instância desconectada</h3>
+        <p className="text-sm text-white/55 mb-6 max-w-xs">
           Clique no botão abaixo para gerar um QR Code e vincular o WhatsApp.
         </p>
         <AnimatePresence>

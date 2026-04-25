@@ -268,8 +268,8 @@ export function AdminOverview() {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-5xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Visão Geral</h1>
-            <p className="text-sm text-gray-500 mt-1">Monitoramento global da plataforma BrainLead.</p>
+            <h1 className="text-2xl font-bold text-white">Visão Geral</h1>
+            <p className="text-sm text-white/55 mt-1">Monitoramento global da plataforma BrainLead.</p>
           </div>
           <PeriodSelect value={period} onChange={setPeriod} />
         </div>
@@ -284,11 +284,11 @@ export function AdminOverview() {
                 </div>
                 {card.delta.label && <DeltaBadge direction={card.delta.direction} label={card.delta.label} />}
               </div>
-              <p className="text-2xl font-bold text-gray-900">
-                {loading ? <span className="w-10 h-6 bg-gray-100 rounded animate-pulse inline-block" /> : card.value}
+              <p className="text-2xl font-bold text-white">
+                {loading ? <span className="w-10 h-6 bg-white/[0.06] rounded animate-pulse inline-block" /> : card.value}
               </p>
-              <p className="text-xs text-gray-500 mt-0.5">{card.label}</p>
-              {card.sub && <p className="text-xs text-gray-400 mt-1.5">{card.sub}</p>}
+              <p className="text-xs text-white/55 mt-0.5">{card.label}</p>
+              {card.sub && <p className="text-xs text-white/40 mt-1.5">{card.sub}</p>}
             </Card>
           ))}
         </div>
@@ -297,8 +297,8 @@ export function AdminOverview() {
         <div className="mb-8">
           <Card>
             <div className="flex items-center gap-2 mb-5">
-              <Activity size={16} className="text-gray-400" />
-              <h2 className="text-sm font-semibold text-gray-900">Saúde do Sistema</h2>
+              <Activity size={16} className="text-white/40" />
+              <h2 className="text-sm font-semibold text-white">Saúde do Sistema</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {healthItems.map((h) => {
@@ -308,13 +308,13 @@ export function AdminOverview() {
                   red: 'text-red-600 bg-red-50',
                 } as const;
                 return (
-                  <div key={h.label} className="flex items-center gap-3 bg-gray-50 rounded-xl p-3">
+                  <div key={h.label} className="flex items-center gap-3 bg-white/[0.04] rounded-xl p-3">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${toneClasses[h.tone as keyof typeof toneClasses]}`}>
                       <h.icon size={18} />
                     </div>
                     <div>
-                      <p className="text-lg font-bold text-gray-900">{h.value}</p>
-                      <p className="text-xs text-gray-500">{h.label}</p>
+                      <p className="text-lg font-bold text-white">{h.value}</p>
+                      <p className="text-xs text-white/55">{h.label}</p>
                     </div>
                   </div>
                 );
@@ -327,9 +327,9 @@ export function AdminOverview() {
         <div className="mb-8">
           <Card>
             <div className="flex items-center gap-2 mb-5">
-              <CreditCard size={16} className="text-gray-400" />
-              <h2 className="text-sm font-semibold text-gray-900">Distribuição por Plano</h2>
-              <span className="ml-auto text-xs text-gray-400">
+              <CreditCard size={16} className="text-white/40" />
+              <h2 className="text-sm font-semibold text-white">Distribuição por Plano</h2>
+              <span className="ml-auto text-xs text-white/40">
                 {totalSubscribers} {totalSubscribers === 1 ? 'assinante ativo' : 'assinantes ativos'}
               </span>
             </div>
@@ -337,11 +337,11 @@ export function AdminOverview() {
             {loading ? (
               <div className="space-y-3">
                 {[...Array(2)].map((_, i) => (
-                  <div key={i} className="h-10 bg-gray-50 rounded-xl animate-pulse" />
+                  <div key={i} className="h-10 bg-white/[0.04] rounded-xl animate-pulse" />
                 ))}
               </div>
             ) : planDist.length === 0 ? (
-              <p className="text-sm text-gray-400 text-center py-6">Nenhum plano configurado.</p>
+              <p className="text-sm text-white/40 text-center py-6">Nenhum plano configurado.</p>
             ) : (
               <div className="space-y-4">
                 {planDist.map((p) => {
@@ -356,16 +356,16 @@ export function AdminOverview() {
                     <div key={p.plan_slug}>
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-semibold text-gray-900">{p.plan_name}</span>
-                          <span className="text-xs text-gray-400">
+                          <span className="text-sm font-semibold text-white">{p.plan_name}</span>
+                          <span className="text-xs text-white/40">
                             {formatBRL(p.price_cents)}/{p.billing_period === 'monthly' ? 'mês' : 'ano'}
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-white/55">
                             {p.count} {p.count === 1 ? 'cliente' : 'clientes'}
                           </span>
-                          <span className="text-xs font-medium text-gray-700">
+                          <span className="text-xs font-medium text-white/85">
                             {monthlyEquiv}/mês equiv.
                           </span>
                           <span className="text-xs font-semibold text-emerald-600">
@@ -373,7 +373,7 @@ export function AdminOverview() {
                           </span>
                         </div>
                       </div>
-                      <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                      <div className="w-full h-2.5 bg-white/[0.06] rounded-full overflow-hidden">
                         <motion.div
                           className={`h-full rounded-full ${barColor}`}
                           initial={{ width: 0 }}
@@ -393,26 +393,26 @@ export function AdminOverview() {
         <div>
           <Card>
             <div className="flex items-center gap-2 mb-4">
-              <Activity size={16} className="text-gray-400" />
-              <h2 className="text-sm font-semibold text-gray-900">Atividade Recente de IA</h2>
+              <Activity size={16} className="text-white/40" />
+              <h2 className="text-sm font-semibold text-white">Atividade Recente de IA</h2>
             </div>
 
             {loading ? (
               <div className="space-y-2">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="h-12 bg-gray-50 rounded-xl animate-pulse" />
+                  <div key={i} className="h-12 bg-white/[0.04] rounded-xl animate-pulse" />
                 ))}
               </div>
             ) : recentLogs.length === 0 ? (
               <div className="text-center py-8">
                 <Activity size={28} className="text-gray-200 mx-auto mb-2" />
-                <p className="text-sm text-gray-400">Nenhuma atividade registrada.</p>
+                <p className="text-sm text-white/40">Nenhuma atividade registrada.</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-xs text-gray-400 border-b border-gray-100">
+                    <tr className="text-xs text-white/40 border-b border-white/10">
                       <th className="text-left pb-2 font-medium">Usuário</th>
                       <th className="text-right pb-2 font-medium">Tokens Entrada</th>
                       <th className="text-right pb-2 font-medium">Tokens Saída</th>
@@ -422,12 +422,12 @@ export function AdminOverview() {
                   </thead>
                   <tbody className="divide-y divide-gray-50">
                     {recentLogs.map((log, i) => (
-                      <tr key={i} className="text-gray-700">
+                      <tr key={i} className="text-white/85">
                         <td className="py-2.5 text-xs">{log.email}</td>
-                        <td className="py-2.5 text-right text-xs text-gray-500">{log.tokens_in}</td>
-                        <td className="py-2.5 text-right text-xs text-gray-500">{log.tokens_out}</td>
+                        <td className="py-2.5 text-right text-xs text-white/55">{log.tokens_in}</td>
+                        <td className="py-2.5 text-right text-xs text-white/55">{log.tokens_out}</td>
                         <td className="py-2.5 text-right text-xs font-medium">{log.tokens_in + log.tokens_out}</td>
-                        <td className="py-2.5 text-right text-xs text-gray-400">
+                        <td className="py-2.5 text-right text-xs text-white/40">
                           {new Date(log.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
                         </td>
                       </tr>
@@ -449,13 +449,13 @@ function PeriodSelect({ value, onChange }: { value: string; onChange: (v: string
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-2xl bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 cursor-pointer"
+        className="appearance-none pl-3 pr-8 py-2 text-sm border border-white/10 rounded-2xl bg-white text-white/85 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 cursor-pointer"
       >
         {PERIOD_OPTIONS.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>
         ))}
       </select>
-      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
     </div>
   );
 }
@@ -464,7 +464,7 @@ function DeltaBadge({ direction, label }: { direction: 'up' | 'down' | 'flat'; l
   const classes = {
     up: 'bg-emerald-50 text-emerald-700',
     down: 'bg-red-50 text-red-600',
-    flat: 'bg-gray-100 text-gray-500',
+    flat: 'bg-white/[0.06] text-white/55',
   }[direction];
   const Icon = direction === 'up' ? ArrowUpRight : direction === 'down' ? ArrowDownRight : Minus;
   return (

@@ -29,13 +29,13 @@ import { supabase } from '../../lib/supabase';
 import { Button } from '../../components/ui/Button';
 
 const STATUS_CONFIG: Record<CampaignStatus, { label: string; color: string; bg: string; icon: typeof Send }> = {
-  draft: { label: 'Rascunho', color: 'text-gray-600', bg: 'bg-gray-100', icon: FileText },
+  draft: { label: 'Rascunho', color: 'text-white/70', bg: 'bg-white/[0.06]', icon: FileText },
   scheduled: { label: 'Agendada', color: 'text-sky-600', bg: 'bg-sky-50', icon: Calendar },
   sending: { label: 'Enviando', color: 'text-amber-600', bg: 'bg-amber-50', icon: Send },
   paused: { label: 'Pausada', color: 'text-orange-600', bg: 'bg-orange-50', icon: Pause },
   completed: { label: 'Concluída', color: 'text-emerald-600', bg: 'bg-emerald-50', icon: CheckCircle2 },
   failed: { label: 'Falhou', color: 'text-red-600', bg: 'bg-red-50', icon: XCircle },
-  cancelled: { label: 'Cancelada', color: 'text-gray-500', bg: 'bg-gray-50', icon: X },
+  cancelled: { label: 'Cancelada', color: 'text-white/55', bg: 'bg-white/[0.04]', icon: X },
 };
 
 const TYPE_ICONS: Record<CampaignMessageType, typeof Type> = {
@@ -140,24 +140,24 @@ export function Campaigns() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-white/10 border-t-gray-600 rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="flex-1 overflow-auto bg-gray-50/50">
+    <div className="flex-1 overflow-auto bg-white/[0.04]/50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-white flex items-center gap-3">
               <div className="w-10 h-10 bg-gray-900 rounded-2xl flex items-center justify-center">
                 <Megaphone size={18} className="text-white" />
               </div>
               Campanhas de Envio
             </h1>
-            <p className="text-sm text-gray-500 mt-1.5 ml-[52px]">
+            <p className="text-sm text-white/55 mt-1.5 ml-[52px]">
               Envie mensagens em massa para seus leads via WhatsApp
             </p>
           </div>
@@ -184,7 +184,7 @@ export function Campaigns() {
 
         {/* Filter tabs + search */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-6">
-          <div className="flex items-center gap-1 bg-white rounded-xl p-1 border border-gray-100 overflow-x-auto">
+          <div className="flex items-center gap-1 bg-white rounded-xl p-1 border border-white/10 overflow-x-auto">
             {filterTabs.map((tab) => (
               <button
                 key={tab.key}
@@ -192,12 +192,12 @@ export function Campaigns() {
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                   filter === tab.key
                     ? 'bg-gray-900 text-white'
-                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                    : 'text-white/55 hover:text-white/85 hover:bg-white/[0.04]'
                 }`}
               >
                 {tab.label}
                 {tab.count !== undefined && tab.count > 0 && (
-                  <span className={`ml-1.5 text-xs ${filter === tab.key ? 'text-gray-300' : 'text-gray-400'}`}>
+                  <span className={`ml-1.5 text-xs ${filter === tab.key ? 'text-white/30' : 'text-white/40'}`}>
                     {tab.count}
                   </span>
                 )}
@@ -205,13 +205,13 @@ export function Campaigns() {
             ))}
           </div>
           <div className="relative w-full sm:flex-1 sm:max-w-xs">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
             <input
               type="text"
               placeholder="Buscar campanha..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300"
+              className="w-full pl-9 pr-3 py-2 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-white/15"
             />
           </div>
         </div>
@@ -221,15 +221,15 @@ export function Campaigns() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl border border-gray-100 p-16 text-center"
+            className="bg-white rounded-2xl border border-white/10 p-16 text-center"
           >
-            <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Megaphone size={28} className="text-gray-400" />
+            <div className="w-16 h-16 bg-white/[0.06] rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Megaphone size={28} className="text-white/40" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+            <h3 className="text-lg font-semibold text-white mb-1">
               {campaigns.length === 0 ? 'Nenhuma campanha ainda' : 'Nenhum resultado encontrado'}
             </h3>
-            <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
+            <p className="text-sm text-white/55 mb-6 max-w-sm mx-auto">
               {campaigns.length === 0
                 ? 'Crie sua primeira campanha para enviar mensagens em massa pelo WhatsApp.'
                 : 'Tente buscar com outros termos ou alterar os filtros.'}
@@ -257,19 +257,19 @@ export function Campaigns() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.97 }}
-                    className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-sm transition-shadow cursor-pointer group"
+                    className="bg-white rounded-2xl border border-white/10 p-5 hover:shadow-sm transition-shadow cursor-pointer group"
                     onClick={() => navigate(`/dashboard/campaigns/${c.id}`)}
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                       {/* Type icon */}
-                      <div className="hidden sm:flex w-11 h-11 bg-gray-50 rounded-xl items-center justify-center shrink-0">
-                        <TypeIcon size={18} className="text-gray-600" />
+                      <div className="hidden sm:flex w-11 h-11 bg-white/[0.04] rounded-xl items-center justify-center shrink-0">
+                        <TypeIcon size={18} className="text-white/70" />
                       </div>
 
                       {/* Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 sm:gap-2.5 mb-1 flex-wrap">
-                          <h3 className="font-semibold text-gray-900 truncate">{c.name || 'Sem nome'}</h3>
+                          <h3 className="font-semibold text-white truncate">{c.name || 'Sem nome'}</h3>
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${statusCfg.bg} ${statusCfg.color}`}>
                             <StatusIcon size={11} />
                             {statusCfg.label}
@@ -280,7 +280,7 @@ export function Campaigns() {
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 sm:gap-4 text-xs text-gray-500 flex-wrap">
+                        <div className="flex items-center gap-3 sm:gap-4 text-xs text-white/55 flex-wrap">
                           <span className="flex items-center gap-1">
                             <TypeIcon size={11} />
                             {TYPE_LABELS[c.message_type]}
@@ -302,12 +302,12 @@ export function Campaigns() {
                         {c.total_recipients > 0 && c.status !== 'draft' && (
                           <div className="w-24 sm:w-32 shrink-0">
                             <div className="flex items-center justify-between text-xs mb-1">
-                              <span className="text-gray-600 font-medium">{progress}%</span>
-                              <span className="text-gray-400">
+                              <span className="text-white/70 font-medium">{progress}%</span>
+                              <span className="text-white/40">
                                 {c.sent_count}/{c.total_recipients}
                               </span>
                             </div>
-                            <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
                               <motion.div
                                 className={`h-full rounded-full ${
                                   c.status === 'sending'
@@ -329,10 +329,10 @@ export function Campaigns() {
                         {/* Delivery rate */}
                         {c.sent_count > 0 && (
                           <div className="text-right shrink-0 hidden sm:block w-20">
-                            <p className="text-sm font-semibold text-gray-900">
+                            <p className="text-sm font-semibold text-white">
                               {Math.round((c.delivered_count / c.sent_count) * 100)}%
                             </p>
-                            <p className="text-xs text-gray-400">entregue</p>
+                            <p className="text-xs text-white/40">entregue</p>
                           </div>
                         )}
 
@@ -340,7 +340,7 @@ export function Campaigns() {
                         <div className="relative shrink-0 ml-auto" onClick={(e) => e.stopPropagation()}>
                         <button
                           onClick={() => setMenuOpen(menuOpen === c.id ? null : c.id)}
-                          className="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-600 transition-colors"
+                          className="p-2 rounded-lg text-white/40 hover:bg-white/[0.04] hover:text-white/70 transition-colors"
                         >
                           <MoreVertical size={16} />
                         </button>
@@ -350,11 +350,11 @@ export function Campaigns() {
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
                               exit={{ opacity: 0, scale: 0.95 }}
-                              className="absolute right-0 top-10 z-30 w-44 bg-white rounded-xl border border-gray-100 shadow-lg py-1"
+                              className="absolute right-0 top-10 z-30 w-44 bg-white rounded-xl border border-white/10 shadow-lg py-1"
                             >
                               <button
                                 onClick={() => { navigate(`/dashboard/campaigns/${c.id}`); setMenuOpen(null); }}
-                                className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                                className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white/85 hover:bg-white/[0.04]"
                               >
                                 <Eye size={14} /> Ver detalhes
                               </button>
@@ -376,7 +376,7 @@ export function Campaigns() {
                               )}
                               <button
                                 onClick={() => handleDuplicate(c)}
-                                className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                                className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white/85 hover:bg-white/[0.04]"
                               >
                                 <Copy size={14} /> Duplicar
                               </button>
@@ -419,8 +419,8 @@ export function Campaigns() {
               className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Excluir campanha?</h3>
-              <p className="text-sm text-gray-500 mb-6">
+              <h3 className="text-lg font-semibold text-white mb-2">Excluir campanha?</h3>
+              <p className="text-sm text-white/55 mb-6">
                 Todos os dados desta campanha serao removidos permanentemente. Esta acao nao pode ser desfeita.
               </p>
               <div className="flex gap-3">

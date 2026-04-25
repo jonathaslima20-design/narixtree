@@ -26,23 +26,23 @@ import { supabase } from '../../lib/supabase';
 import { Button } from '../../components/ui/Button';
 
 const STATUS_CONFIG: Record<CampaignStatus, { label: string; color: string; bg: string }> = {
-  draft: { label: 'Rascunho', color: 'text-gray-600', bg: 'bg-gray-100' },
+  draft: { label: 'Rascunho', color: 'text-white/70', bg: 'bg-white/[0.06]' },
   scheduled: { label: 'Agendada', color: 'text-sky-600', bg: 'bg-sky-50' },
   sending: { label: 'Enviando', color: 'text-amber-600', bg: 'bg-amber-50' },
   paused: { label: 'Pausada', color: 'text-orange-600', bg: 'bg-orange-50' },
   completed: { label: 'Concluída', color: 'text-emerald-600', bg: 'bg-emerald-50' },
   failed: { label: 'Falhou', color: 'text-red-600', bg: 'bg-red-50' },
-  cancelled: { label: 'Cancelada', color: 'text-gray-500', bg: 'bg-gray-50' },
+  cancelled: { label: 'Cancelada', color: 'text-white/55', bg: 'bg-white/[0.04]' },
 };
 
 const RECIPIENT_STATUS: Record<CampaignRecipientStatus, { label: string; color: string; bg: string }> = {
-  pending: { label: 'Pendente', color: 'text-gray-500', bg: 'bg-gray-50' },
+  pending: { label: 'Pendente', color: 'text-white/55', bg: 'bg-white/[0.04]' },
   sending: { label: 'Enviando', color: 'text-amber-600', bg: 'bg-amber-50' },
   sent: { label: 'Enviado', color: 'text-sky-600', bg: 'bg-sky-50' },
   delivered: { label: 'Entregue', color: 'text-emerald-600', bg: 'bg-emerald-50' },
   read: { label: 'Lido', color: 'text-teal-600', bg: 'bg-teal-50' },
   failed: { label: 'Falhou', color: 'text-red-600', bg: 'bg-red-50' },
-  skipped: { label: 'Pulado', color: 'text-gray-400', bg: 'bg-gray-50' },
+  skipped: { label: 'Pulado', color: 'text-white/40', bg: 'bg-white/[0.04]' },
 };
 
 const TYPE_ICONS: Record<string, typeof Type> = {
@@ -147,7 +147,7 @@ export function CampaignDetail() {
   if (loading || !campaign) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-white/10 border-t-gray-600 rounded-full animate-spin" />
       </div>
     );
   }
@@ -156,20 +156,20 @@ export function CampaignDetail() {
   const TypeIcon = TYPE_ICONS[campaign.message_type] || Type;
 
   return (
-    <div className="flex-1 overflow-auto bg-gray-50/50">
+    <div className="flex-1 overflow-auto bg-white/[0.04]/50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 sm:mb-8">
           <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
             <button
               onClick={() => navigate('/dashboard/campaigns')}
-              className="p-2 rounded-xl hover:bg-white hover:shadow-sm transition-all text-gray-500 shrink-0"
+              className="p-2 rounded-xl hover:bg-white hover:shadow-sm transition-all text-white/55 shrink-0"
             >
               <ArrowLeft size={18} />
             </button>
             <div className="min-w-0">
               <div className="flex items-center gap-3 flex-wrap">
-                <h1 className="text-lg sm:text-xl font-bold text-gray-900 truncate">{campaign.name}</h1>
+                <h1 className="text-lg sm:text-xl font-bold text-white truncate">{campaign.name}</h1>
                 <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${statusCfg.bg} ${statusCfg.color}`}>
                   {statusCfg.label}
                   {campaign.status === 'sending' && (
@@ -177,7 +177,7 @@ export function CampaignDetail() {
                   )}
                 </span>
               </div>
-              <div className="flex items-center gap-3 mt-1 text-xs text-gray-500 flex-wrap">
+              <div className="flex items-center gap-3 mt-1 text-xs text-white/55 flex-wrap">
                 <span className="flex items-center gap-1"><TypeIcon size={12} /> {campaign.message_type === 'text' ? 'Texto' : campaign.message_type === 'image' ? 'Imagem' : campaign.message_type === 'audio' ? 'Áudio' : 'Documento'}</span>
                 <span className="hidden sm:inline">Criada em {formatDate(campaign.created_at)}</span>
                 {campaign.scheduled_at && <span className="flex items-center gap-1"><Clock size={12} /> Agendada para {formatDate(campaign.scheduled_at)}</span>}
@@ -231,7 +231,7 @@ export function CampaignDetail() {
         {/* Progress ring + stats */}
         <div className="grid grid-cols-1 sm:grid-cols-6 gap-4 mb-6">
           {/* Big progress card */}
-          <div className="sm:col-span-2 bg-white rounded-2xl border border-gray-100 p-6 flex flex-col items-center justify-center">
+          <div className="sm:col-span-2 bg-white rounded-2xl border border-white/10 p-6 flex flex-col items-center justify-center">
             <div className="relative w-28 h-28 mb-3">
               <svg className="w-28 h-28 -rotate-90" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="42" fill="none" stroke="#f3f4f6" strokeWidth="8" />
@@ -250,10 +250,10 @@ export function CampaignDetail() {
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-2xl font-bold text-gray-900">{progressPercent}%</span>
+                <span className="text-2xl font-bold text-white">{progressPercent}%</span>
               </div>
             </div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-white/55">
               {stats.sent + stats.failed} de {stats.total} processados
             </p>
           </div>
@@ -261,7 +261,7 @@ export function CampaignDetail() {
           {/* Stat cards */}
           <div className="sm:col-span-4 grid grid-cols-2 sm:grid-cols-2 gap-3">
             {[
-              { label: 'Total', value: stats.total, icon: Users, color: 'text-gray-900', bg: 'bg-gray-50' },
+              { label: 'Total', value: stats.total, icon: Users, color: 'text-white', bg: 'bg-white/[0.04]' },
               { label: 'Enviados', value: stats.sent, icon: Send, color: 'text-sky-700', bg: 'bg-sky-50' },
               { label: 'Entregues', value: stats.delivered, icon: CheckCircle2, color: 'text-emerald-700', bg: 'bg-emerald-50' },
               { label: 'Lidos', value: stats.read, icon: Eye, color: 'text-teal-700', bg: 'bg-teal-50' },
@@ -272,10 +272,10 @@ export function CampaignDetail() {
                 <s.icon size={18} className={s.color} />
                 <div>
                   <p className={`text-lg font-bold ${s.color}`}>{s.value}</p>
-                  <p className="text-xs text-gray-500">{s.label}</p>
+                  <p className="text-xs text-white/55">{s.label}</p>
                 </div>
                 {stats.total > 0 && (
-                  <span className="ml-auto text-xs font-medium text-gray-400">
+                  <span className="ml-auto text-xs font-medium text-white/40">
                     {Math.round((s.value / stats.total) * 100)}%
                   </span>
                 )}
@@ -286,25 +286,25 @@ export function CampaignDetail() {
 
         {/* Message preview */}
         {(campaign.content || campaign.caption) && (
-          <div className="bg-white rounded-2xl border border-gray-100 p-5 mb-6">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Mensagem</h3>
-            <div className="bg-gray-50 rounded-xl p-4">
-              <p className="text-sm text-gray-700 whitespace-pre-wrap">{campaign.content || campaign.caption}</p>
+          <div className="bg-white rounded-2xl border border-white/10 p-5 mb-6">
+            <h3 className="text-sm font-semibold text-white mb-3">Mensagem</h3>
+            <div className="bg-white/[0.04] rounded-xl p-4">
+              <p className="text-sm text-white/85 whitespace-pre-wrap">{campaign.content || campaign.caption}</p>
             </div>
           </div>
         )}
 
         {/* Recipients table */}
-        <div className="bg-white rounded-2xl border border-gray-100">
+        <div className="bg-white rounded-2xl border border-white/10">
           <div className="px-4 sm:px-5 py-4 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
-            <h3 className="text-sm font-semibold text-gray-900">Destinatários ({recipients.length})</h3>
-            <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-0.5 overflow-x-auto">
+            <h3 className="text-sm font-semibold text-white">Destinatários ({recipients.length})</h3>
+            <div className="flex items-center gap-1 bg-white/[0.04] rounded-lg p-0.5 overflow-x-auto">
               {(['all', 'sent', 'delivered', 'read', 'failed', 'pending'] as const).map((f) => (
                 <button
                   key={f}
                   onClick={() => setRecipientFilter(f)}
                   className={`px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
-                    recipientFilter === f ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                    recipientFilter === f ? 'bg-white shadow-sm text-white' : 'text-white/55 hover:text-white/85'
                   }`}
                 >
                   {f === 'all' ? 'Todos' : RECIPIENT_STATUS[f]?.label || f}
@@ -314,8 +314,8 @@ export function CampaignDetail() {
           </div>
           <div className="max-h-[500px] overflow-auto">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 bg-gray-50/90 backdrop-blur-sm">
-                <tr className="text-left text-xs text-gray-500 font-medium">
+              <thead className="sticky top-0 bg-white/[0.04]/90 backdrop-blur-sm">
+                <tr className="text-left text-xs text-white/55 font-medium">
                   <th className="px-5 py-2.5">Nome</th>
                   <th className="px-5 py-2.5">Telefone</th>
                   <th className="px-5 py-2.5">Status</th>
@@ -334,19 +334,19 @@ export function CampaignDetail() {
                         key={r.id}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="hover:bg-gray-50/50 transition-colors"
+                        className="hover:bg-white/[0.04]/50 transition-colors"
                       >
-                        <td className="px-5 py-3 font-medium text-gray-900">{r.lead_name || '-'}</td>
-                        <td className="px-5 py-3 text-gray-500">{r.phone}</td>
+                        <td className="px-5 py-3 font-medium text-white">{r.lead_name || '-'}</td>
+                        <td className="px-5 py-3 text-white/55">{r.phone}</td>
                         <td className="px-5 py-3">
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${rCfg.bg} ${rCfg.color}`}>
                             {r.status === 'sending' && <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />}
                             {rCfg.label}
                           </span>
                         </td>
-                        <td className="px-5 py-3 text-xs text-gray-500">{formatDate(r.sent_at)}</td>
-                        <td className="px-5 py-3 text-xs text-gray-500">{formatDate(r.delivered_at)}</td>
-                        <td className="px-5 py-3 text-xs text-gray-500">{formatDate(r.read_at)}</td>
+                        <td className="px-5 py-3 text-xs text-white/55">{formatDate(r.sent_at)}</td>
+                        <td className="px-5 py-3 text-xs text-white/55">{formatDate(r.delivered_at)}</td>
+                        <td className="px-5 py-3 text-xs text-white/55">{formatDate(r.read_at)}</td>
                         <td className="px-5 py-3 text-xs text-red-500 max-w-[200px] truncate">{r.error_message || '-'}</td>
                       </motion.tr>
                     );
@@ -354,7 +354,7 @@ export function CampaignDetail() {
                 </AnimatePresence>
                 {filteredRecipients.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="px-5 py-12 text-center text-sm text-gray-400">
+                    <td colSpan={7} className="px-5 py-12 text-center text-sm text-white/40">
                       Nenhum destinatário neste filtro
                     </td>
                   </tr>

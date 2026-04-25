@@ -74,56 +74,56 @@ export function PricingModal({ open, onClose, permanent, reason = 'browse' }: Pr
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            className="relative bg-white rounded-t-2xl sm:rounded-2xl shadow-xl w-full max-w-3xl z-10 max-h-[95vh] overflow-y-auto"
+            className="relative glass-panel-strong rounded-t-2xl sm:rounded-2xl shadow-2xl w-full max-w-3xl z-10 max-h-[95vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6 sm:p-8">
               {!permanent && onClose && (
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 p-1.5 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                  className="absolute top-4 right-4 p-1.5 rounded-xl text-white/50 hover:text-white hover:bg-white/10 transition-colors"
                 >
                   <X size={18} />
                 </button>
               )}
 
               <div className="text-center mb-8">
-                <div className="w-12 h-12 bg-gray-900 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-white/10 border border-white/15 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <Crown size={22} className="text-white" />
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 tracking-tight">
                   {REASON_TITLES[reason]}
                 </h2>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-white/55">
                   Desbloqueie todas as funcionalidades do BrainLead.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Trial */}
-                <div className="border border-gray-200 rounded-2xl p-5 bg-gray-50 opacity-60">
+                <div className="border border-white/10 rounded-2xl p-5 bg-white/[0.03] opacity-70">
                   <div className="flex items-center gap-2 mb-3">
-                    <Clock size={16} className="text-gray-400" />
-                    <span className="text-sm font-semibold text-gray-600">Trial</span>
+                    <Clock size={16} className="text-white/40" />
+                    <span className="text-sm font-semibold text-white/70">Trial</span>
                   </div>
                   <div className="mb-4">
-                    <span className="text-2xl font-bold text-gray-400">Gratis</span>
+                    <span className="text-2xl font-bold text-white/55">Gratis</span>
                   </div>
-                  <p className="text-xs text-gray-400 mb-4">2 dias ou 50 envios</p>
+                  <p className="text-xs text-white/40 mb-4">2 dias ou 50 envios</p>
                   <button
                     disabled
-                    className="w-full py-2.5 rounded-xl text-sm font-medium bg-gray-200 text-gray-400 cursor-not-allowed"
+                    className="w-full py-2.5 rounded-xl text-sm font-medium bg-white/[0.06] text-white/40 cursor-not-allowed"
                   >
                     Plano Atual
                   </button>
                   <ul className="mt-4 space-y-2">
                     {FEATURES.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-gray-400">
+                      <li key={f} className="flex items-start gap-2 text-xs text-white/40">
                         <Check size={13} className="mt-0.5 shrink-0" />
                         {f}
                       </li>
                     ))}
-                    <li className="flex items-start gap-2 text-xs text-gray-400">
+                    <li className="flex items-start gap-2 text-xs text-white/40">
                       <Check size={13} className="mt-0.5 shrink-0" />
                       Limite: 50 envios
                     </li>
@@ -131,64 +131,64 @@ export function PricingModal({ open, onClose, permanent, reason = 'browse' }: Pr
                 </div>
 
                 {/* Mensal */}
-                <div className="border border-gray-200 rounded-2xl p-5 bg-white">
+                <div className="border border-white/10 rounded-2xl p-5 bg-white/[0.04]">
                   <div className="flex items-center gap-2 mb-3">
-                    <Zap size={16} className="text-gray-900" />
-                    <span className="text-sm font-semibold text-gray-900">Mensal Pro</span>
+                    <Zap size={16} className="text-white" />
+                    <span className="text-sm font-semibold text-white">Mensal Pro</span>
                   </div>
                   <div className="mb-4">
-                    <span className="text-2xl font-bold text-gray-900">R$49</span>
-                    <span className="text-sm text-gray-500">/mes</span>
+                    <span className="text-2xl font-bold text-white">R$49</span>
+                    <span className="text-sm text-white/55">/mes</span>
                   </div>
-                  <p className="text-xs text-gray-500 mb-4">Envios ilimitados</p>
+                  <p className="text-xs text-white/55 mb-4">Envios ilimitados</p>
                   <button
                     onClick={() => handleSubscribe(checkoutLinks.mensal)}
                     disabled={!checkoutLinks.mensal}
-                    className="w-full py-2.5 rounded-xl text-sm font-medium bg-gray-900 text-white hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-2.5 rounded-xl text-sm font-medium bg-white text-black hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Assinar Mensal Pro
                   </button>
                   <ul className="mt-4 space-y-2">
                     {FEATURES.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-gray-600">
-                        <Check size={13} className="mt-0.5 text-emerald-500 shrink-0" />
+                      <li key={f} className="flex items-start gap-2 text-xs text-white/70">
+                        <Check size={13} className="mt-0.5 text-emerald-300 shrink-0" />
                         {f}
                       </li>
                     ))}
-                    <li className="flex items-start gap-2 text-xs text-gray-600">
-                      <Check size={13} className="mt-0.5 text-emerald-500 shrink-0" />
+                    <li className="flex items-start gap-2 text-xs text-white/70">
+                      <Check size={13} className="mt-0.5 text-emerald-300 shrink-0" />
                       Envios ilimitados
                     </li>
                   </ul>
                 </div>
 
                 {/* Anual */}
-                <div className="relative border-2 border-emerald-500 rounded-2xl p-5 bg-white shadow-lg shadow-emerald-100/50">
+                <div className="relative border border-emerald-400/40 rounded-2xl p-5 bg-emerald-500/[0.06] shadow-glow">
                   <div className="flex items-center gap-2 mb-3">
-                    <Crown size={16} className="text-emerald-600" />
-                    <span className="text-sm font-semibold text-gray-900">Anual Pro</span>
+                    <Crown size={16} className="text-emerald-300" />
+                    <span className="text-sm font-semibold text-white">Anual Pro</span>
                   </div>
                   <div className="mb-1">
-                    <span className="text-2xl font-bold text-gray-900">R$389</span>
-                    <span className="text-sm text-gray-500">/ano</span>
+                    <span className="text-2xl font-bold text-white">R$389</span>
+                    <span className="text-sm text-white/55">/ano</span>
                   </div>
-                  <p className="text-xs text-emerald-600 font-medium mb-4">~R$32/mes - Economize 34%</p>
+                  <p className="text-xs text-emerald-300 font-medium mb-4">~R$32/mes - Economize 34%</p>
                   <button
                     onClick={() => handleSubscribe(checkoutLinks.anual)}
                     disabled={!checkoutLinks.anual}
-                    className="w-full py-2.5 rounded-xl text-sm font-medium bg-emerald-600 text-white hover:bg-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-2.5 rounded-xl text-sm font-medium bg-emerald-500 text-white hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Assinar Anual Pro
                   </button>
                   <ul className="mt-4 space-y-2">
                     {FEATURES.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-gray-600">
-                        <Check size={13} className="mt-0.5 text-emerald-500 shrink-0" />
+                      <li key={f} className="flex items-start gap-2 text-xs text-white/70">
+                        <Check size={13} className="mt-0.5 text-emerald-300 shrink-0" />
                         {f}
                       </li>
                     ))}
-                    <li className="flex items-start gap-2 text-xs text-gray-600">
-                      <Check size={13} className="mt-0.5 text-emerald-500 shrink-0" />
+                    <li className="flex items-start gap-2 text-xs text-white/70">
+                      <Check size={13} className="mt-0.5 text-emerald-300 shrink-0" />
                       Envios ilimitados
                     </li>
                   </ul>

@@ -362,15 +362,15 @@ export function Leads() {
   const mobileShowChat = selectedId !== null;
 
   return (
-    <div className="h-[calc(100dvh-53px)] lg:h-screen flex flex-col bg-gray-50">
+    <div className="h-[calc(100dvh-53px)] lg:h-screen flex flex-col bg-white/[0.04]">
       {/* Header -- hidden on mobile when chat is open */}
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`px-4 sm:px-6 py-3 sm:py-4 bg-white border-b border-gray-100 flex items-center justify-between shrink-0 ${mobileShowChat ? 'hidden md:flex' : 'flex'}`}
+        className={`px-4 sm:px-6 py-3 sm:py-4 bg-white border-b border-white/10 flex items-center justify-between shrink-0 ${mobileShowChat ? 'hidden md:flex' : 'flex'}`}
       >
         <div>
-          <h1 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center gap-2">
+          <h1 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
             Chat
             {totalUnread > 0 && (
               <span className="text-xs font-semibold px-2 py-0.5 bg-emerald-500 text-white rounded-full">
@@ -378,13 +378,13 @@ export function Leads() {
               </span>
             )}
           </h1>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <p className="text-xs text-white/55 mt-0.5">
             {leads.length} contatos
           </p>
         </div>
         <button
           onClick={() => setShowBulkImport(true)}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-2xl bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-2xl bg-white/[0.06] text-white hover:bg-white/[0.10] transition-colors"
         >
           <Upload size={14} /> <span className="hidden sm:inline">Importar leads</span>
         </button>
@@ -424,16 +424,16 @@ export function Leads() {
           {selected && user ? (
             <div className="flex-1 flex flex-col">
               {/* Mobile back button */}
-              <div className="md:hidden flex items-center gap-2 px-3 py-2 bg-white border-b border-gray-100">
+              <div className="md:hidden flex items-center gap-2 px-3 py-2 bg-white border-b border-white/10">
                 <button
                   onClick={() => setSelectedId(null)}
-                  className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"
+                  className="p-1.5 rounded-lg text-white/55 hover:bg-white/[0.06] transition-colors"
                 >
                   <ArrowLeft size={18} />
                 </button>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900 truncate">{selected.name || selected.phone}</p>
-                  <p className="text-xs text-gray-400 truncate">{selected.phone}</p>
+                  <p className="text-sm font-semibold text-white truncate">{selected.name || selected.phone}</p>
+                  <p className="text-xs text-white/40 truncate">{selected.phone}</p>
                 </div>
               </div>
               <div className="flex-1">
@@ -456,10 +456,10 @@ export function Leads() {
                   <MessageSquare size={24} className="text-emerald-500" />
                 )}
               </div>
-              <p className="text-sm font-medium text-gray-700">
+              <p className="text-sm font-medium text-white/85">
                 {leads.length === 0 ? 'Nenhum lead ainda' : 'Selecione uma conversa'}
               </p>
-              <p className="text-xs text-gray-400 mt-1 max-w-xs">
+              <p className="text-xs text-white/40 mt-1 max-w-xs">
                 {leads.length === 0
                   ? 'Conecte seu WhatsApp ou adicione leads manualmente para começar.'
                   : 'Escolha um contato à esquerda para ver o histórico e responder.'}

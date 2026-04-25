@@ -250,18 +250,18 @@ export function LeadManagement() {
   }
 
   return (
-    <div className="flex flex-col bg-gray-50 min-h-screen">
+    <div className="flex flex-col bg-white/[0.04] min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
-        className="px-4 sm:px-6 pt-4 sm:pt-6 pb-4 bg-white border-b border-gray-100"
+        className="px-4 sm:px-6 pt-4 sm:pt-6 pb-4 bg-white border-b border-white/10"
       >
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center gap-2">
-              <Users size={20} className="text-gray-500" /> Gestao de Leads
+            <h1 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+              <Users size={20} className="text-white/55" /> Gestao de Leads
             </h1>
-            <p className="text-xs text-gray-500 mt-1 hidden sm:block">
+            <p className="text-xs text-white/55 mt-1 hidden sm:block">
               Organize seus contatos por categorias e acompanhe o progresso de cada negociacao.
             </p>
           </div>
@@ -295,14 +295,14 @@ export function LeadManagement() {
         </div>
       </motion.div>
 
-      <div className="px-4 sm:px-6 py-3 bg-white border-b border-gray-100 flex items-center gap-2 sm:gap-3 flex-wrap">
+      <div className="px-4 sm:px-6 py-3 bg-white border-b border-white/10 flex items-center gap-2 sm:gap-3 flex-wrap">
         <div className="relative flex-1 min-w-0 sm:min-w-[220px] sm:max-w-md w-full sm:w-auto order-first sm:order-none">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por nome, telefone, tag, empresa..."
-            className="w-full pl-9 pr-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:bg-white"
+            className="w-full pl-9 pr-3 py-2 text-sm bg-white/[0.04] border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:bg-white"
           />
         </div>
 
@@ -311,7 +311,7 @@ export function LeadManagement() {
           className={`px-2.5 py-1.5 rounded-xl text-xs font-medium transition border ${
             onlyFavorites
               ? 'bg-amber-50 border-amber-200 text-amber-700'
-              : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              : 'bg-white border-white/10 text-white/70 hover:bg-white/[0.04]'
           }`}
         >
           <Star size={12} className="inline mr-1" /> Favoritos
@@ -322,17 +322,17 @@ export function LeadManagement() {
           className={`px-2.5 py-1.5 rounded-xl text-xs font-medium transition border ${
             showArchived
               ? 'bg-gray-900 text-white border-gray-900'
-              : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              : 'bg-white border-white/10 text-white/70 hover:bg-white/[0.04]'
           }`}
         >
           <Archive size={12} className="inline mr-1" /> Arquivados
         </button>
 
-        <div className="flex items-center gap-1 p-1 bg-gray-100 rounded-xl shrink-0">
+        <div className="flex items-center gap-1 p-1 bg-white/[0.06] rounded-xl shrink-0">
           <button
             onClick={() => setView('kanban')}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
-              view === 'kanban' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-800'
+              view === 'kanban' ? 'bg-white shadow-sm text-white' : 'text-white/55 hover:text-gray-800'
             }`}
           >
             <LayoutGrid size={13} /> <span className="hidden sm:inline">Kanban</span>
@@ -340,7 +340,7 @@ export function LeadManagement() {
           <button
             onClick={() => setView('table')}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
-              view === 'table' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-800'
+              view === 'table' ? 'bg-white shadow-sm text-white' : 'text-white/55 hover:text-gray-800'
             }`}
           >
             <Rows size={13} /> <span className="hidden sm:inline">Tabela</span>
@@ -352,7 +352,7 @@ export function LeadManagement() {
         <div className="px-4 sm:px-6 py-2 bg-gray-900 text-white flex items-center gap-2 sm:gap-3 text-xs overflow-x-auto">
           <span className="font-semibold">{selected.size} selecionado(s)</span>
           <div className="h-4 w-px bg-white/20" />
-          <span className="text-gray-300">Mover para:</span>
+          <span className="text-white/30">Mover para:</span>
           {CATEGORIES.map((c) => (
             <button key={c.key} onClick={() => bulkSetCategory(c.key)} className="px-2 py-1 rounded-md bg-white/10 hover:bg-white/20 transition">
               {c.label}
@@ -372,7 +372,7 @@ export function LeadManagement() {
         {loading || catsLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-72 bg-white rounded-2xl animate-pulse border border-gray-100" />
+              <div key={i} className="h-72 bg-white rounded-2xl animate-pulse border border-white/10" />
             ))}
           </div>
         ) : filtered.length === 0 ? (
@@ -415,7 +415,7 @@ export function LeadManagement() {
         <div className="space-y-4">
           <Input label="Nome" placeholder="Nome do contato" value={addForm.name} onChange={(e) => setAddForm((f) => ({ ...f, name: e.target.value }))} />
           <Input label="Telefone *" placeholder="+55 11 99999-9999" value={addForm.phone} onChange={(e) => setAddForm((f) => ({ ...f, phone: e.target.value }))} required />
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-white/40">
             O lead sera adicionado na categoria "{CATEGORIES[0]?.label || 'Frio'}". Voce pode mover depois.
           </p>
           <Button fullWidth onClick={addLead} loading={saving}>
@@ -435,7 +435,7 @@ export function LeadManagement() {
 function StatPill({ label, value, iconName, tone }: { label: string; value: number; iconName: string; tone: string }) {
   const Icon = iconName === 'Users' ? Users : resolveIcon(iconName);
   const toneClasses: Record<string, string> = {
-    gray: 'bg-gray-50 text-gray-600',
+    gray: 'bg-white/[0.04] text-white/70',
     red: 'bg-red-50 text-red-600',
     amber: 'bg-amber-50 text-amber-700',
     sky: 'bg-sky-50 text-sky-700',
@@ -448,13 +448,13 @@ function StatPill({ label, value, iconName, tone }: { label: string; value: numb
   const cls = toneClasses[tone] || toneClasses.gray;
 
   return (
-    <div className="flex items-center gap-2 px-3 py-2.5 bg-white border border-gray-100 rounded-xl">
+    <div className="flex items-center gap-2 px-3 py-2.5 bg-white border border-white/10 rounded-xl">
       <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${cls}`}>
         <Icon size={14} />
       </div>
       <div className="min-w-0">
-        <p className="text-[10px] uppercase tracking-wide text-gray-400 font-semibold">{label}</p>
-        <p className="text-sm font-bold text-gray-900">{value}</p>
+        <p className="text-[10px] uppercase tracking-wide text-white/40 font-semibold">{label}</p>
+        <p className="text-sm font-bold text-white">{value}</p>
       </div>
     </div>
   );
@@ -463,13 +463,13 @@ function StatPill({ label, value, iconName, tone }: { label: string; value: numb
 function EmptyState({ hasAny, onAdd }: { hasAny: boolean; onAdd: () => void }) {
   return (
     <div className="py-16 flex flex-col items-center justify-center text-center">
-      <div className="w-16 h-16 bg-white border border-gray-100 rounded-2xl flex items-center justify-center mb-4">
-        <Users size={24} className="text-gray-400" />
+      <div className="w-16 h-16 bg-white border border-white/10 rounded-2xl flex items-center justify-center mb-4">
+        <Users size={24} className="text-white/40" />
       </div>
-      <p className="text-sm font-medium text-gray-700">
+      <p className="text-sm font-medium text-white/85">
         {hasAny ? 'Nenhum lead com esses filtros' : 'Nenhum lead cadastrado ainda'}
       </p>
-      <p className="text-xs text-gray-500 mt-1 max-w-sm">
+      <p className="text-xs text-white/55 mt-1 max-w-sm">
         {hasAny
           ? 'Ajuste a busca ou desative os filtros para ver mais contatos.'
           : 'Conecte seu WhatsApp na pagina Conexoes para receber leads automaticamente, ou adicione manualmente abaixo.'}
@@ -536,7 +536,7 @@ function KanbanView({
               setDragOverCat(null);
             }}
             className={`bg-white border rounded-2xl flex flex-col min-h-[420px] min-w-[260px] sm:min-w-0 transition ${
-              over ? 'border-gray-900 shadow-md' : 'border-gray-100'
+              over ? 'border-gray-900 shadow-md' : 'border-white/10'
             }`}
           >
             <div className="px-3 pt-3 pb-2 border-b border-gray-50 flex items-center justify-between">
@@ -546,7 +546,7 @@ function KanbanView({
                   {cat.label}
                 </span>
               </div>
-              <span className="text-[11px] font-semibold text-gray-500">{items.length}</span>
+              <span className="text-[11px] font-semibold text-white/55">{items.length}</span>
             </div>
             <div className="flex-1 p-2 space-y-2 overflow-y-auto max-h-[calc(100vh-280px)]">
               {items.map((lead) => (
@@ -561,7 +561,7 @@ function KanbanView({
                 />
               ))}
               {items.length === 0 && (
-                <div className="text-[11px] text-gray-400 text-center py-6 border border-dashed border-gray-200 rounded-xl">
+                <div className="text-[11px] text-white/40 text-center py-6 border border-dashed border-white/10 rounded-xl">
                   Arraste um lead aqui
                 </div>
               )}
@@ -590,7 +590,7 @@ function KanbanCard({
 }) {
   const cat = categories.find((c) => c.key === lead.category) || categories[0];
   const CatIcon = cat ? resolveIcon(cat.icon) : Users;
-  const catColor = cat?.color.split(' ')[1] || 'text-gray-500';
+  const catColor = cat?.color.split(' ')[1] || 'text-white/55';
   const unread = (lead.unread_count ?? 0) > 0;
 
   return (
@@ -600,7 +600,7 @@ function KanbanCard({
       onDragEnd={onDragEnd}
       onClick={onOpen}
       className={`group cursor-pointer bg-white rounded-xl border p-2.5 text-left hover:shadow-md transition ${
-        dragging ? 'opacity-40 border-gray-900' : 'border-gray-100'
+        dragging ? 'opacity-40 border-gray-900' : 'border-white/10'
       }`}
     >
       <div className="flex items-start gap-2">
@@ -609,11 +609,11 @@ function KanbanCard({
             <img
               src={lead.profile_picture_url}
               alt={leadDisplayName(lead)}
-              className="w-8 h-8 rounded-full object-cover bg-gray-100"
+              className="w-8 h-8 rounded-full object-cover bg-white/[0.06]"
               onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
             />
           ) : (
-            <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center text-[11px] font-bold text-gray-700">
+            <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center text-[11px] font-bold text-white/85">
               {leadDisplayName(lead).charAt(0).toUpperCase()}
             </div>
           )}
@@ -621,12 +621,12 @@ function KanbanCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1">
-            <p className="text-sm font-semibold text-gray-900 truncate">{leadDisplayName(lead)}</p>
+            <p className="text-sm font-semibold text-white truncate">{leadDisplayName(lead)}</p>
             {lead.is_favorite && <Star size={10} className="text-amber-400 fill-amber-400 shrink-0" />}
           </div>
-          <p className="text-[11px] text-gray-500 truncate flex items-center gap-1">
+          <p className="text-[11px] text-white/55 truncate flex items-center gap-1">
             {isPrivateContact(lead) && (
-              <span className="text-[8px] font-semibold tracking-wide uppercase px-1 py-0.5 rounded bg-gray-100 text-gray-500">Privado</span>
+              <span className="text-[8px] font-semibold tracking-wide uppercase px-1 py-0.5 rounded bg-white/[0.06] text-white/55">Privado</span>
             )}
             {leadPhoneLabel(lead)}
           </p>
@@ -636,21 +636,21 @@ function KanbanCard({
         )}
       </div>
 
-      {lead.last_message && <p className="text-[11px] text-gray-500 line-clamp-2 mt-2">{lead.last_message}</p>}
+      {lead.last_message && <p className="text-[11px] text-white/55 line-clamp-2 mt-2">{lead.last_message}</p>}
 
       {(lead.tags || []).length > 0 && (
         <div className="flex flex-wrap gap-1 mt-2">
           {(lead.tags || []).slice(0, 3).map((t) => (
-            <span key={t} className="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-gray-50 text-gray-600 border border-gray-100">{t}</span>
+            <span key={t} className="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-white/[0.04] text-white/70 border border-white/10">{t}</span>
           ))}
         </div>
       )}
 
       <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50">
-        <span className="text-[10px] text-gray-400 flex items-center gap-1">
+        <span className="text-[10px] text-white/40 flex items-center gap-1">
           <MessageSquare size={9} /> {lead.message_count ?? 0}
         </span>
-        <span className="text-[10px] text-gray-400">{formatRelative(lead.last_activity_at)}</span>
+        <span className="text-[10px] text-white/40">{formatRelative(lead.last_activity_at)}</span>
       </div>
     </div>
   );
@@ -686,13 +686,13 @@ function TableView({
   }
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden">
+    <div className="bg-white border border-white/10 rounded-2xl overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b border-gray-100 text-[11px] uppercase tracking-wide text-gray-500">
+          <thead className="bg-white/[0.04] border-b border-white/10 text-[11px] uppercase tracking-wide text-white/55">
             <tr>
               <th className="w-10 px-3 py-3">
-                <input type="checkbox" checked={allSelected} onChange={toggleAll} className="rounded border-gray-300 text-gray-900 focus:ring-gray-900" />
+                <input type="checkbox" checked={allSelected} onChange={toggleAll} className="rounded border-white/15 text-white focus:ring-gray-900" />
               </th>
               <th className="px-3 py-3 text-left font-semibold">Contato</th>
               <th className="px-3 py-3 text-left font-semibold">Telefone</th>
@@ -706,31 +706,31 @@ function TableView({
             {leads.map((lead) => {
               const isSel = selected.has(lead.id);
               return (
-                <tr key={lead.id} className={`hover:bg-gray-50 transition ${isSel ? 'bg-gray-50' : ''}`}>
+                <tr key={lead.id} className={`hover:bg-white/[0.04] transition ${isSel ? 'bg-white/[0.04]' : ''}`}>
                   <td className="px-3 py-3">
-                    <input type="checkbox" checked={isSel} onChange={() => toggle(lead.id)} className="rounded border-gray-300 text-gray-900 focus:ring-gray-900" />
+                    <input type="checkbox" checked={isSel} onChange={() => toggle(lead.id)} className="rounded border-white/15 text-white focus:ring-gray-900" />
                   </td>
                   <td className="px-3 py-3">
                     <button onClick={() => onOpen(lead)} className="flex items-center gap-2 text-left">
                       {lead.profile_picture_url ? (
-                        <img src={lead.profile_picture_url} alt={leadDisplayName(lead)} className="w-8 h-8 rounded-full object-cover bg-gray-100" />
+                        <img src={lead.profile_picture_url} alt={leadDisplayName(lead)} className="w-8 h-8 rounded-full object-cover bg-white/[0.06]" />
                       ) : (
-                        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-[11px] font-semibold text-gray-600">
+                        <div className="w-8 h-8 bg-white/[0.06] rounded-full flex items-center justify-center text-[11px] font-semibold text-white/70">
                           {leadDisplayName(lead).charAt(0).toUpperCase()}
                         </div>
                       )}
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">{leadDisplayName(lead)}</p>
-                        {lead.company && <p className="text-[11px] text-gray-500">{lead.company}</p>}
+                        <p className="text-sm font-semibold text-white">{leadDisplayName(lead)}</p>
+                        {lead.company && <p className="text-[11px] text-white/55">{lead.company}</p>}
                       </div>
                     </button>
                   </td>
-                  <td className="px-3 py-3 text-gray-600 text-xs">{leadPhoneLabel(lead)}</td>
+                  <td className="px-3 py-3 text-white/70 text-xs">{leadPhoneLabel(lead)}</td>
                   <td className="px-3 py-3">
                     <select
                       value={lead.category || (categories[0]?.key ?? 'cold')}
                       onChange={(e) => onCategoryChange(lead.id, e.target.value)}
-                      className="text-xs bg-white border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="text-xs bg-white border border-white/10 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-gray-900"
                     >
                       {categories.map((c) => (
                         <option key={c.key} value={c.key}>{c.label}</option>
@@ -740,14 +740,14 @@ function TableView({
                   <td className="px-3 py-3">
                     <div className="flex flex-wrap gap-1 max-w-[180px]">
                       {(lead.tags || []).slice(0, 3).map((t) => (
-                        <span key={t} className="inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-gray-50 text-gray-600 border border-gray-100">
+                        <span key={t} className="inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-white/[0.04] text-white/70 border border-white/10">
                           <TagIcon size={9} /> {t}
                         </span>
                       ))}
                     </div>
                   </td>
-                  <td className="px-3 py-3 text-right text-xs text-gray-700 font-medium">{lead.message_count ?? 0}</td>
-                  <td className="px-3 py-3 text-right text-xs text-gray-500">{formatRelative(lead.last_activity_at)}</td>
+                  <td className="px-3 py-3 text-right text-xs text-white/85 font-medium">{lead.message_count ?? 0}</td>
+                  <td className="px-3 py-3 text-right text-xs text-white/55">{formatRelative(lead.last_activity_at)}</td>
                 </tr>
               );
             })}

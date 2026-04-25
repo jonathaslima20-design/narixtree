@@ -107,13 +107,13 @@ export function AuditLogs() {
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-white flex items-center gap-3">
               <div className="w-10 h-10 bg-gray-900 rounded-2xl flex items-center justify-center">
                 <FileClock size={18} className="text-white" />
               </div>
               Logs de Auditoria
             </h1>
-            <p className="text-sm text-gray-500 mt-1.5 ml-[52px]">
+            <p className="text-sm text-white/55 mt-1.5 ml-[52px]">
               Histórico completo de ações administrativas
             </p>
           </div>
@@ -143,7 +143,7 @@ export function AuditLogs() {
             <button
               onClick={exportCsv}
               disabled={filtered.length === 0}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-sm font-medium text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-sm font-medium text-white/85 bg-white border border-white/10 hover:bg-white/[0.04] transition-colors disabled:opacity-50"
             >
               <Download size={14} />
               Exportar CSV
@@ -154,19 +154,19 @@ export function AuditLogs() {
             {loading ? (
               <div className="space-y-2">
                 {[...Array(8)].map((_, i) => (
-                  <div key={i} className="h-14 bg-gray-50 rounded-xl animate-pulse" />
+                  <div key={i} className="h-14 bg-white/[0.04] rounded-xl animate-pulse" />
                 ))}
               </div>
             ) : filtered.length === 0 ? (
               <div className="text-center py-12">
                 <Filter size={28} className="text-gray-200 mx-auto mb-2" />
-                <p className="text-sm text-gray-400">Nenhum registro encontrado.</p>
+                <p className="text-sm text-white/40">Nenhum registro encontrado.</p>
               </div>
             ) : (
               <div className="overflow-x-auto -mx-6 px-6">
                 <table className="w-full text-sm min-w-[720px]">
                   <thead>
-                    <tr className="text-xs text-gray-400 border-b border-gray-100">
+                    <tr className="text-xs text-white/40 border-b border-white/10">
                       <th className="text-left pb-2 font-medium">Data</th>
                       <th className="text-left pb-2 font-medium">Admin</th>
                       <th className="text-left pb-2 font-medium">Ação</th>
@@ -184,14 +184,14 @@ export function AuditLogs() {
                           <tr
                             key={log.id}
                             onClick={() => hasMeta && setExpanded(isOpen ? null : log.id)}
-                            className={`text-gray-700 ${hasMeta ? 'cursor-pointer hover:bg-gray-50' : ''}`}
+                            className={`text-white/85 ${hasMeta ? 'cursor-pointer hover:bg-white/[0.04]' : ''}`}
                           >
-                            <td className="py-2.5 text-xs text-gray-500 whitespace-nowrap">
+                            <td className="py-2.5 text-xs text-white/55 whitespace-nowrap">
                               {formatDateTime(log.created_at)}
                             </td>
                             <td className="py-2.5 text-xs">
                               <div className="flex items-center gap-1.5">
-                                <User size={11} className="text-gray-400" />
+                                <User size={11} className="text-white/40" />
                                 {log.admin_email}
                               </div>
                             </td>
@@ -200,15 +200,15 @@ export function AuditLogs() {
                                 {actionLabel(log.action)}
                               </Badge>
                             </td>
-                            <td className="py-2.5 text-xs text-gray-600">{log.target_label || '-'}</td>
-                            <td className="py-2.5 text-xs text-gray-500 max-w-sm truncate">
+                            <td className="py-2.5 text-xs text-white/70">{log.target_label || '-'}</td>
+                            <td className="py-2.5 text-xs text-white/55 max-w-sm truncate">
                               {log.description}
                             </td>
                             <td className="py-2.5 text-right">
                               {hasMeta && (
                                 <ChevronDown
                                   size={14}
-                                  className={`text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                                  className={`text-white/40 transition-transform ${isOpen ? 'rotate-180' : ''}`}
                                 />
                               )}
                             </td>
@@ -216,7 +216,7 @@ export function AuditLogs() {
                           {isOpen && hasMeta && (
                             <tr key={log.id + '-meta'}>
                               <td colSpan={6} className="pb-3">
-                                <pre className="text-xs bg-gray-50 rounded-xl p-3 text-gray-600 overflow-x-auto">
+                                <pre className="text-xs bg-white/[0.04] rounded-xl p-3 text-white/70 overflow-x-auto">
                                   {JSON.stringify(log.metadata, null, 2)}
                                 </pre>
                               </td>
@@ -250,13 +250,13 @@ function SelectFilter({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-gray-200 rounded-2xl bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 cursor-pointer"
+        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-white/10 rounded-2xl bg-white text-white/85 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 cursor-pointer"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>
         ))}
       </select>
-      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
     </div>
   );
 }
