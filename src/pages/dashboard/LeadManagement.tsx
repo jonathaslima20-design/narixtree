@@ -436,14 +436,14 @@ function StatPill({ label, value, iconName, tone }: { label: string; value: numb
   const Icon = iconName === 'Users' ? Users : resolveIcon(iconName);
   const toneClasses: Record<string, string> = {
     gray: 'bg-white/[0.10] text-white/70',
-    red: 'bg-red-500/10 text-red-400',
-    amber: 'bg-amber-500/10 text-amber-400',
-    sky: 'bg-sky-500/10 text-sky-400',
-    orange: 'bg-orange-500/10 text-orange-400',
-    emerald: 'bg-emerald-500/10 text-emerald-400',
-    teal: 'bg-teal-500/10 text-teal-400',
-    pink: 'bg-pink-500/10 text-pink-400',
-    cyan: 'bg-cyan-500/10 text-cyan-400',
+    red: 'bg-white/[0.10] text-red-400',
+    amber: 'bg-white/[0.10] text-amber-400',
+    sky: 'bg-white/[0.10] text-sky-400',
+    orange: 'bg-white/[0.10] text-orange-400',
+    emerald: 'bg-white/[0.10] text-emerald-400',
+    teal: 'bg-white/[0.10] text-teal-400',
+    pink: 'bg-white/[0.10] text-pink-400',
+    cyan: 'bg-white/[0.10] text-cyan-400',
   };
   const cls = toneClasses[tone] || toneClasses.gray;
 
