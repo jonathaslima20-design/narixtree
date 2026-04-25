@@ -227,7 +227,7 @@ export function ChatComposer({
   }
 
   return (
-    <div className="border-t border-gray-100 bg-white relative">
+    <div className="border-t border-white/[0.08] bg-surface-2 relative">
       {pendingSuggestion && sendMode === 'approval' && (
         <div className="mx-4 mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-2xl">
           <div className="flex items-center gap-1.5 mb-2">
@@ -238,11 +238,11 @@ export function ChatComposer({
             <textarea
               value={suggestionText}
               onChange={(e) => setSuggestionText(e.target.value)}
-              className="w-full text-sm text-gray-800 bg-white border border-emerald-200 rounded-xl p-2 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              className="w-full text-sm text-white/90 bg-surface-2 border border-emerald-200 rounded-xl p-2 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-400"
               rows={3}
             />
           ) : (
-            <p className="text-sm text-gray-800 whitespace-pre-wrap">{pendingSuggestion.content}</p>
+            <p className="text-sm text-white/90 whitespace-pre-wrap">{pendingSuggestion.content}</p>
           )}
           <div className="flex items-center gap-2 mt-2.5">
             <button
@@ -256,13 +256,13 @@ export function ChatComposer({
                 setEditingSuggestion(!editingSuggestion);
                 setSuggestionText(pendingSuggestion.content);
               }}
-              className="flex items-center gap-1 px-3 py-1.5 bg-white text-gray-700 text-xs font-medium rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-1 px-3 py-1.5 bg-surface-2 text-white/85 text-xs font-medium rounded-lg border border-white/10 hover:bg-white/[0.04] transition-colors"
             >
               <Edit3 size={12} /> {editingSuggestion ? 'Cancelar edicao' : 'Editar'}
             </button>
             <button
               onClick={() => onRejectSuggestion(pendingSuggestion)}
-              className="flex items-center gap-1 px-3 py-1.5 text-gray-500 text-xs font-medium rounded-lg hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-1 px-3 py-1.5 text-white/55 text-xs font-medium rounded-lg hover:bg-white/[0.06] transition-colors"
             >
               <X size={12} /> Descartar
             </button>
@@ -329,7 +329,7 @@ export function ChatComposer({
       {pendingImage && (
         <div className="mx-3 mt-3 rounded-2xl border border-emerald-200 bg-emerald-50 shadow-sm overflow-hidden">
           <div className="flex items-start gap-3 p-3">
-            <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-100 shrink-0">
+            <div className="w-20 h-20 rounded-xl overflow-hidden bg-white/[0.06] shrink-0">
               <img src={pendingImage.objectUrl} alt="" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
@@ -341,7 +341,7 @@ export function ChatComposer({
                 value={pendingImage.caption}
                 onChange={(e) => setPendingImage((prev) => prev ? { ...prev, caption: e.target.value } : null)}
                 placeholder="Legenda (opcional)..."
-                className="w-full px-2.5 py-1.5 text-xs bg-white border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent"
+                className="w-full px-2.5 py-1.5 text-xs bg-surface-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent"
               />
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
@@ -423,7 +423,7 @@ export function ChatComposer({
               className={`p-2 rounded-xl transition-colors ${
                 quickRepliesOpen
                   ? 'text-emerald-600 bg-emerald-50'
-                  : 'text-gray-400 hover:text-emerald-600 hover:bg-emerald-50'
+                  : 'text-white/40 hover:text-emerald-600 hover:bg-emerald-50'
               } disabled:opacity-40`}
               title="Respostas rapidas"
               type="button"
@@ -431,14 +431,14 @@ export function ChatComposer({
               <Zap size={18} />
             </button>
             <button
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+              className="p-2 text-white/40 hover:text-white/70 hover:bg-white/[0.06] rounded-xl transition-colors"
               title="Emoji"
               type="button"
             >
               <Smile size={18} />
             </button>
             <button
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+              className="p-2 text-white/40 hover:text-white/70 hover:bg-white/[0.06] rounded-xl transition-colors"
               title="Anexo"
               type="button"
             >
@@ -447,7 +447,7 @@ export function ChatComposer({
             <button
               onClick={triggerAudioPicker}
               disabled={disabled || isBusy}
-              className="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors disabled:opacity-40"
+              className="p-2 text-white/40 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors disabled:opacity-40"
               title="Enviar arquivo de audio como nota de voz"
               type="button"
             >
@@ -462,13 +462,13 @@ export function ChatComposer({
               }
               disabled={disabled || isBusy}
               rows={1}
-              className="flex-1 resize-none px-3 py-2 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent max-h-32"
+              className="flex-1 resize-none px-3 py-2 bg-white/[0.03] border border-white/[0.08] rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent max-h-32"
             />
             {text.trim() ? (
               <button
                 onClick={handleSend}
                 disabled={!text.trim() || sending || disabled}
-                className="p-2.5 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
+                className="p-2.5 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 disabled:bg-white/[0.10] disabled:text-white/30 transition-colors"
                 title="Enviar"
                 type="button"
               >
@@ -478,7 +478,7 @@ export function ChatComposer({
               <button
                 onClick={startRecording}
                 disabled={disabled || isBusy}
-                className="p-2.5 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
+                className="p-2.5 bg-emerald-600 text-white rounded-2xl hover:bg-emerald-700 disabled:bg-white/[0.10] disabled:text-white/30 transition-colors"
                 title="Gravar mensagem de voz"
                 type="button"
               >

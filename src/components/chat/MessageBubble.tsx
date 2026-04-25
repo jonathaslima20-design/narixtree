@@ -49,14 +49,14 @@ export function MessageBubble({ message, errorDetail, onRetry, onDelete }: Props
             <button
               type="button"
               onClick={() => setMenuOpen((v) => !v)}
-              className="mt-2 p-1 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-200"
+              className="mt-2 p-1 rounded-full text-white/40 hover:text-white/85 hover:bg-white/[0.10]"
               aria-label="Opções da mensagem"
             >
               <MoreVertical size={14} />
             </button>
             {menuOpen && (
               <div
-                className={`absolute z-20 ${isOut ? 'right-full mr-1' : 'left-full ml-1'} top-0 w-56 bg-white border border-gray-100 rounded-xl shadow-lg py-1 text-xs`}
+                className={`absolute z-20 ${isOut ? 'right-full mr-1' : 'left-full ml-1'} top-0 w-56 bg-surface-2 border border-white/[0.08] rounded-xl shadow-lg py-1 text-xs`}
               >
                 <button
                   type="button"
@@ -64,7 +64,7 @@ export function MessageBubble({ message, errorDetail, onRetry, onDelete }: Props
                     setMenuOpen(false);
                     onDelete?.('local');
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 text-gray-700"
+                  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/[0.04] text-white/85"
                 >
                   <Trash2 size={12} /> Excluir apenas para mim
                 </button>
@@ -91,7 +91,7 @@ export function MessageBubble({ message, errorDetail, onRetry, onDelete }: Props
                 ? isFailed
                   ? 'bg-red-500 text-white rounded-br-sm'
                   : 'bg-emerald-600 text-white rounded-br-sm'
-                : 'bg-white text-gray-800 rounded-bl-sm border border-gray-100'
+                : 'bg-surface-2 text-white/90 rounded-bl-sm border border-white/[0.08]'
             }`}
             title={isFailed && errorDetail ? errorDetail : undefined}
           >
@@ -113,7 +113,7 @@ export function MessageBubble({ message, errorDetail, onRetry, onDelete }: Props
                     uploading={message.status === 'pending'}
                   />
                 ) : (
-                  <div className={`text-xs flex items-center gap-1.5 ${isOut ? 'text-white/80' : 'text-gray-500'}`}>
+                  <div className={`text-xs flex items-center gap-1.5 ${isOut ? 'text-white/80' : 'text-white/55'}`}>
                     <Sparkles size={10} /> Mensagem de voz
                   </div>
                 )}
@@ -122,7 +122,7 @@ export function MessageBubble({ message, errorDetail, onRetry, onDelete }: Props
             {message.content && (
               <p className="text-sm whitespace-pre-wrap break-words leading-snug">{message.content}</p>
             )}
-            <div className={`flex items-center justify-end gap-1 mt-1 text-[10px] ${isOut ? 'text-white/70' : 'text-gray-400'}`}>
+            <div className={`flex items-center justify-end gap-1 mt-1 text-[10px] ${isOut ? 'text-white/70' : 'text-white/40'}`}>
               <span>{formatTime(message.created_at)}</span>
               {isOut && statusIcon}
             </div>

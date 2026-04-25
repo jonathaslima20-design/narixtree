@@ -12,7 +12,7 @@ const MODES: { key: SendMode; title: string; desc: string; icon: typeof Hand; ti
     title: 'Manual',
     desc: 'Você responde a cada mensagem. A IA apenas sugere quando solicitada.',
     icon: Hand,
-    tint: 'bg-gray-50 border-gray-200 text-gray-700',
+    tint: 'bg-white/[0.03] border-white/10 text-white/85',
   },
   {
     key: 'approval',
@@ -88,17 +88,17 @@ export function SendModeSelector() {
   if (loading) {
     return (
       <Card>
-        <div className="h-40 bg-gray-50 rounded-xl animate-pulse" />
+        <div className="h-40 bg-white/[0.03] rounded-xl animate-pulse" />
       </Card>
     );
   }
 
   return (
     <Card padding="none">
-      <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+      <div className="px-5 py-4 border-b border-white/[0.08] flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-gray-900">Modo de envio de mensagens</h2>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <h2 className="text-sm font-semibold text-white">Modo de envio de mensagens</h2>
+          <p className="text-xs text-white/40 mt-0.5">
             Escolha como a IA participa nas respostas aos seus leads.
           </p>
         </div>
@@ -108,7 +108,7 @@ export function SendModeSelector() {
           className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
             saved
               ? 'bg-emerald-50 text-emerald-700'
-              : 'bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-50'
+              : 'bg-white/[0.10] text-white hover:bg-white/[0.15] disabled:opacity-50'
           }`}
         >
           <Save size={13} /> {saved ? 'Salvo!' : saving ? 'Salvando...' : 'Salvar'}
@@ -126,7 +126,7 @@ export function SendModeSelector() {
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setMode(m.key)}
                 className={`text-left p-4 rounded-2xl border-2 transition-all ${
-                  active ? 'border-gray-900 bg-white shadow-sm' : 'border-gray-100 bg-white hover:border-gray-200'
+                  active ? 'border-white/20 bg-white/[0.10]' : 'border-white/[0.08] bg-white/[0.04] hover:border-white/10'
                 }`}
               >
                 <div
@@ -134,41 +134,41 @@ export function SendModeSelector() {
                 >
                   <m.icon size={15} />
                 </div>
-                <p className="text-sm font-semibold text-gray-900">{m.title}</p>
-                <p className="text-xs text-gray-500 mt-1 leading-snug">{m.desc}</p>
+                <p className="text-sm font-semibold text-white">{m.title}</p>
+                <p className="text-xs text-white/55 mt-1 leading-snug">{m.desc}</p>
               </motion.button>
             );
           })}
         </div>
 
-        <div className="pt-2 border-t border-gray-100">
-          <p className="text-xs font-semibold text-gray-700 flex items-center gap-1.5 mb-2">
+        <div className="pt-2 border-t border-white/[0.08]">
+          <p className="text-xs font-semibold text-white/85 flex items-center gap-1.5 mb-2">
             <Clock size={12} /> Horário comercial
           </p>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-[10px] font-medium text-gray-500 uppercase">Início</label>
+              <label className="text-[10px] font-medium text-white/55 uppercase">Início</label>
               <input
                 type="time"
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+                className="w-full px-3 py-2 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
               />
             </div>
             <div>
-              <label className="text-[10px] font-medium text-gray-500 uppercase">Fim</label>
+              <label className="text-[10px] font-medium text-white/55 uppercase">Fim</label>
               <input
                 type="time"
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+                className="w-full px-3 py-2 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
               />
             </div>
           </div>
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-gray-700 block mb-1.5">
+          <label className="text-xs font-semibold text-white/85 block mb-1.5">
             Mensagem fora do expediente
           </label>
           <textarea
@@ -176,7 +176,7 @@ export function SendModeSelector() {
             onChange={(e) => setAwayMessage(e.target.value)}
             placeholder="Ex: Obrigado pela mensagem! Nosso atendimento retorna em breve."
             rows={2}
-            className="w-full px-3 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-gray-900"
+            className="w-full px-3 py-2 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-white/20"
           />
         </div>
       </div>

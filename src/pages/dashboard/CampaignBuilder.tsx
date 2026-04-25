@@ -349,7 +349,7 @@ export function CampaignBuilder() {
         <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
           <button
             onClick={() => navigate('/dashboard/campaigns')}
-            className="p-2 rounded-xl hover:bg-white hover:shadow-sm transition-all text-white/55"
+            className="p-2 rounded-xl hover:bg-white/[0.06] hover:shadow-sm transition-all text-white/55"
           >
             <ArrowLeft size={18} />
           </button>
@@ -368,9 +368,9 @@ export function CampaignBuilder() {
                 disabled={i > step}
                 className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                   i === step
-                    ? 'bg-gray-900 text-white'
+                    ? 'bg-white/[0.10] text-white'
                     : i < step
-                      ? 'bg-emerald-50 text-emerald-700 cursor-pointer hover:bg-emerald-100'
+                      ? 'bg-emerald-500/10 text-emerald-400 cursor-pointer hover:bg-emerald-500/15'
                       : 'bg-white/[0.06] text-white/40 cursor-not-allowed'
                 }`}
               >
@@ -389,19 +389,19 @@ export function CampaignBuilder() {
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3 space-y-5">
                   {/* Campaign name */}
-                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                     <label className="block text-sm font-medium text-white/85 mb-2">Nome da campanha</label>
                     <input
                       type="text"
                       value={form.name}
                       onChange={(e) => updateForm({ name: e.target.value })}
                       placeholder="Ex: Promoção de Natal 2026"
-                      className="w-full px-4 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-white/15"
+                      className="w-full px-4 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15"
                     />
                   </div>
 
                   {/* Message type */}
-                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                     <label className="block text-sm font-medium text-white/85 mb-3">Tipo de mensagem</label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {([
@@ -420,7 +420,7 @@ export function CampaignBuilder() {
                           }}
                           className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
                             form.message_type === type
-                              ? 'border-gray-900 bg-gray-900/5'
+                              ? 'border-white/20 bg-white/[0.04]'
                               : 'border-white/10 hover:border-white/15'
                           }`}
                         >
@@ -433,7 +433,7 @@ export function CampaignBuilder() {
 
                   {/* Content -- hidden for audio since voice notes have no caption */}
                   {form.message_type !== 'audio' && (
-                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                     <label className="block text-sm font-medium text-white/85 mb-2">
                       {form.message_type === 'text' ? 'Mensagem' : form.message_type === 'image' ? 'Legenda (opcional)' : 'Texto da mensagem'}
                     </label>
@@ -446,7 +446,7 @@ export function CampaignBuilder() {
                       }
                       placeholder={form.message_type === 'text' ? 'Olá {nome}, temos uma oferta especial para você!' : 'Legenda para a mídia...'}
                       rows={5}
-                      className="w-full px-4 py-3 rounded-xl border border-white/10 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-white/15"
+                      className="w-full px-4 py-3 rounded-xl border border-white/10 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15"
                     />
                     <div className="flex items-center gap-2 mt-2">
                       <span className="text-xs text-white/40">Variáveis:</span>
@@ -468,17 +468,17 @@ export function CampaignBuilder() {
 
                   {/* Media upload */}
                   {form.message_type !== 'text' && (
-                    <div className="bg-white rounded-2xl border border-white/10 p-5">
+                    <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                       <label className="block text-sm font-medium text-white/85 mb-3">
                         {form.message_type === 'image' ? 'Imagem' : form.message_type === 'audio' ? 'Nota de Voz' : 'Documento'}
                       </label>
 
                       {/* Audio: recording state */}
                       {form.message_type === 'audio' && isRecording && (
-                        <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl">
+                        <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
                           <button
                             onClick={cancelCampaignRecording}
-                            className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors shrink-0"
+                            className="p-2 text-red-400 hover:bg-red-500/15 rounded-lg transition-colors shrink-0"
                             title="Cancelar"
                             type="button"
                           >
@@ -488,7 +488,7 @@ export function CampaignBuilder() {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
                           </span>
-                          <span className="text-sm font-semibold text-red-700 tabular-nums">
+                          <span className="text-sm font-semibold text-red-400 tabular-nums">
                             {formatDuration(recorder.elapsed)}
                           </span>
                           <div className="flex-1 flex items-center gap-0.5 overflow-hidden">
@@ -518,13 +518,13 @@ export function CampaignBuilder() {
                       {/* Audio: has file with AudioPlayer preview */}
                       {form.message_type === 'audio' && form.mediaFile && !isRecording && (
                         <div className="space-y-3">
-                          <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4">
                             <div className="flex items-center gap-1.5 mb-3">
-                              <Mic size={13} className="text-emerald-600" />
-                              <span className="text-[11px] font-semibold text-emerald-700 uppercase tracking-wide">
+                              <Mic size={13} className="text-emerald-400" />
+                              <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wide">
                                 Nota de voz
                               </span>
-                              <span className="text-[11px] text-emerald-600 ml-auto">
+                              <span className="text-[11px] text-emerald-400 ml-auto">
                                 {formatDuration(form.audioDurationSeconds)}
                               </span>
                             </div>
@@ -541,7 +541,7 @@ export function CampaignBuilder() {
                             </div>
                             <button
                               onClick={clearMedia}
-                              className="p-1.5 rounded-lg hover:bg-red-50 text-white/40 hover:text-red-500 transition-colors"
+                              className="p-1.5 rounded-lg hover:bg-red-500/10 text-white/40 hover:text-red-400 transition-colors"
                               title="Remover audio"
                             >
                               <Trash2 size={16} />
@@ -555,10 +555,10 @@ export function CampaignBuilder() {
                         <div className="space-y-3">
                           <button
                             onClick={startCampaignRecording}
-                            className="w-full flex items-center justify-center gap-3 border-2 border-dashed border-emerald-300 rounded-xl p-6 text-center hover:border-emerald-500 hover:bg-emerald-50/50 transition-all group"
+                            className="w-full flex items-center justify-center gap-3 border-2 border-dashed border-emerald-500/30 rounded-xl p-6 text-center hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all group"
                           >
-                            <div className="w-12 h-12 rounded-full bg-emerald-100 group-hover:bg-emerald-200 flex items-center justify-center transition-colors">
-                              <Mic size={22} className="text-emerald-600" />
+                            <div className="w-12 h-12 rounded-full bg-emerald-500/15 group-hover:bg-emerald-500/25 flex items-center justify-center transition-colors">
+                              <Mic size={22} className="text-emerald-400" />
                             </div>
                             <div className="text-left">
                               <p className="text-sm font-semibold text-white">Gravar nota de voz</p>
@@ -572,7 +572,7 @@ export function CampaignBuilder() {
                           </div>
                           <button
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full flex items-center justify-center gap-3 border-2 border-dashed border-white/10 rounded-xl p-4 text-center hover:border-gray-400 hover:bg-white/[0.04] transition-all"
+                            className="w-full flex items-center justify-center gap-3 border-2 border-dashed border-white/10 rounded-xl p-4 text-center hover:border-white/20 hover:bg-white/[0.04] transition-all"
                           >
                             <Upload size={18} className="text-white/40" />
                             <div className="text-left">
@@ -581,7 +581,7 @@ export function CampaignBuilder() {
                             </div>
                           </button>
                           {recorder.error && (
-                            <p className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                            <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
                               {recorder.error}
                             </p>
                           )}
@@ -611,7 +611,7 @@ export function CampaignBuilder() {
                       {form.message_type !== 'audio' && !form.mediaFile && (
                         <button
                           onClick={() => fileInputRef.current?.click()}
-                          className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:border-gray-400 hover:bg-white/[0.04] transition-all"
+                          className="w-full border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:border-white/20 hover:bg-white/[0.04] transition-all"
                         >
                           <Upload size={24} className="mx-auto mb-2 text-white/40" />
                           <p className="text-sm text-white/70 font-medium">Clique para fazer upload</p>
@@ -722,7 +722,7 @@ export function CampaignBuilder() {
               <div className="space-y-5">
                 {/* Instance selector (when > 1 instance) */}
                 {connectedInstances.length > 1 && (
-                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                     <h3 className="text-sm font-semibold text-white mb-1 flex items-center gap-2">
                       <Smartphone size={16} className="text-white/55" />
                       Instâncias de envio
@@ -740,15 +740,15 @@ export function CampaignBuilder() {
                             onClick={() => toggleInstance(inst.id)}
                             className={`flex items-center gap-3 p-3 rounded-xl border-2 text-left transition-all ${
                               selected
-                                ? 'border-gray-900 bg-gray-900/5'
+                                ? 'border-white/20 bg-white/[0.04]'
                                 : 'border-white/10 hover:border-white/15'
                             }`}
                           >
                             <div
                               className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 border ${
                                 selected
-                                  ? 'bg-gray-900 border-gray-900 text-white'
-                                  : 'border-white/15 bg-white'
+                                  ? 'bg-white/[0.10] border-white/20 text-white'
+                                  : 'border-white/15 bg-surface-2'
                               }`}
                             >
                               {selected && <Check size={12} />}
@@ -762,7 +762,7 @@ export function CampaignBuilder() {
                                 <p className="text-[11px] text-white/40 truncate">{inst.phone_number}</p>
                               )}
                             </div>
-                            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 shrink-0">
+                            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 shrink-0">
                               conectado
                             </span>
                           </button>
@@ -778,7 +778,7 @@ export function CampaignBuilder() {
                 )}
 
                 {/* Filters */}
-                <div className="bg-white rounded-2xl border border-white/10 p-5">
+                <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                   <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
                     <Users size={16} className="text-white/55" />
                     Filtrar destinatários
@@ -792,7 +792,7 @@ export function CampaignBuilder() {
                           onClick={() => updateForm({ filter_category: '' })}
                           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                             !form.filter_category
-                              ? 'bg-gray-900 text-white'
+                              ? 'bg-white/[0.10] text-white'
                               : 'bg-white/[0.04] text-white/70 hover:bg-white/[0.06]'
                           }`}
                         >
@@ -807,7 +807,7 @@ export function CampaignBuilder() {
                               onClick={() => updateForm({ filter_category: cat.key })}
                               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                                 form.filter_category === cat.key
-                                  ? 'bg-gray-900 text-white'
+                                  ? 'bg-white/[0.10] text-white'
                                   : 'bg-white/[0.04] text-white/70 hover:bg-white/[0.06]'
                               }`}
                             >
@@ -830,7 +830,7 @@ export function CampaignBuilder() {
                           value={form.exclude_recent_days || ''}
                           onChange={(e) => updateForm({ exclude_recent_days: Number(e.target.value) || 0 })}
                           placeholder="0"
-                          className="w-20 px-3 py-2 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                          className="w-20 px-3 py-2 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
                         />
                         <span className="text-xs text-white/55">dias desde última campanha</span>
                       </div>
@@ -848,7 +848,7 @@ export function CampaignBuilder() {
                             onClick={() => toggleTag(tag)}
                             className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
                               form.filter_tags.includes(tag)
-                                ? 'bg-gray-900 text-white'
+                                ? 'bg-white/[0.10] text-white'
                                 : 'bg-white/[0.06] text-white/70 hover:bg-white/[0.10]'
                             }`}
                           >
@@ -861,7 +861,7 @@ export function CampaignBuilder() {
                 </div>
 
                 {/* Recipient count badge */}
-                <div className="bg-gray-900 rounded-2xl px-5 py-4 flex items-center justify-between">
+                <div className="bg-white/[0.10] rounded-2xl px-5 py-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
                       <Users size={18} className="text-white" />
@@ -883,7 +883,7 @@ export function CampaignBuilder() {
                 </div>
 
                 {/* Recipient list */}
-                <div className="bg-white rounded-2xl border border-white/10 p-5">
+                <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <h3 className="text-sm font-semibold text-white">Lista de destinatários</h3>
                     <div className="relative w-full sm:w-60">
@@ -893,13 +893,13 @@ export function CampaignBuilder() {
                         placeholder="Buscar lead..."
                         value={leadSearch}
                         onChange={(e) => setLeadSearch(e.target.value)}
-                        className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-white/10 text-xs focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-white/10 text-xs focus:outline-none focus:ring-2 focus:ring-white/20"
                       />
                     </div>
                   </div>
                   {leadsLoading ? (
                     <div className="flex justify-center py-8">
-                      <div className="w-5 h-5 border-2 border-white/10 border-t-gray-600 rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-white/10 border-t-white/70 rounded-full animate-spin" />
                     </div>
                   ) : (
                     <div className="max-h-72 overflow-auto rounded-xl border border-white/10">
@@ -912,7 +912,7 @@ export function CampaignBuilder() {
                             <th className="px-3 py-2">Categoria</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-50">
+                        <tbody className="divide-y divide-white/[0.06]">
                           {searchedLeads.slice(0, 100).map((l) => {
                             const excluded = form.excludedLeadIds.has(l.id);
                             return (
@@ -972,8 +972,8 @@ export function CampaignBuilder() {
                       onClick={() => updateForm({ schedule_mode: mode })}
                       className={`p-5 rounded-2xl border-2 text-left transition-all ${
                         form.schedule_mode === mode
-                          ? 'border-gray-900 bg-gray-900/5'
-                          : 'border-white/10 bg-white hover:border-white/15'
+                          ? 'border-white/20 bg-white/[0.04]'
+                          : 'border-white/10 bg-surface-2 hover:border-white/15'
                       }`}
                     >
                       <Icon size={22} className={form.schedule_mode === mode ? 'text-white mb-3' : 'text-white/40 mb-3'} />
@@ -985,7 +985,7 @@ export function CampaignBuilder() {
 
                 {/* Date/time picker */}
                 {form.schedule_mode === 'later' && (
-                  <div className="bg-white rounded-2xl border border-white/10 p-5">
+                  <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                     <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
                       <Calendar size={16} className="text-white/55" />
                       Data e horário
@@ -998,7 +998,7 @@ export function CampaignBuilder() {
                           value={form.scheduled_date}
                           onChange={(e) => updateForm({ scheduled_date: e.target.value })}
                           min={new Date().toISOString().split('T')[0]}
-                          className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                          className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
                         />
                       </div>
                       <div>
@@ -1007,7 +1007,7 @@ export function CampaignBuilder() {
                           type="time"
                           value={form.scheduled_time}
                           onChange={(e) => updateForm({ scheduled_time: e.target.value })}
-                          className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                          className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
                         />
                       </div>
                     </div>
@@ -1015,7 +1015,7 @@ export function CampaignBuilder() {
                 )}
 
                 {/* Send window */}
-                <div className="bg-white rounded-2xl border border-white/10 p-5">
+                <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                   <h3 className="text-sm font-semibold text-white mb-1 flex items-center gap-2">
                     <Clock size={16} className="text-white/55" />
                     Janela de envio (opcional)
@@ -1028,7 +1028,7 @@ export function CampaignBuilder() {
                         type="time"
                         value={form.send_window_start}
                         onChange={(e) => updateForm({ send_window_start: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
                       />
                     </div>
                     <div>
@@ -1037,14 +1037,14 @@ export function CampaignBuilder() {
                         type="time"
                         value={form.send_window_end}
                         onChange={(e) => updateForm({ send_window_end: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className="w-full px-3 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Delay */}
-                <div className="bg-white rounded-2xl border border-white/10 p-5">
+                <div className="bg-surface-2 rounded-2xl border border-white/10 p-5">
                   <h3 className="text-sm font-semibold text-white mb-1">Intervalo entre mensagens</h3>
                   <p className="text-xs text-white/55 mb-3">
                     O sistema aguarda um tempo aleatório entre os dois valores definidos. Intervalos maiores reduzem o risco de bloqueio pelo WhatsApp.
@@ -1072,29 +1072,29 @@ export function CampaignBuilder() {
           {step === 3 && (
             <motion.div key="step-3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}>
               <div className="max-w-2xl space-y-5">
-                <div className="bg-white rounded-2xl border border-white/10 p-6">
+                <div className="bg-surface-2 rounded-2xl border border-white/10 p-6">
                   <h3 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
                     <Megaphone size={20} className="text-white/55" />
                     Resumo da campanha
                   </h3>
 
                   <div className="space-y-4">
-                    <div className="flex justify-between py-3 border-b border-gray-50">
+                    <div className="flex justify-between py-3 border-b border-white/[0.06]">
                       <span className="text-sm text-white/55">Nome</span>
                       <span className="text-sm font-medium text-white">{form.name}</span>
                     </div>
-                    <div className="flex justify-between py-3 border-b border-gray-50">
+                    <div className="flex justify-between py-3 border-b border-white/[0.06]">
                       <span className="text-sm text-white/55">Tipo de mensagem</span>
                       <span className="text-sm font-medium text-white capitalize">{form.message_type === 'text' ? 'Texto' : form.message_type === 'image' ? 'Imagem' : form.message_type === 'audio' ? 'Áudio' : 'Documento'}</span>
                     </div>
                     {form.mediaFile && form.message_type === 'audio' && (
-                      <div className="py-3 border-b border-gray-50">
+                      <div className="py-3 border-b border-white/[0.06]">
                         <div className="flex justify-between mb-3">
                           <span className="text-sm text-white/55">Nota de voz</span>
                           <span className="text-sm font-medium text-white">{formatDuration(form.audioDurationSeconds)}</span>
                         </div>
                         {form.audioObjectUrl && (
-                          <div className="bg-emerald-50 rounded-xl p-3">
+                          <div className="bg-emerald-500/10 rounded-xl p-3">
                             <AudioPlayer
                               src={form.audioObjectUrl}
                               durationSeconds={form.audioDurationSeconds}
@@ -1105,28 +1105,28 @@ export function CampaignBuilder() {
                       </div>
                     )}
                     {form.mediaFile && form.message_type !== 'audio' && (
-                      <div className="flex justify-between py-3 border-b border-gray-50">
+                      <div className="flex justify-between py-3 border-b border-white/[0.06]">
                         <span className="text-sm text-white/55">Arquivo</span>
                         <span className="text-sm font-medium text-white">{form.mediaFile.name}</span>
                       </div>
                     )}
-                    <div className="flex justify-between py-3 border-b border-gray-50">
+                    <div className="flex justify-between py-3 border-b border-white/[0.06]">
                       <span className="text-sm text-white/55">Destinatários</span>
                       <span className="text-sm font-semibold text-white">{filteredLeads.length} leads</span>
                     </div>
-                    <div className="flex justify-between py-3 border-b border-gray-50">
+                    <div className="flex justify-between py-3 border-b border-white/[0.06]">
                       <span className="text-sm text-white/55">Agendamento</span>
                       <span className="text-sm font-medium text-white">
                         {form.schedule_mode === 'now' ? 'Envio imediato' : `${form.scheduled_date} às ${form.scheduled_time}`}
                       </span>
                     </div>
                     {form.send_window_start && form.send_window_end && (
-                      <div className="flex justify-between py-3 border-b border-gray-50">
+                      <div className="flex justify-between py-3 border-b border-white/[0.06]">
                         <span className="text-sm text-white/55">Janela de envio</span>
                         <span className="text-sm font-medium text-white">{form.send_window_start} - {form.send_window_end}</span>
                       </div>
                     )}
-                    <div className="flex justify-between py-3 border-b border-gray-50">
+                    <div className="flex justify-between py-3 border-b border-white/[0.06]">
                       <span className="text-sm text-white/55">Intervalo</span>
                       <span className="text-sm font-medium text-white">entre {Math.round(form.delay_ms / 1000)}s e {Math.round(form.delay_ms_max / 1000)}s (aleatório)</span>
                     </div>
@@ -1138,7 +1138,7 @@ export function CampaignBuilder() {
                 </div>
 
                 {/* Message preview */}
-                <div className="bg-white rounded-2xl border border-white/10 p-6">
+                <div className="bg-surface-2 rounded-2xl border border-white/10 p-6">
                   <h4 className="text-sm font-semibold text-white mb-3">Prévia da mensagem</h4>
                   <div className="bg-[#e5ddd5] rounded-xl p-4">
                     <div className="max-w-[80%] ml-auto">
@@ -1186,11 +1186,11 @@ export function CampaignBuilder() {
 
                 {/* Warning */}
                 {filteredLeads.length > 100 && (
-                  <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex items-start gap-3">
-                    <Clock size={18} className="text-amber-600 mt-0.5 shrink-0" />
+                  <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3">
+                    <Clock size={18} className="text-amber-400 mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-medium text-amber-800">Envio para muitos destinatários</p>
-                      <p className="text-xs text-amber-600 mt-0.5">
+                      <p className="text-sm font-medium text-amber-300">Envio para muitos destinatários</p>
+                      <p className="text-xs text-amber-400 mt-0.5">
                         Campanhas com mais de 100 destinatários levam mais tempo e podem ser pausadas automaticamente pelo WhatsApp. Recomendamos enviar em lotes menores.
                       </p>
                     </div>

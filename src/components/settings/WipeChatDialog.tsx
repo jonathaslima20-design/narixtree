@@ -133,23 +133,23 @@ export function WipeChatDialog({ open, userId, onClose, onWiped }: Props) {
           </div>
 
           <div className="grid grid-cols-2 gap-2">
-            <div className="p-3 bg-gray-50 border border-gray-100 rounded-xl">
-              <p className="text-[10px] uppercase tracking-wide font-semibold text-gray-500">Conversas</p>
-              <p className="text-lg font-bold text-gray-900 mt-0.5">
+            <div className="p-3 bg-white/[0.03] border border-white/[0.08] rounded-xl">
+              <p className="text-[10px] uppercase tracking-wide font-semibold text-white/55">Conversas</p>
+              <p className="text-lg font-bold text-white mt-0.5">
                 {counts ? counts.leads.toLocaleString('pt-BR') : '—'}
               </p>
             </div>
-            <div className="p-3 bg-gray-50 border border-gray-100 rounded-xl">
-              <p className="text-[10px] uppercase tracking-wide font-semibold text-gray-500">Mensagens</p>
-              <p className="text-lg font-bold text-gray-900 mt-0.5">
+            <div className="p-3 bg-white/[0.03] border border-white/[0.08] rounded-xl">
+              <p className="text-[10px] uppercase tracking-wide font-semibold text-white/55">Mensagens</p>
+              <p className="text-lg font-bold text-white mt-0.5">
                 {counts ? counts.messages.toLocaleString('pt-BR') : '—'}
               </p>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-              Digite <span className="font-mono bg-gray-100 px-1.5 py-0.5 rounded">{CONFIRM_WORD}</span> para confirmar
+            <label className="block text-xs font-semibold text-white/85 mb-1.5">
+              Digite <span className="font-mono bg-white/[0.06] px-1.5 py-0.5 rounded">{CONFIRM_WORD}</span> para confirmar
             </label>
             <input
               type="text"
@@ -158,7 +158,7 @@ export function WipeChatDialog({ open, userId, onClose, onWiped }: Props) {
               disabled={running}
               placeholder={CONFIRM_WORD}
               autoFocus
-              className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent disabled:bg-gray-50"
+              className="w-full px-3 py-2 bg-surface-2 border border-white/10 rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-transparent disabled:bg-white/[0.03]"
             />
           </div>
 

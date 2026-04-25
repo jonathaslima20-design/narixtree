@@ -713,9 +713,9 @@ const SEARCH_INDEX = buildSearchIndex();
 
 function Callout({ type, text }: Callout) {
   const styles = {
-    tip: { bg: 'bg-emerald-50', border: 'border-emerald-200', icon: CheckCircle, iconColor: 'text-emerald-600', textColor: 'text-emerald-800' },
-    warning: { bg: 'bg-amber-50', border: 'border-amber-200', icon: AlertCircle, iconColor: 'text-amber-600', textColor: 'text-amber-800' },
-    info: { bg: 'bg-blue-50', border: 'border-blue-200', icon: Info, iconColor: 'text-blue-600', textColor: 'text-blue-800' },
+    tip: { bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', icon: CheckCircle, iconColor: 'text-emerald-400', textColor: 'text-emerald-300' },
+    warning: { bg: 'bg-amber-500/10', border: 'border-amber-500/20', icon: AlertCircle, iconColor: 'text-amber-400', textColor: 'text-amber-300' },
+    info: { bg: 'bg-blue-500/10', border: 'border-blue-500/20', icon: Info, iconColor: 'text-blue-400', textColor: 'text-blue-300' },
   }[type];
   const Icon = styles.icon;
   return (
@@ -764,7 +764,7 @@ function TopicView({ topic, onBack }: { topic: Topic; onBack: () => void }) {
               <ol className="space-y-3 mt-3">
                 {sec.steps.map((step, j) => (
                   <li key={j} className="flex gap-3">
-                    <span className="shrink-0 w-6 h-6 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center mt-0.5">
+                    <span className="shrink-0 w-6 h-6 rounded-full bg-white/[0.10] text-white text-xs font-bold flex items-center justify-center mt-0.5">
                       {j + 1}
                     </span>
                     <div>
@@ -792,7 +792,7 @@ const WHATSAPP_URL =
 
 function SupportBanner() {
   return (
-    <div className="mt-10 rounded-2xl border border-white/10 bg-white p-6 text-center">
+    <div className="mt-10 rounded-2xl border border-white/10 bg-surface-2 p-6 text-center">
       <p className="text-sm font-bold text-white mb-1">Precisa de Ajuda?</p>
       <p className="text-sm text-white/55 mb-4">
         Em caso de dúvidas sobre os planos ou funcionalidades, nossa equipe está pronta para ajudar.
@@ -848,7 +848,7 @@ export function HelpCenter() {
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="px-6 py-5 border-b border-white/10 bg-white">
+      <div className="px-6 py-5 border-b border-white/10 bg-surface-2">
         <div className="max-w-3xl">
           <div className="flex items-center gap-2 mb-1">
             <HelpCircle size={18} className="text-white/40" />
@@ -862,7 +862,7 @@ export function HelpCenter() {
               placeholder="Buscar por tema, funcionalidade ou dúvida..."
               value={query}
               onChange={(e) => { setQuery(e.target.value); setActiveTopic(null); }}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 bg-white/[0.04] placeholder-white/30"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/[0.04] placeholder-white/30"
             />
             {query && (
               <button
@@ -888,7 +888,7 @@ export function HelpCenter() {
                   <div key={cat.id}>
                     <button
                       onClick={() => toggleCategory(cat.id)}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-semibold text-white/85 hover:bg-white hover:text-white transition-all"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-semibold text-white/85 hover:bg-white/[0.06] hover:text-white transition-all"
                     >
                       <cat.icon size={14} className="text-white/55 shrink-0" />
                       <span className="flex-1 text-left">{cat.label}</span>
@@ -910,7 +910,7 @@ export function HelpCenter() {
                               <button
                                 key={topic.id}
                                 onClick={() => openTopic(topic)}
-                                className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-white/55 hover:text-white hover:bg-white transition-all truncate"
+                                className="w-full text-left px-3 py-1.5 rounded-lg text-xs text-white/55 hover:text-white hover:bg-white/[0.06] transition-all truncate"
                               >
                                 {topic.title}
                               </button>
@@ -951,7 +951,7 @@ export function HelpCenter() {
                   </p>
                   {searchResults.length === 0 ? (
                     <div className="text-center py-16">
-                      <HelpCircle size={36} className="text-gray-200 mx-auto mb-3" />
+                      <HelpCircle size={36} className="text-white/10 mx-auto mb-3" />
                       <p className="text-sm text-white/40">Tente outras palavras-chave.</p>
                     </div>
                   ) : (
@@ -960,7 +960,7 @@ export function HelpCenter() {
                         <button
                           key={r.topic.id}
                           onClick={() => { openTopic(r.topic); }}
-                          className="w-full text-left p-4 rounded-xl border border-white/10 bg-white hover:border-white/15 hover:shadow-sm transition-all group"
+                          className="w-full text-left p-4 rounded-xl border border-white/10 bg-surface-2 hover:border-white/15 transition-all group"
                         >
                           <div className="flex items-center gap-2 mb-1">
                             <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">{r.categoryLabel}</span>
@@ -995,7 +995,7 @@ export function HelpCenter() {
                             <button
                               key={topic.id}
                               onClick={() => openTopic(topic)}
-                              className="text-left p-4 rounded-xl border border-white/10 bg-white hover:border-white/15 hover:shadow-sm transition-all group"
+                              className="text-left p-4 rounded-xl border border-white/10 bg-surface-2 hover:border-white/15 transition-all group"
                             >
                               <div className="w-8 h-8 rounded-xl bg-white/[0.06] flex items-center justify-center mb-3 group-hover:bg-white/[0.10] transition-colors">
                                 <topic.icon size={15} className="text-white/70" />

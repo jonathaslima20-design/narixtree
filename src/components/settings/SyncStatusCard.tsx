@@ -273,9 +273,9 @@ export function SyncStatusCard({ userId }: { userId: string }) {
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between gap-2">
-              <h4 className="text-sm font-semibold text-gray-900">Sincronização de contatos</h4>
+              <h4 className="text-sm font-semibold text-white">Sincronização de contatos</h4>
               {run && (
-                <span className="text-[10px] uppercase tracking-wide font-semibold text-gray-500">
+                <span className="text-[10px] uppercase tracking-wide font-semibold text-white/55">
                   {isCompleted
                     ? 'Concluída'
                     : isTimeout
@@ -290,7 +290,7 @@ export function SyncStatusCard({ userId }: { userId: string }) {
             </div>
 
             {!run && (
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+              <p className="text-xs text-white/55 mt-1 leading-relaxed">
                 Nenhuma sincronização registrada ainda. Ao conectar o WhatsApp pela primeira vez, os contatos são
                 importados automaticamente.
               </p>
@@ -309,7 +309,7 @@ export function SyncStatusCard({ userId }: { userId: string }) {
 
                 {fetched > 0 && (
                   <div className="mt-3">
-                    <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full ${
                           isTimeout ? 'bg-amber-400' : 'bg-emerald-400'
@@ -317,7 +317,7 @@ export function SyncStatusCard({ userId }: { userId: string }) {
                         style={{ width: `${completion}%` }}
                       />
                     </div>
-                    <p className="text-[11px] text-gray-500 mt-1.5">
+                    <p className="text-[11px] text-white/55 mt-1.5">
                       {isTimeout
                         ? `Interrompida por tempo. ${fetched} registros lidos até agora em ${(
                             run.elapsed_ms / 1000
@@ -445,24 +445,24 @@ function BackfillCard({
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-2">
-            <h4 className="text-sm font-semibold text-gray-900">{title}</h4>
-            <span className="text-[10px] uppercase tracking-wide font-semibold text-gray-500">
+            <h4 className="text-sm font-semibold text-white">{title}</h4>
+            <span className="text-[10px] uppercase tracking-wide font-semibold text-white/55">
               {total > 0 ? `${pct}%` : '—'}
             </span>
           </div>
-          <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{description}</p>
+          <p className="text-xs text-white/55 mt-0.5 leading-relaxed">{description}</p>
 
           {total > 0 ? (
             <div className="mt-3">
-              <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
                 <div className={`h-full rounded-full ${barClass}`} style={{ width: `${pct}%` }} />
               </div>
-              <p className="text-[11px] text-gray-500 mt-1.5">
+              <p className="text-[11px] text-white/55 mt-1.5">
                 {done.toLocaleString('pt-BR')} {doneLabel} · {pending.toLocaleString('pt-BR')} {pendingLabel}
               </p>
             </div>
           ) : (
-            <p className="text-[11px] text-gray-500 mt-2">
+            <p className="text-[11px] text-white/55 mt-2">
               Nenhuma conversa encontrada ainda.
             </p>
           )}
@@ -498,20 +498,20 @@ function Stat({
         highlight
           ? 'bg-emerald-50 border-emerald-100'
           : muted
-          ? 'bg-gray-50 border-gray-100'
-          : 'bg-white border-gray-100'
+          ? 'bg-white/[0.03] border-white/[0.08]'
+          : 'bg-surface-2 border-white/[0.08]'
       }`}
     >
       <div
         className={`text-[10px] uppercase tracking-wide font-semibold ${
-          highlight ? 'text-emerald-700' : 'text-gray-500'
+          highlight ? 'text-emerald-700' : 'text-white/55'
         }`}
       >
         {label}
       </div>
       <div
         className={`text-base font-bold leading-tight mt-0.5 ${
-          highlight ? 'text-emerald-700' : 'text-gray-900'
+          highlight ? 'text-emerald-700' : 'text-white'
         }`}
       >
         {value.toLocaleString('pt-BR')}

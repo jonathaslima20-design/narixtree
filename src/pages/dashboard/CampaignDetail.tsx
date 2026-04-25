@@ -27,21 +27,21 @@ import { Button } from '../../components/ui/Button';
 
 const STATUS_CONFIG: Record<CampaignStatus, { label: string; color: string; bg: string }> = {
   draft: { label: 'Rascunho', color: 'text-white/70', bg: 'bg-white/[0.06]' },
-  scheduled: { label: 'Agendada', color: 'text-sky-600', bg: 'bg-sky-50' },
-  sending: { label: 'Enviando', color: 'text-amber-600', bg: 'bg-amber-50' },
-  paused: { label: 'Pausada', color: 'text-orange-600', bg: 'bg-orange-50' },
-  completed: { label: 'Concluída', color: 'text-emerald-600', bg: 'bg-emerald-50' },
-  failed: { label: 'Falhou', color: 'text-red-600', bg: 'bg-red-50' },
+  scheduled: { label: 'Agendada', color: 'text-sky-400', bg: 'bg-sky-500/10' },
+  sending: { label: 'Enviando', color: 'text-amber-400', bg: 'bg-amber-500/10' },
+  paused: { label: 'Pausada', color: 'text-orange-400', bg: 'bg-orange-500/10' },
+  completed: { label: 'Concluida', color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+  failed: { label: 'Falhou', color: 'text-red-400', bg: 'bg-red-500/10' },
   cancelled: { label: 'Cancelada', color: 'text-white/55', bg: 'bg-white/[0.04]' },
 };
 
 const RECIPIENT_STATUS: Record<CampaignRecipientStatus, { label: string; color: string; bg: string }> = {
   pending: { label: 'Pendente', color: 'text-white/55', bg: 'bg-white/[0.04]' },
-  sending: { label: 'Enviando', color: 'text-amber-600', bg: 'bg-amber-50' },
-  sent: { label: 'Enviado', color: 'text-sky-600', bg: 'bg-sky-50' },
-  delivered: { label: 'Entregue', color: 'text-emerald-600', bg: 'bg-emerald-50' },
-  read: { label: 'Lido', color: 'text-teal-600', bg: 'bg-teal-50' },
-  failed: { label: 'Falhou', color: 'text-red-600', bg: 'bg-red-50' },
+  sending: { label: 'Enviando', color: 'text-amber-400', bg: 'bg-amber-500/10' },
+  sent: { label: 'Enviado', color: 'text-sky-400', bg: 'bg-sky-500/10' },
+  delivered: { label: 'Entregue', color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+  read: { label: 'Lido', color: 'text-teal-400', bg: 'bg-teal-500/10' },
+  failed: { label: 'Falhou', color: 'text-red-400', bg: 'bg-red-500/10' },
   skipped: { label: 'Pulado', color: 'text-white/40', bg: 'bg-white/[0.04]' },
 };
 
@@ -296,7 +296,7 @@ export function CampaignDetail() {
 
         {/* Recipients table */}
         <div className="bg-white rounded-2xl border border-white/10">
-          <div className="px-4 sm:px-5 py-4 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+          <div className="px-4 sm:px-5 py-4 border-b border-white/[0.06] flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
             <h3 className="text-sm font-semibold text-white">Destinatários ({recipients.length})</h3>
             <div className="flex items-center gap-1 bg-white/[0.04] rounded-lg p-0.5 overflow-x-auto">
               {(['all', 'sent', 'delivered', 'read', 'failed', 'pending'] as const).map((f) => (
@@ -325,7 +325,7 @@ export function CampaignDetail() {
                   <th className="px-5 py-2.5">Erro</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-white/[0.06]">
                 <AnimatePresence>
                   {filteredRecipients.map((r) => {
                     const rCfg = RECIPIENT_STATUS[r.status];

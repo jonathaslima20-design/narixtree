@@ -34,11 +34,11 @@ export function AdminSidebar({ onClose }: { onClose?: () => void }) {
           </div>
           <div>
             <p className="font-semibold text-white text-sm tracking-tight">BrainLead</p>
-            <p className="text-xs text-gray-400">Admin</p>
+            <p className="text-xs text-white/40">Admin</p>
           </div>
         </div>
         {onClose && (
-          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-white/10 transition-colors">
+          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg text-white/40 hover:text-white/70 hover:bg-white/10 transition-colors">
             <X size={18} />
           </button>
         )}

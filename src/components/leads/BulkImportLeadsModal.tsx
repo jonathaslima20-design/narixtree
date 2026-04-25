@@ -22,7 +22,7 @@ import { parseContacts, ParsedContact, RejectedLine } from '../../lib/parseConta
 import { readContactsFile } from '../../lib/readContactsFile';
 
 const COLOR_PRESETS = [
-  { label: 'Cinza', value: 'bg-gray-100 text-gray-700' },
+  { label: 'Cinza', value: 'bg-white/[0.06] text-white/85' },
   { label: 'Azul', value: 'bg-sky-100 text-sky-700' },
   { label: 'Amarelo', value: 'bg-amber-100 text-amber-700' },
   { label: 'Verde', value: 'bg-emerald-100 text-emerald-700' },
@@ -427,7 +427,7 @@ function StepInput({
     <div className="space-y-5">
       {/* Textarea */}
       <div>
-        <label className="text-sm font-medium text-gray-700 block mb-1.5">
+        <label className="text-sm font-medium text-white/85 block mb-1.5">
           Contatos
         </label>
         <textarea
@@ -435,10 +435,10 @@ function StepInput({
           onChange={(e) => onRawTextChange(e.target.value)}
           rows={8}
           placeholder={"5511999999999, Joao Silva\n5521988887777\n11977776666, Maria"}
-          className="w-full px-4 py-3 text-sm text-gray-900 bg-white border border-gray-200 rounded-2xl outline-none transition-all placeholder:text-gray-400 focus:ring-2 focus:ring-gray-900 focus:border-transparent font-mono resize-none"
+          className="w-full px-4 py-3 text-sm text-white bg-surface-2 border border-white/10 rounded-2xl outline-none transition-all placeholder:text-white/30 focus:ring-2 focus:ring-white/20 focus:border-transparent font-mono resize-none"
         />
         <div className="flex items-center justify-between mt-2">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-white/55">
             Um contato por linha. Formato: telefone, nome (ou apenas telefone).
             Separadores aceitos: virgula, ponto-e-virgula ou tab.
           </p>
@@ -468,7 +468,7 @@ function StepInput({
       <div
         onDragOver={(e) => e.preventDefault()}
         onDrop={onDrop}
-        className="border-2 border-dashed border-gray-200 rounded-2xl p-4 text-center hover:border-gray-400 transition-colors cursor-pointer"
+        className="border-2 border-dashed border-white/10 rounded-2xl p-4 text-center hover:border-white/20 transition-colors cursor-pointer"
         onClick={() => fileInputRef.current?.click()}
       >
         <input
@@ -481,22 +481,22 @@ function StepInput({
         {fileName ? (
           <div className="flex items-center justify-center gap-2">
             <FileText size={16} className="text-emerald-600" />
-            <span className="text-sm font-medium text-gray-700">{fileName}</span>
+            <span className="text-sm font-medium text-white/85">{fileName}</span>
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 onClearFile();
               }}
-              className="p-1 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+              className="p-1 text-white/40 hover:text-white/70 rounded-lg hover:bg-white/[0.06] transition-colors"
             >
               <X size={14} />
             </button>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-1.5">
-            <Upload size={20} className="text-gray-400" />
-            <p className="text-sm text-gray-500">
+            <Upload size={20} className="text-white/40" />
+            <p className="text-sm text-white/55">
               Arraste um arquivo <span className="font-medium">.txt</span> ou <span className="font-medium">.csv</span> aqui, ou clique para selecionar
             </p>
           </div>
@@ -508,7 +508,7 @@ function StepInput({
 
       {/* Category selector */}
       <div>
-        <label className="text-sm font-medium text-gray-700 block mb-1.5">
+        <label className="text-sm font-medium text-white/85 block mb-1.5">
           Categoria para os novos leads
         </label>
         <div className="flex flex-wrap gap-2">
@@ -522,8 +522,8 @@ function StepInput({
                 onClick={() => onCategoryChange(cat.key)}
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl border transition-all ${
                   isActive
-                    ? 'border-gray-900 bg-gray-900 text-white shadow-sm'
-                    : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50'
+                    ? 'border-white/20 bg-white/[0.10] text-white shadow-sm'
+                    : 'border-white/10 bg-surface-2 text-white/85 hover:border-white/15 hover:bg-white/[0.04]'
                 }`}
               >
                 <Icon size={12} /> {cat.label}
@@ -533,24 +533,24 @@ function StepInput({
           <button
             type="button"
             onClick={onToggleNewCategory}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl border border-dashed border-gray-300 text-gray-500 hover:border-gray-400 hover:text-gray-700 transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl border border-dashed border-white/15 text-white/55 hover:border-white/20 hover:text-white/85 transition-colors"
           >
             <Plus size={12} /> Nova categoria
           </button>
         </div>
 
         {showNewCategory && (
-          <div className="mt-3 p-3 bg-gray-50 border border-gray-200 rounded-xl space-y-3">
+          <div className="mt-3 p-3 bg-white/[0.03] border border-white/10 rounded-xl space-y-3">
             <input
               value={newCatLabel}
               onChange={(e) => onNewCatLabelChange(e.target.value)}
               placeholder="Nome da categoria"
-              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="w-full px-3 py-2 text-sm border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/20"
             />
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-xs text-gray-500 mr-1">Cor:</span>
+              <span className="text-xs text-white/55 mr-1">Cor:</span>
               {COLOR_PRESETS.map((preset) => {
-                const dotBg = preset.value.split(' ')[0] || 'bg-gray-100';
+                const dotBg = preset.value.split(' ')[0] || 'bg-white/[0.06]';
                 const isSelected = newCatColor === preset.value;
                 return (
                   <button
@@ -558,7 +558,7 @@ function StepInput({
                     type="button"
                     onClick={() => onNewCatColorChange(preset.value)}
                     className={`w-6 h-6 rounded-full ${dotBg} transition-all ${
-                      isSelected ? 'ring-2 ring-offset-1 ring-gray-900 scale-110' : 'hover:scale-110'
+                      isSelected ? 'ring-2 ring-offset-1 ring-white/20 scale-110' : 'hover:scale-110'
                     }`}
                     title={preset.label}
                   />
@@ -627,8 +627,8 @@ function StepReview({
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-12 gap-3">
-        <RefreshCw size={24} className="text-gray-400 animate-spin" />
-        <p className="text-sm text-gray-500">Verificando duplicados...</p>
+        <RefreshCw size={24} className="text-white/40 animate-spin" />
+        <p className="text-sm text-white/55">Verificando duplicados...</p>
       </div>
     );
   }
@@ -658,8 +658,8 @@ function StepReview({
       </div>
 
       {rejected.length > 0 && (
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-xl">
-          <p className="text-xs font-medium text-gray-600">
+        <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl">
+          <p className="text-xs font-medium text-white/70">
             {rejected.length} linha{rejected.length !== 1 ? 's' : ''} ignorada{rejected.length !== 1 ? 's' : ''} (formato invalido)
             {truncated && ' - limite de 1000 contatos atingido'}
           </p>
@@ -669,7 +669,7 @@ function StepReview({
       {/* Duplicate resolution */}
       {duplicates.length > 0 && (
         <div className="space-y-3">
-          <p className="text-sm font-medium text-gray-700">O que fazer com os duplicados?</p>
+          <p className="text-sm font-medium text-white/85">O que fazer com os duplicados?</p>
           <div className="flex flex-col gap-2">
             {([
               ['skip', 'Ignorar duplicados', 'Manter os contatos existentes como estao'],
@@ -680,8 +680,8 @@ function StepReview({
                 key={mode}
                 className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all ${
                   duplicateMode === mode
-                    ? 'border-gray-900 bg-gray-50'
-                    : 'border-gray-200 bg-white hover:border-gray-300'
+                    ? 'border-white/20 bg-white/[0.03]'
+                    : 'border-white/10 bg-surface-2 hover:border-white/15'
                 }`}
               >
                 <input
@@ -693,8 +693,8 @@ function StepReview({
                   className="mt-0.5 accent-gray-900"
                 />
                 <div>
-                  <p className="text-sm font-medium text-gray-800">{label}</p>
-                  <p className="text-xs text-gray-500">{desc}</p>
+                  <p className="text-sm font-medium text-white/90">{label}</p>
+                  <p className="text-xs text-white/55">{desc}</p>
                 </div>
               </label>
             ))}
@@ -704,23 +704,23 @@ function StepReview({
 
       {/* Individual picker */}
       {duplicateMode === 'pick' && duplicates.length > 0 && (
-        <div className="border border-gray-200 rounded-xl overflow-hidden max-h-56 overflow-y-auto">
+        <div className="border border-white/10 rounded-xl overflow-hidden max-h-56 overflow-y-auto">
           <table className="w-full text-xs">
-            <thead className="bg-gray-50 sticky top-0">
+            <thead className="bg-white/[0.03] sticky top-0">
               <tr>
                 <th className="w-8 px-3 py-2" />
-                <th className="text-left px-3 py-2 font-semibold text-gray-600">Telefone</th>
-                <th className="text-left px-3 py-2 font-semibold text-gray-600">Nome (importado)</th>
-                <th className="text-left px-3 py-2 font-semibold text-gray-600">Nome (existente)</th>
-                <th className="text-left px-3 py-2 font-semibold text-gray-600">Cat. atual</th>
+                <th className="text-left px-3 py-2 font-semibold text-white/70">Telefone</th>
+                <th className="text-left px-3 py-2 font-semibold text-white/70">Nome (importado)</th>
+                <th className="text-left px-3 py-2 font-semibold text-white/70">Nome (existente)</th>
+                <th className="text-left px-3 py-2 font-semibold text-white/70">Cat. atual</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-white/[0.08]">
               {duplicates.map((d) => (
                 <tr
                   key={d.phone}
                   className={`transition-colors ${
-                    pickedDuplicates.has(d.phone) ? 'bg-emerald-50/50' : 'hover:bg-gray-50'
+                    pickedDuplicates.has(d.phone) ? 'bg-emerald-50/50' : 'hover:bg-white/[0.04]'
                   }`}
                 >
                   <td className="px-3 py-2 text-center">
@@ -731,10 +731,10 @@ function StepReview({
                       className="accent-gray-900"
                     />
                   </td>
-                  <td className="px-3 py-2 text-gray-800 font-mono">{d.phone}</td>
-                  <td className="px-3 py-2 text-gray-700">{d.name || '-'}</td>
-                  <td className="px-3 py-2 text-gray-500">{d.existing.name || '-'}</td>
-                  <td className="px-3 py-2 text-gray-500">{d.existing.category || '-'}</td>
+                  <td className="px-3 py-2 text-white/90 font-mono">{d.phone}</td>
+                  <td className="px-3 py-2 text-white/85">{d.name || '-'}</td>
+                  <td className="px-3 py-2 text-white/55">{d.existing.name || '-'}</td>
+                  <td className="px-3 py-2 text-white/55">{d.existing.category || '-'}</td>
                 </tr>
               ))}
             </tbody>
@@ -745,13 +745,13 @@ function StepReview({
       {/* Progress bar during import */}
       {importing && (
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-gray-600">
+          <div className="flex items-center justify-between text-xs text-white/70">
             <span>Importando...</span>
             <span>{progress}%</span>
           </div>
-          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-2 bg-white/[0.06] rounded-full overflow-hidden">
             <div
-              className="h-full bg-gray-900 rounded-full transition-all duration-300"
+              className="h-full bg-white/[0.10] rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -798,7 +798,7 @@ function StepResult({ resultNew, resultUpdated, resultSkipped, resultErrors, onC
             <CheckCircle2 size={24} className="text-emerald-600" />
           )}
         </div>
-        <h3 className="text-lg font-bold text-gray-900">
+        <h3 className="text-lg font-bold text-white">
           {total > 0 ? 'Importacao concluida' : 'Nenhum lead importado'}
         </h3>
       </div>
@@ -817,9 +817,9 @@ function StepResult({ resultNew, resultUpdated, resultSkipped, resultErrors, onC
           </div>
         )}
         {resultSkipped > 0 && (
-          <div className="p-3 bg-gray-50 border border-gray-200 rounded-xl text-center">
-            <p className="text-2xl font-bold text-gray-700">{resultSkipped}</p>
-            <p className="text-xs text-gray-500">Duplicados ignorados</p>
+          <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl text-center">
+            <p className="text-2xl font-bold text-white/85">{resultSkipped}</p>
+            <p className="text-xs text-white/55">Duplicados ignorados</p>
           </div>
         )}
         {resultErrors > 0 && (

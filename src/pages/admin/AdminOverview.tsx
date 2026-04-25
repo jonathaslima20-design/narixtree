@@ -202,26 +202,26 @@ export function AdminOverview() {
       sub: `${stats.newUsers} novos no período`,
       delta: usersDelta,
       icon: Users,
-      color: 'text-sky-500',
-      bg: 'bg-sky-50',
+      color: 'text-sky-400',
+      bg: 'bg-sky-500/10',
     },
     {
       label: 'WhatsApp Conectados',
       value: stats.activeInstances,
-      sub: `${health.totalInstances} instâncias no total`,
+      sub: `${health.totalInstances} instancias no total`,
       delta: { label: '', direction: 'flat' as const },
       icon: Smartphone,
-      color: 'text-emerald-500',
-      bg: 'bg-emerald-50',
+      color: 'text-emerald-400',
+      bg: 'bg-emerald-500/10',
     },
     {
-      label: 'Leads no Período',
+      label: 'Leads no Periodo',
       value: stats.newLeads,
       sub: `${stats.totalLeads.toLocaleString('pt-BR')} no total`,
       delta: leadsDelta,
       icon: TrendingUp,
-      color: 'text-amber-500',
-      bg: 'bg-amber-50',
+      color: 'text-amber-400',
+      bg: 'bg-amber-500/10',
     },
     {
       label: 'MRR Estimado',
@@ -229,8 +229,8 @@ export function AdminOverview() {
       sub: `${totalSubscribers} assinantes ativos`,
       delta: { label: '', direction: 'flat' as const },
       icon: DollarSign,
-      color: 'text-teal-500',
-      bg: 'bg-teal-50',
+      color: 'text-teal-400',
+      bg: 'bg-teal-500/10',
     },
   ];
 
@@ -303,9 +303,9 @@ export function AdminOverview() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {healthItems.map((h) => {
                 const toneClasses = {
-                  emerald: 'text-emerald-600 bg-emerald-50',
-                  amber: 'text-amber-600 bg-amber-50',
-                  red: 'text-red-600 bg-red-50',
+                  emerald: 'text-emerald-400 bg-emerald-500/10',
+                  amber: 'text-amber-400 bg-amber-500/10',
+                  red: 'text-red-400 bg-red-500/10',
                 } as const;
                 return (
                   <div key={h.label} className="flex items-center gap-3 bg-white/[0.04] rounded-xl p-3">
@@ -405,7 +405,7 @@ export function AdminOverview() {
               </div>
             ) : recentLogs.length === 0 ? (
               <div className="text-center py-8">
-                <Activity size={28} className="text-gray-200 mx-auto mb-2" />
+                <Activity size={28} className="text-white/20 mx-auto mb-2" />
                 <p className="text-sm text-white/40">Nenhuma atividade registrada.</p>
               </div>
             ) : (
@@ -420,7 +420,7 @@ export function AdminOverview() {
                       <th className="text-right pb-2 font-medium">Data</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-white/[0.06]">
                     {recentLogs.map((log, i) => (
                       <tr key={i} className="text-white/85">
                         <td className="py-2.5 text-xs">{log.email}</td>
@@ -449,7 +449,7 @@ function PeriodSelect({ value, onChange }: { value: string; onChange: (v: string
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2 text-sm border border-white/10 rounded-2xl bg-white text-white/85 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 cursor-pointer"
+        className="appearance-none pl-3 pr-8 py-2 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15 cursor-pointer"
       >
         {PERIOD_OPTIONS.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>
@@ -462,8 +462,8 @@ function PeriodSelect({ value, onChange }: { value: string; onChange: (v: string
 
 function DeltaBadge({ direction, label }: { direction: 'up' | 'down' | 'flat'; label: string }) {
   const classes = {
-    up: 'bg-emerald-50 text-emerald-700',
-    down: 'bg-red-50 text-red-600',
+    up: 'bg-emerald-500/10 text-emerald-400',
+    down: 'bg-red-500/10 text-red-400',
     flat: 'bg-white/[0.06] text-white/55',
   }[direction];
   const Icon = direction === 'up' ? ArrowUpRight : direction === 'down' ? ArrowDownRight : Minus;

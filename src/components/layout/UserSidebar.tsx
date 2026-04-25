@@ -71,7 +71,7 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
           <span className="font-semibold text-white text-base tracking-tight">BrainLead</span>
         </div>
         {onClose && (
-          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-white/10 transition-colors">
+          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg text-white/40 hover:text-gray-200 hover:bg-white/10 transition-colors">
             <X size={18} />
           </button>
         )}
@@ -89,10 +89,10 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
               className={({ isActive }) =>
                 `relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
                   disabled
-                    ? 'opacity-30 cursor-not-allowed text-gray-500'
+                    ? 'opacity-30 cursor-not-allowed text-white/55'
                     : isActive
                       ? 'bg-white/[0.10] text-white'
-                      : 'text-gray-400 hover:bg-white/[0.05] hover:text-white'
+                      : 'text-white/40 hover:bg-white/[0.05] hover:text-white'
                 }`
               }
             >
@@ -101,7 +101,7 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
                   {!disabled && isActive && (
                     <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-white rounded-r-full" />
                   )}
-                  <Icon size={16} className={disabled ? 'text-gray-600' : isActive ? 'text-white' : 'text-gray-500'} />
+                  <Icon size={16} className={disabled ? 'text-white/70' : isActive ? 'text-white' : 'text-white/55'} />
                   {label}
                 </>
               )}
@@ -123,16 +123,16 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
                 <Clock size={12} className="text-amber-400" />
                 <span className="text-xs font-semibold text-white">Trial</span>
               </div>
-              <span className="text-[10px] font-medium text-gray-400 bg-white/[0.07] px-2 py-0.5 rounded-full border border-white/10">
+              <span className="text-[10px] font-medium text-white/40 bg-white/[0.07] px-2 py-0.5 rounded-full border border-white/10">
                 {daysLeft}d restante{daysLeft !== 1 ? 's' : ''}
               </span>
             </div>
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-1">
-                <Send size={10} className="text-gray-500" />
-                <span className="text-[11px] text-gray-400">Envios</span>
+                <Send size={10} className="text-white/55" />
+                <span className="text-[11px] text-white/40">Envios</span>
               </div>
-              <span className="text-[11px] font-medium text-gray-300">{sendCount}/{maxSends}</span>
+              <span className="text-[11px] font-medium text-white/30">{sendCount}/{maxSends}</span>
             </div>
             <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
               <motion.div
@@ -148,7 +148,7 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
                 transition={{ duration: 0.6, ease: 'easeOut' }}
               />
             </div>
-            <p className="text-[10px] text-gray-500 mt-1">{remainingSends} restante{remainingSends !== 1 ? 's' : ''}</p>
+            <p className="text-[10px] text-white/55 mt-1">{remainingSends} restante{remainingSends !== 1 ? 's' : ''}</p>
           </button>
         </div>
       )}
@@ -158,11 +158,11 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
           <p className="text-xs font-medium text-gray-200 truncate">
             {profile?.full_name || profile?.email || 'Usuario'}
           </p>
-          <p className="text-xs text-gray-500 truncate">{profile?.email}</p>
+          <p className="text-xs text-white/55 truncate">{profile?.email}</p>
           {plan?.name && !isTrial && (
             <button
               onClick={() => setShowPricing(true)}
-              className="inline-block mt-1.5 text-[10px] font-semibold text-gray-900 bg-white px-2.5 py-1 rounded-lg tracking-wide uppercase hover:bg-gray-100 transition-colors cursor-pointer"
+              className="inline-block mt-1.5 text-[10px] font-semibold text-white bg-surface-2 px-2.5 py-1 rounded-lg tracking-wide uppercase hover:bg-white/[0.06] transition-colors cursor-pointer"
             >
               {plan.name}
             </button>
@@ -171,7 +171,7 @@ export function UserSidebar({ onClose }: { onClose?: () => void }) {
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={handleSignOut}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-all duration-150"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:bg-red-500/10 hover:text-red-400 transition-all duration-150"
         >
           <LogOut size={16} />
           Sair

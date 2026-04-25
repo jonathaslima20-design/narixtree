@@ -257,30 +257,30 @@ export function ClientManagement() {
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-              <div className="w-10 h-10 bg-gray-900 rounded-2xl flex items-center justify-center">
+            <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/[0.10] rounded-2xl flex items-center justify-center">
                 <Users size={18} className="text-white" />
               </div>
               Gestao de Clientes
             </h1>
-            <p className="text-sm text-gray-500 mt-1.5 ml-[52px]">
+            <p className="text-sm text-white/55 mt-1.5 ml-[52px]">
               {clients.length} clientes cadastrados
             </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <Card>
-              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              <p className="text-xs text-gray-500 mt-0.5">Total de Clientes</p>
+              <p className="text-2xl font-bold text-white">{stats.total}</p>
+              <p className="text-xs text-white/55 mt-0.5">Total de Clientes</p>
             </Card>
             <Card>
-              <p className="text-2xl font-bold text-emerald-600">{stats.active}</p>
-              <p className="text-xs text-gray-500 mt-0.5">Assinaturas Ativas</p>
+              <p className="text-2xl font-bold text-emerald-400">{stats.active}</p>
+              <p className="text-xs text-white/55 mt-0.5">Assinaturas Ativas</p>
             </Card>
             {Object.entries(stats.byPlan).map(([planName, count]) => (
               <Card key={planName}>
-                <p className="text-2xl font-bold text-gray-900">{count}</p>
-                <p className="text-xs text-gray-500 mt-0.5">Plano {planName}</p>
+                <p className="text-2xl font-bold text-white">{count}</p>
+                <p className="text-xs text-white/55 mt-0.5">Plano {planName}</p>
               </Card>
             ))}
           </div>
@@ -325,7 +325,7 @@ export function ClientManagement() {
             />
             <button
               onClick={exportSelectedCsv}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-sm font-medium text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-sm font-medium text-white/85 bg-white/[0.04] border border-white/10 hover:bg-white/[0.06] transition-colors"
             >
               <Download size={14} />
               Exportar CSV
@@ -333,7 +333,7 @@ export function ClientManagement() {
           </div>
 
           {selectedIds.size > 0 && (
-            <div className="flex items-center gap-3 mb-4 px-4 py-3 rounded-2xl bg-gray-900 text-white">
+            <div className="flex items-center gap-3 mb-4 px-4 py-3 rounded-2xl bg-white/[0.10] text-white">
               <span className="text-sm font-medium">
                 {selectedIds.size} {selectedIds.size === 1 ? 'selecionado' : 'selecionados'}
               </span>
@@ -341,7 +341,7 @@ export function ClientManagement() {
               <button
                 onClick={() => bulkAction('suspend')}
                 disabled={bulkLoading}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-500/20 text-amber-100 hover:bg-amber-500/30 transition-colors disabled:opacity-50"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 transition-colors disabled:opacity-50"
               >
                 <Ban size={12} />
                 Suspender
@@ -349,7 +349,7 @@ export function ClientManagement() {
               <button
                 onClick={() => bulkAction('reactivate')}
                 disabled={bulkLoading}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/20 text-emerald-100 hover:bg-emerald-500/30 transition-colors disabled:opacity-50"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 transition-colors disabled:opacity-50"
               >
                 <RefreshCw size={12} />
                 Reativar
@@ -367,13 +367,13 @@ export function ClientManagement() {
           {loading ? (
             <div className="space-y-3">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-20 bg-white rounded-2xl border border-gray-100 animate-pulse" />
+                <div key={i} className="h-20 bg-white/[0.04] rounded-2xl border border-white/[0.08] animate-pulse" />
               ))}
             </div>
           ) : filtered.length === 0 ? (
             <Card className="text-center py-16">
-              <Users size={36} className="text-gray-200 mx-auto mb-2" />
-              <p className="text-sm text-gray-400">Nenhum cliente encontrado.</p>
+              <Users size={36} className="text-white/20 mx-auto mb-2" />
+              <p className="text-sm text-white/40">Nenhum cliente encontrado.</p>
             </Card>
           ) : (
             <div className="space-y-2">
@@ -419,13 +419,13 @@ function FilterSelect({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-gray-200 rounded-2xl bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 cursor-pointer"
+        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15 cursor-pointer"
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>{opt.label}</option>
         ))}
       </select>
-      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
     </div>
   );
 }
@@ -444,32 +444,32 @@ function ClientCard({
   const waInfo = WA_STATUS_MAP[client.instance_status || 'disconnected'] || WA_STATUS_MAP.disconnected;
   const subInfo = SUB_STATUS_MAP[client.sub_status || 'active'] || SUB_STATUS_MAP.active;
   const planBadgeColor = client.plan_slug === 'anual'
-    ? 'bg-amber-50 text-amber-700 border border-amber-200'
+    ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
     : client.plan_slug === 'trial'
-      ? 'bg-sky-50 text-sky-600 border border-sky-200'
-      : 'bg-sky-50 text-sky-700 border border-sky-200';
+      ? 'bg-sky-500/10 text-sky-400 border border-sky-500/20'
+      : 'bg-sky-500/10 text-sky-400 border border-sky-500/20';
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       onClick={onClick}
-      className={`bg-white border rounded-2xl px-5 py-4 flex items-center gap-4 cursor-pointer hover:shadow-sm transition-shadow ${client.is_enabled === false ? 'border-red-200 opacity-60' : selected ? 'border-gray-900' : 'border-gray-100'}`}
+      className={`bg-surface-2 border rounded-2xl px-5 py-4 flex items-center gap-4 cursor-pointer hover:bg-white/[0.06] transition-all ${client.is_enabled === false ? 'border-red-500/30 opacity-60' : selected ? 'border-white/20' : 'border-white/[0.08]'}`}
     >
       <button
         onClick={(e) => { e.stopPropagation(); onToggleSelect(); }}
-        className="shrink-0 text-gray-400 hover:text-gray-900 transition-colors"
+        className="shrink-0 text-white/40 hover:text-white transition-colors"
         aria-label={selected ? 'Desmarcar' : 'Selecionar'}
       >
-        {selected ? <CheckSquare size={18} className="text-gray-900" /> : <Square size={18} />}
+        {selected ? <CheckSquare size={18} className="text-white" /> : <Square size={18} />}
       </button>
-      <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center text-sm font-bold text-gray-600 shrink-0">
+      <div className="w-10 h-10 bg-white/[0.06] rounded-xl flex items-center justify-center text-sm font-bold text-white/70 shrink-0">
         {(client.full_name || client.email).charAt(0).toUpperCase()}
       </div>
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-0.5">
-          <p className="text-sm font-semibold text-gray-900 truncate">
+          <p className="text-sm font-semibold text-white truncate">
             {client.full_name || 'Sem nome'}
           </p>
           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${planBadgeColor}`}>
@@ -480,7 +480,7 @@ function ClientCard({
             <Badge variant="error" size="sm">Desativado</Badge>
           )}
         </div>
-        <p className="text-xs text-gray-400 flex items-center gap-1">
+        <p className="text-xs text-white/40 flex items-center gap-1">
           <Mail size={11} />
           {client.email}
         </p>
@@ -488,20 +488,20 @@ function ClientCard({
 
       <div className="flex items-center gap-6 shrink-0">
         <div className="text-center hidden sm:block">
-          <p className="text-sm font-bold text-gray-900">{client.send_count}</p>
-          <p className="text-xs text-gray-400">Envios</p>
+          <p className="text-sm font-bold text-white">{client.send_count}</p>
+          <p className="text-xs text-white/40">Envios</p>
         </div>
         <div className="text-center hidden sm:block">
-          <p className="text-sm font-bold text-gray-900">{client.lead_count}</p>
-          <p className="text-xs text-gray-400">Leads</p>
+          <p className="text-sm font-bold text-white">{client.lead_count}</p>
+          <p className="text-xs text-white/40">Leads</p>
         </div>
         <div className="flex items-center gap-1.5">
-          <Smartphone size={13} className="text-gray-400" />
+          <Smartphone size={13} className="text-white/40" />
           <Badge variant={waInfo.variant}>{waInfo.label}</Badge>
         </div>
         <div className="flex items-center gap-1.5">
-          <Calendar size={13} className="text-gray-400" />
-          <span className="text-xs text-gray-500">
+          <Calendar size={13} className="text-white/40" />
+          <span className="text-xs text-white/55">
             {formatDate(client.created_at)}
           </span>
         </div>
@@ -693,8 +693,8 @@ function ClientDetailModal({
     if (limit === -1) {
       return (
         <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold text-gray-700">{used.toLocaleString()}</span>
-          <span className="text-xs text-gray-400">/ Ilimitado</span>
+          <span className="text-sm font-semibold text-white/85">{used.toLocaleString()}</span>
+          <span className="text-xs text-white/40">/ Ilimitado</span>
         </div>
       );
     }
@@ -703,10 +703,10 @@ function ClientDetailModal({
     return (
       <div>
         <div className="flex items-center justify-between mb-1">
-          <span className="text-sm font-semibold text-gray-700">{used.toLocaleString()}</span>
-          <span className="text-xs text-gray-400">/ {limit.toLocaleString()}</span>
+          <span className="text-sm font-semibold text-white/85">{used.toLocaleString()}</span>
+          <span className="text-xs text-white/40">/ {limit.toLocaleString()}</span>
         </div>
-        <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
           <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
         </div>
       </div>
@@ -719,7 +719,7 @@ function ClientDetailModal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
         onClick={onClose}
       >
         <motion.div
@@ -727,26 +727,26 @@ function ClientDetailModal({
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-          className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto z-10"
+          className="bg-surface-1 rounded-2xl shadow-xl border border-white/[0.08] w-full max-w-2xl max-h-[90vh] overflow-y-auto z-10"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="sticky top-0 bg-white z-10 flex items-center justify-between px-6 py-5 border-b border-gray-100 rounded-t-2xl">
+          <div className="sticky top-0 bg-surface-1 z-10 flex items-center justify-between px-6 py-5 border-b border-white/[0.08] rounded-t-2xl">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-lg font-bold text-gray-600">
+              <div className="w-12 h-12 bg-white/[0.06] rounded-xl flex items-center justify-center text-lg font-bold text-white/70">
                 {(client.full_name || client.email).charAt(0).toUpperCase()}
               </div>
               <div>
-                <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
                   {client.full_name || 'Sem nome'}
                   {client.is_enabled === false && <Badge variant="error" size="sm">Desativado</Badge>}
                 </h2>
-                <p className="text-sm text-gray-500">{client.email}</p>
+                <p className="text-sm text-white/55">{client.email}</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-xl text-white/40 hover:text-white/70 hover:bg-white/[0.06] transition-colors"
             >
               <X size={18} />
             </button>
@@ -755,16 +755,16 @@ function ClientDetailModal({
           <div className="p-6 space-y-6">
             {/* Account status */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <Power size={14} className="text-gray-400" />
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <Power size={14} className="text-white/40" />
                 Status da Conta
               </h3>
-              <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+              <div className="flex items-center justify-between bg-white/[0.03] rounded-xl p-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium text-white">
                     Conta {client.is_enabled !== false ? 'Ativa' : 'Desativada'}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-white/55 mt-0.5">
                     {client.is_enabled !== false
                       ? 'O usuario pode acessar o sistema normalmente.'
                       : 'O usuario esta impedido de acessar o sistema.'}
@@ -775,8 +775,8 @@ function ClientDetailModal({
                   disabled={togglingEnabled}
                   className={`px-4 py-2 rounded-xl text-xs font-medium transition-colors disabled:opacity-50 ${
                     client.is_enabled !== false
-                      ? 'bg-red-50 text-red-600 hover:bg-red-100'
-                      : 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'
+                      ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+                      : 'bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20'
                   }`}
                 >
                   {client.is_enabled !== false ? 'Desativar' : 'Ativar'}
@@ -786,24 +786,24 @@ function ClientDetailModal({
 
             {/* Subscription section */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <CreditCard size={14} className="text-gray-400" />
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <CreditCard size={14} className="text-white/40" />
                 Assinatura Atual
               </h3>
-              <div className="bg-gray-50 rounded-xl p-4">
+              <div className="bg-white/[0.03] rounded-xl p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="font-semibold text-gray-900">{client.plan_name}</span>
+                      <span className="font-semibold text-white">{client.plan_name}</span>
                       <Badge variant={subInfo.variant}>{subInfo.label}</Badge>
                     </div>
                     {currentPlan && (
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-white/55">
                         {formatBRL(currentPlan.price_cents)}{currentPlan.billing_period === 'monthly' ? '/mes' : '/ano'}
                       </p>
                     )}
                   </div>
-                  <div className="text-right text-xs text-gray-500">
+                  <div className="text-right text-xs text-white/55">
                     <p>Inicio: {formatDate(client.sub_started_at)}</p>
                     {client.sub_expires_at && <p>Expira: {formatDate(client.sub_expires_at)}</p>}
                   </div>
@@ -812,7 +812,7 @@ function ClientDetailModal({
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => setChangingPlan(!changingPlan)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 bg-white border border-gray-200 hover:bg-gray-100 transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white/70 bg-white/[0.04] border border-white/10 hover:bg-white/[0.06] transition-colors"
                   >
                     <RefreshCw size={12} />
                     Alterar Plano
@@ -822,7 +822,7 @@ function ClientDetailModal({
                       <button
                         onClick={() => handleStatusAction('suspend')}
                         disabled={actionLoading}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 transition-colors disabled:opacity-50"
                       >
                         <Ban size={12} />
                         Suspender
@@ -830,7 +830,7 @@ function ClientDetailModal({
                       <button
                         onClick={() => handleStatusAction('cancel')}
                         disabled={actionLoading}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-400 bg-red-500/10 hover:bg-red-500/20 transition-colors disabled:opacity-50"
                       >
                         <X size={12} />
                         Cancelar
@@ -841,7 +841,7 @@ function ClientDetailModal({
                     <button
                       onClick={() => handleStatusAction('reactivate')}
                       disabled={actionLoading}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-emerald-600 bg-emerald-50 hover:bg-emerald-100 transition-colors disabled:opacity-50"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors disabled:opacity-50"
                     >
                       <RefreshCw size={12} />
                       Reativar
@@ -850,12 +850,12 @@ function ClientDetailModal({
                 </div>
 
                 {changingPlan && (
-                  <div className="mt-3 pt-3 border-t border-gray-200">
+                  <div className="mt-3 pt-3 border-t border-white/10">
                     <div className="flex items-center gap-2">
                       <select
                         value={selectedPlanId}
                         onChange={(e) => setSelectedPlanId(e.target.value)}
-                        className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                        className="flex-1 px-3 py-2 text-sm border border-white/10 rounded-xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20"
                       >
                         <option value="">Selecione um plano</option>
                         {plans.filter((p) => p.is_active).map((p) => (
@@ -880,8 +880,8 @@ function ClientDetailModal({
 
             {/* Extend expiry */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <CalendarPlus size={14} className="text-gray-400" />
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <CalendarPlus size={14} className="text-white/40" />
                 Vencimento
               </h3>
               <div className="flex items-center gap-3">
@@ -889,7 +889,7 @@ function ClientDetailModal({
                   type="date"
                   value={expiryDate}
                   onChange={(e) => setExpiryDate(e.target.value)}
-                  className="flex-1 px-4 py-2.5 text-sm border border-gray-200 rounded-2xl bg-white focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                  className="flex-1 px-4 py-2.5 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20"
                 />
                 <Button size="sm" loading={savingExpiry} onClick={handleSaveExpiry} disabled={!expiryDate}>
                   <CalendarPlus size={14} />
@@ -897,25 +897,25 @@ function ClientDetailModal({
                 </Button>
               </div>
               {client.sub_expires_at && (
-                <p className="text-xs text-gray-400 mt-1.5">Expira atualmente em: {formatDate(client.sub_expires_at)}</p>
+                <p className="text-xs text-white/40 mt-1.5">Expira atualmente em: {formatDate(client.sub_expires_at)}</p>
               )}
             </section>
 
             {/* Send count */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <Send size={14} className="text-gray-400" />
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <Send size={14} className="text-white/40" />
                 Contador de Envios
               </h3>
-              <div className="bg-gray-50 rounded-xl p-4">
+              <div className="bg-white/[0.03] rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-sm text-gray-600">Envios realizados:</span>
-                  <span className="text-sm font-bold text-gray-900">{client.send_count}</span>
+                  <span className="text-sm text-white/70">Envios realizados:</span>
+                  <span className="text-sm font-bold text-white">{client.send_count}</span>
                   {client.plan_max_sends !== undefined && client.plan_max_sends !== -1 && (
-                    <span className="text-xs text-gray-400">/ {client.plan_max_sends}</span>
+                    <span className="text-xs text-white/40">/ {client.plan_max_sends}</span>
                   )}
                   {(client.plan_max_sends === undefined || client.plan_max_sends === -1) && (
-                    <span className="text-xs text-gray-400">/ Ilimitado</span>
+                    <span className="text-xs text-white/40">/ Ilimitado</span>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
@@ -924,7 +924,7 @@ function ClientDetailModal({
                     min="0"
                     value={editSendCount}
                     onChange={(e) => setEditSendCount(e.target.value)}
-                    className="w-24 px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                    className="w-24 px-3 py-2 text-sm border border-white/10 rounded-xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20"
                   />
                   <Button size="sm" loading={savingSendCount} onClick={handleSaveSendCount}>
                     <Save size={12} />
@@ -933,7 +933,7 @@ function ClientDetailModal({
                   <button
                     onClick={handleResetSendCount}
                     disabled={savingSendCount}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 transition-colors disabled:opacity-50"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 transition-colors disabled:opacity-50"
                   >
                     <RotateCcw size={12} />
                     Resetar
@@ -944,25 +944,25 @@ function ClientDetailModal({
 
             {/* Usage & Limits */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <UserCheck size={14} className="text-gray-400" />
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <UserCheck size={14} className="text-white/40" />
                 Uso e Limites
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-gray-50 rounded-xl p-3">
-                  <p className="text-xs text-gray-500 mb-1.5">Leads</p>
+                <div className="bg-white/[0.03] rounded-xl p-3">
+                  <p className="text-xs text-white/55 mb-1.5">Leads</p>
                   {usageBar(client.lead_count, currentPlan?.max_leads ?? -1)}
                 </div>
-                <div className="bg-gray-50 rounded-xl p-3">
-                  <p className="text-xs text-gray-500 mb-1.5">Campanhas</p>
+                <div className="bg-white/[0.03] rounded-xl p-3">
+                  <p className="text-xs text-white/55 mb-1.5">Campanhas</p>
                   {usageBar(client.campaign_count, currentPlan?.max_campaigns_per_month ?? -1)}
                 </div>
-                <div className="bg-gray-50 rounded-xl p-3">
-                  <p className="text-xs text-gray-500 mb-1.5">Templates</p>
+                <div className="bg-white/[0.03] rounded-xl p-3">
+                  <p className="text-xs text-white/55 mb-1.5">Templates</p>
                   {usageBar(client.template_count, currentPlan?.max_templates ?? -1)}
                 </div>
-                <div className="bg-gray-50 rounded-xl p-3">
-                  <p className="text-xs text-gray-500 mb-1.5">Instâncias WhatsApp</p>
+                <div className="bg-white/[0.03] rounded-xl p-3">
+                  <p className="text-xs text-white/55 mb-1.5">Instancias WhatsApp</p>
                   {usageBar(
                     client.instance_count,
                     client.max_instances_override !== null && client.max_instances_override !== undefined
@@ -978,21 +978,21 @@ function ClientDetailModal({
 
             {/* WhatsApp section */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <Smartphone size={14} className="text-gray-400" />
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <Smartphone size={14} className="text-white/40" />
                 WhatsApp
               </h3>
-              <div className="bg-gray-50 rounded-xl p-4">
+              <div className="bg-white/[0.03] rounded-xl p-4">
                 <div className="flex items-center gap-4 flex-wrap">
                   <Badge variant={waInfo.variant}>{waInfo.label}</Badge>
                   {client.instance_phone && (
-                    <span className="text-sm text-gray-700">{client.instance_phone}</span>
+                    <span className="text-sm text-white/85">{client.instance_phone}</span>
                   )}
-                  <span className="text-xs text-gray-400 capitalize">
+                  <span className="text-xs text-white/40 capitalize">
                     Modo: {client.instance_send_mode || 'manual'}
                   </span>
-                  <span className="text-xs text-gray-500 ml-auto">
-                    {client.instance_count} {client.instance_count === 1 ? 'instância' : 'instâncias'}
+                  <span className="text-xs text-white/55 ml-auto">
+                    {client.instance_count} {client.instance_count === 1 ? 'instancia' : 'instancias'}
                   </span>
                 </div>
               </div>
@@ -1000,8 +1000,8 @@ function ClientDetailModal({
 
             {/* Admin notes */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <Save size={14} className="text-gray-400" />
+              <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <Save size={14} className="text-white/40" />
                 Notas do Administrador
               </h3>
               <textarea
@@ -1009,7 +1009,7 @@ function ClientDetailModal({
                 onChange={(e) => setNotes(e.target.value)}
                 rows={3}
                 placeholder="Adicione notas sobre este cliente..."
-                className="w-full px-4 py-3 text-sm border border-gray-200 rounded-2xl bg-white focus:outline-none focus:ring-2 focus:ring-gray-900/10 resize-none placeholder:text-gray-400"
+                className="w-full px-4 py-3 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 resize-none placeholder:text-white/30"
               />
               <div className="flex justify-end mt-2">
                 <Button size="sm" loading={savingNotes} onClick={handleSaveNotes}>
@@ -1020,8 +1020,8 @@ function ClientDetailModal({
             </section>
 
             {/* Account info */}
-            <section className="pt-4 border-t border-gray-100">
-              <div className="flex items-center gap-6 text-xs text-gray-400">
+            <section className="pt-4 border-t border-white/[0.08]">
+              <div className="flex items-center gap-6 text-xs text-white/40">
                 <span>ID: {client.id.slice(0, 8)}...</span>
                 <span>Cadastrado em: {formatDate(client.created_at)}</span>
               </div>
@@ -1055,7 +1055,7 @@ function InstanceLimitSection({
     try {
       const override = useOverride ? parseInt(value, 10) : null;
       if (useOverride && (isNaN(override as number) || (override as number) < -1)) {
-        alert('Digite um número válido (use -1 para ilimitado, 0+ para limite específico).');
+        alert('Digite um numero valido (use -1 para ilimitado, 0+ para limite especifico).');
         setSaving(false);
         return;
       }
@@ -1066,7 +1066,7 @@ function InstanceLimitSection({
       if (error) throw error;
       onUpdated({ ...client, max_instances_override: override });
     } catch {
-      alert('Erro ao salvar limite de instâncias.');
+      alert('Erro ao salvar limite de instancias.');
     } finally {
       setSaving(false);
     }
@@ -1074,28 +1074,28 @@ function InstanceLimitSection({
 
   return (
     <section>
-      <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-        <Smartphone size={14} className="text-gray-400" />
-        Limite de Instâncias WhatsApp
+      <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+        <Smartphone size={14} className="text-white/40" />
+        Limite de Instancias WhatsApp
       </h3>
-      <div className="bg-gray-50 rounded-xl p-4 space-y-3">
+      <div className="bg-white/[0.03] rounded-xl p-4 space-y-3">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-gray-600">Em uso</span>
-          <span className="font-semibold text-gray-900">
+          <span className="text-white/70">Em uso</span>
+          <span className="font-semibold text-white">
             {client.instance_count} / {effective === -1 ? 'Ilimitado' : effective}
           </span>
         </div>
-        <div className="flex items-center justify-between text-xs text-gray-500">
+        <div className="flex items-center justify-between text-xs text-white/55">
           <span>Limite do plano</span>
           <span>{planLimit === -1 ? 'Ilimitado' : planLimit}</span>
         </div>
-        <div className="pt-3 border-t border-gray-200 space-y-2">
-          <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+        <div className="pt-3 border-t border-white/10 space-y-2">
+          <label className="flex items-center gap-2 text-sm text-white/85 cursor-pointer">
             <input
               type="checkbox"
               checked={useOverride}
               onChange={(e) => setUseOverride(e.target.checked)}
-              className="rounded border-gray-300"
+              className="rounded border-white/15"
             />
             Sobrepor limite do plano para este cliente
           </label>
@@ -1106,9 +1106,9 @@ function InstanceLimitSection({
                 min={-1}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                className="w-28 px-3 py-2 text-sm border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-gray-900/10"
+                className="w-28 px-3 py-2 text-sm border border-white/10 rounded-xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20"
               />
-              <span className="text-xs text-gray-500">instâncias (-1 = ilimitado)</span>
+              <span className="text-xs text-white/55">instancias (-1 = ilimitado)</span>
             </div>
           )}
           <div className="flex justify-end">

@@ -775,28 +775,28 @@ export function ChatPanel({ lead, userId, sendMode, onOpenDetails, onLeadUpdated
   const isDisconnected = instanceStatus === 'disconnected' || instanceStatus === 'error';
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-b from-gray-50 to-gray-100">
-      <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-100 shadow-sm">
+    <div className="flex flex-col h-full bg-surface-0">
+      <div className="flex items-center justify-between px-4 py-3 bg-surface-2 border-b border-white/[0.08] shadow-sm">
         <div className="flex items-center gap-3">
           {lead.profile_picture_url ? (
             <img
               src={lead.profile_picture_url}
               alt={leadDisplayName(lead)}
-              className="w-10 h-10 rounded-full object-cover bg-gray-100"
+              className="w-10 h-10 rounded-full object-cover bg-white/[0.06]"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).style.display = 'none';
               }}
             />
           ) : (
-            <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center text-sm font-bold text-gray-700">
+            <div className="w-10 h-10 bg-white/[0.10] rounded-full flex items-center justify-center text-sm font-bold text-white/85">
               {leadDisplayName(lead).charAt(0).toUpperCase()}
             </div>
           )}
           <div>
-            <p className="text-sm font-semibold text-gray-900 flex items-center gap-1.5">
+            <p className="text-sm font-semibold text-white flex items-center gap-1.5">
               {leadDisplayName(lead)}
               {isPrivateContact(lead) && (
-                <span className="text-[9px] font-semibold tracking-wide uppercase px-1.5 py-0.5 rounded bg-gray-100 text-gray-500">
+                <span className="text-[9px] font-semibold tracking-wide uppercase px-1.5 py-0.5 rounded bg-white/[0.06] text-white/55">
                   Privado
                 </span>
               )}
@@ -804,7 +804,7 @@ export function ChatPanel({ lead, userId, sendMode, onOpenDetails, onLeadUpdated
             {presence && (presence.state === 'composing' || presence.state === 'recording') ? (
               <PresenceIndicator state={presence.state} compact />
             ) : (
-              <p className="text-xs text-gray-500 flex items-center gap-1">
+              <p className="text-xs text-white/55 flex items-center gap-1">
                 <Phone size={10} /> {leadPhoneLabel(lead)}
               </p>
             )}
@@ -814,27 +814,27 @@ export function ChatPanel({ lead, userId, sendMode, onOpenDetails, onLeadUpdated
 
           <button
             onClick={onOpenDetails}
-            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+            className="p-2 text-white/40 hover:text-white/70 hover:bg-white/[0.06] rounded-xl transition-colors"
           >
             <Info size={16} />
           </button>
           <div className="relative" ref={headerMenuRef}>
             <button
               onClick={() => setHeaderMenuOpen((v) => !v)}
-              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+              className="p-2 text-white/40 hover:text-white/70 hover:bg-white/[0.06] rounded-xl transition-colors"
               aria-label="Opções da conversa"
             >
               <MoreVertical size={16} />
             </button>
             {headerMenuOpen && (
-              <div className="absolute right-0 top-full mt-1 w-56 bg-white border border-gray-100 rounded-xl shadow-lg py-1 text-xs z-20">
+              <div className="absolute right-0 top-full mt-1 w-56 bg-surface-2 border border-white/[0.08] rounded-xl shadow-lg py-1 text-xs z-20">
                 <button
                   type="button"
                   onClick={() => {
                     setHeaderMenuOpen(false);
                     onOpenDetails();
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 text-gray-700"
+                  className="w-full flex items-center gap-2 px-3 py-2 hover:bg-white/[0.04] text-white/85"
                 >
                   <Info size={12} /> Detalhes do lead
                 </button>
@@ -875,11 +875,11 @@ export function ChatPanel({ lead, userId, sendMode, onOpenDetails, onLeadUpdated
           </div>
         ) : messages.length === 0 ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-            <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-sm mb-3">
+            <div className="w-14 h-14 bg-surface-2 rounded-full flex items-center justify-center shadow-sm mb-3">
               <Sparkles size={20} className="text-emerald-500" />
             </div>
-            <p className="text-sm font-medium text-gray-600">Nenhuma mensagem ainda</p>
-            <p className="text-xs text-gray-400 mt-1">Inicie a conversa enviando uma mensagem abaixo</p>
+            <p className="text-sm font-medium text-white/70">Nenhuma mensagem ainda</p>
+            <p className="text-xs text-white/40 mt-1">Inicie a conversa enviando uma mensagem abaixo</p>
           </div>
         ) : (
           <Virtuoso
@@ -902,7 +902,7 @@ export function ChatPanel({ lead, userId, sendMode, onOpenDetails, onLeadUpdated
                 <div className="px-4">
                   {showSeparator && (
                     <div className="flex justify-center my-3">
-                      <span className="text-[10px] uppercase tracking-wide font-semibold text-gray-500 bg-white border border-gray-100 px-2.5 py-1 rounded-full shadow-sm">
+                      <span className="text-[10px] uppercase tracking-wide font-semibold text-white/55 bg-surface-2 border border-white/[0.08] px-2.5 py-1 rounded-full shadow-sm">
                         {formatDaySeparator(m.created_at)}
                       </span>
                     </div>

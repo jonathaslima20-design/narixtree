@@ -193,7 +193,7 @@ export function ConnectWhatsApp({ embedded = false }: { embedded?: boolean } = {
       {loading ? (
         <Card>
           <div className="flex flex-col items-center py-8 gap-3">
-            <div className="w-8 h-8 border-2 border-white/10 border-t-gray-900 rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-white/10 border-t-white rounded-full animate-spin" />
             <p className="text-sm text-white/40">Carregando...</p>
           </div>
         </Card>
@@ -284,7 +284,7 @@ function InstanceList({
           </Button>
         </div>
         {atLimit && (
-          <div className="mt-3 text-xs text-amber-700 bg-amber-50 border border-amber-100 rounded-xl px-3 py-2">
+          <div className="mt-3 text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-xl px-3 py-2">
             Limite de instâncias atingido. Fale com o administrador para aumentar.
           </div>
         )}
@@ -333,7 +333,7 @@ function InstanceList({
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl"
+              className="bg-surface-2 rounded-2xl p-6 w-full max-w-sm shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg font-semibold text-white mb-2">Nova instância</h3>
@@ -384,9 +384,9 @@ function InstanceCard({
   const status = instance.status;
   const statusColor =
     status === 'connected'
-      ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
+      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
       : status === 'connecting'
-        ? 'bg-amber-50 text-amber-600 border border-amber-100'
+        ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
         : 'bg-white/[0.04] text-white/55 border border-white/10';
   const statusLabel =
     status === 'connected'
@@ -399,11 +399,11 @@ function InstanceCard({
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white border border-white/10 rounded-2xl p-5 hover:shadow-sm transition-shadow cursor-pointer"
+      className="bg-surface-2 border border-white/10 rounded-2xl p-5 hover:shadow-sm transition-shadow cursor-pointer"
       onClick={onSelect}
     >
       <div className="flex items-start justify-between mb-3">
-        <div className="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center">
+        <div className="w-10 h-10 bg-white/[0.10] rounded-xl flex items-center justify-center">
           <Smartphone size={18} className="text-white" />
         </div>
         <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${statusColor}`}>
@@ -425,7 +425,7 @@ function InstanceCard({
         </button>
         <button
           onClick={(e) => { e.stopPropagation(); onRemove(); }}
-          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-red-600 hover:bg-red-50 transition-colors ml-auto"
+          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-red-400 hover:bg-red-500/10 transition-colors ml-auto"
         >
           <Trash2 size={12} /> Remover
         </button>
@@ -567,7 +567,7 @@ function InstanceDetail({
       </button>
 
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center">
+        <div className="w-10 h-10 bg-white/[0.10] rounded-xl flex items-center justify-center">
           <Smartphone size={18} className="text-white" />
         </div>
         <div className="flex-1">
@@ -576,7 +576,7 @@ function InstanceDetail({
         </div>
         <button
           onClick={remove}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 hover:bg-red-50 transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-red-400 hover:bg-red-500/10 transition-colors"
         >
           <Trash2 size={12} /> Remover
         </button>
@@ -609,7 +609,7 @@ function ConnectedState({ instance, onDisconnect }: { instance: WhatsAppInstance
   return (
     <Card>
       <div className="flex flex-col items-center text-center py-6">
-        <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-4">
+        <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-4">
           <CheckCircle2 size={28} className="text-emerald-500" />
         </div>
         <h3 className="text-lg font-semibold text-white mb-1">WhatsApp Conectado</h3>
@@ -618,7 +618,7 @@ function ConnectedState({ instance, onDisconnect }: { instance: WhatsAppInstance
         </p>
         <div className="flex items-center gap-1.5 mb-6">
           <Wifi size={12} className="text-emerald-500" />
-          <span className="text-xs text-emerald-600 font-medium">Online</span>
+          <span className="text-xs text-emerald-400 font-medium">Online</span>
         </div>
         <Button variant="secondary" onClick={onDisconnect} size="sm">
           <WifiOff size={14} />
@@ -667,14 +667,14 @@ function QRCodeState({
           />
           {expired && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xs font-semibold text-white/70 bg-white/90 px-3 py-1.5 rounded-full border border-white/10">
+              <span className="text-xs font-semibold text-white/70 bg-surface-2 px-3 py-1.5 rounded-full border border-white/10">
                 QR expirado
               </span>
             </div>
           )}
         </div>
         <div className="flex items-center gap-2 mb-4">
-          <div className={`w-2 h-2 rounded-full ${expired ? 'bg-gray-300' : 'bg-amber-400 animate-pulse'}`} />
+          <div className={`w-2 h-2 rounded-full ${expired ? 'bg-white/[0.15]' : 'bg-amber-400 animate-pulse'}`} />
           <span className="text-xs font-medium text-white/70">
             {expired
               ? 'Gerando novo código...'
@@ -682,7 +682,7 @@ function QRCodeState({
           </span>
         </div>
         {lastError && (
-          <div className="flex items-start gap-2 bg-red-50 text-red-700 text-xs px-3 py-2 rounded-xl mb-4 w-full text-left">
+          <div className="flex items-start gap-2 bg-red-500/10 text-red-400 text-xs px-3 py-2 rounded-xl mb-4 w-full text-left">
             <AlertCircle size={14} className="mt-0.5 shrink-0" />
             <span>{lastError}</span>
           </div>
@@ -727,7 +727,7 @@ function DisconnectedState({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="flex items-start gap-2 bg-red-50 text-red-600 text-sm px-4 py-2 rounded-xl mb-4 w-full text-left"
+              className="flex items-start gap-2 bg-red-500/10 text-red-400 text-sm px-4 py-2 rounded-xl mb-4 w-full text-left"
             >
               <AlertCircle size={14} className="mt-0.5 shrink-0" />
               <span>{error}</span>

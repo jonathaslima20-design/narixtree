@@ -60,7 +60,7 @@ export function AudioPlayer({ src, durationSeconds, variant, uploading }: Props)
   const isOut = variant === 'out';
 
   return (
-    <div className={`flex items-center gap-2.5 min-w-[200px] ${isOut ? 'text-white' : 'text-gray-800'}`}>
+    <div className={`flex items-center gap-2.5 min-w-[200px] ${isOut ? 'text-white' : 'text-white/90'}`}>
       <audio ref={audioRef} src={src} preload="metadata" />
       <button
         onClick={toggle}
@@ -88,14 +88,14 @@ export function AudioPlayer({ src, durationSeconds, variant, uploading }: Props)
                       : 'bg-emerald-600'
                     : isOut
                     ? 'bg-white/40'
-                    : 'bg-gray-300'
+                    : 'bg-white/30'
                 }`}
                 style={{ height: `${h}px` }}
               />
             );
           })}
         </div>
-        <div className={`flex items-center justify-between text-[10px] ${isOut ? 'text-white/70' : 'text-gray-500'}`}>
+        <div className={`flex items-center justify-between text-[10px] ${isOut ? 'text-white/70' : 'text-white/55'}`}>
           <span className="tabular-nums">
             {formatDuration(playing || current > 0 ? current : duration)}
           </span>

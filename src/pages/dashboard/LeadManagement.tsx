@@ -254,7 +254,7 @@ export function LeadManagement() {
       <motion.div
         initial={{ opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
-        className="px-4 sm:px-6 pt-4 sm:pt-6 pb-4 bg-white border-b border-white/10"
+        className="px-4 sm:px-6 pt-4 sm:pt-6 pb-4 bg-surface-1 border-b border-white/10"
       >
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
           <div>
@@ -295,14 +295,14 @@ export function LeadManagement() {
         </div>
       </motion.div>
 
-      <div className="px-4 sm:px-6 py-3 bg-white border-b border-white/10 flex items-center gap-2 sm:gap-3 flex-wrap">
+      <div className="px-4 sm:px-6 py-3 bg-surface-1 border-b border-white/10 flex items-center gap-2 sm:gap-3 flex-wrap">
         <div className="relative flex-1 min-w-0 sm:min-w-[220px] sm:max-w-md w-full sm:w-auto order-first sm:order-none">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por nome, telefone, tag, empresa..."
-            className="w-full pl-9 pr-3 py-2 text-sm bg-white/[0.04] border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:bg-white"
+            className="w-full pl-9 pr-3 py-2 text-sm bg-white/[0.04] border border-white/10 rounded-xl text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 focus:bg-white/[0.06]"
           />
         </div>
 
@@ -310,8 +310,8 @@ export function LeadManagement() {
           onClick={() => setOnlyFavorites((v) => !v)}
           className={`px-2.5 py-1.5 rounded-xl text-xs font-medium transition border ${
             onlyFavorites
-              ? 'bg-amber-50 border-amber-200 text-amber-700'
-              : 'bg-white border-white/10 text-white/70 hover:bg-white/[0.04]'
+              ? 'bg-amber-500/10 border-amber-500/20 text-amber-400'
+              : 'bg-white/[0.04] border-white/10 text-white/70 hover:bg-white/[0.06]'
           }`}
         >
           <Star size={12} className="inline mr-1" /> Favoritos
@@ -321,8 +321,8 @@ export function LeadManagement() {
           onClick={() => setShowArchived((v) => !v)}
           className={`px-2.5 py-1.5 rounded-xl text-xs font-medium transition border ${
             showArchived
-              ? 'bg-gray-900 text-white border-gray-900'
-              : 'bg-white border-white/10 text-white/70 hover:bg-white/[0.04]'
+              ? 'bg-white/[0.10] text-white border-white/20'
+              : 'bg-white/[0.04] border-white/10 text-white/70 hover:bg-white/[0.06]'
           }`}
         >
           <Archive size={12} className="inline mr-1" /> Arquivados
@@ -332,7 +332,7 @@ export function LeadManagement() {
           <button
             onClick={() => setView('kanban')}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
-              view === 'kanban' ? 'bg-white shadow-sm text-white' : 'text-white/55 hover:text-gray-800'
+              view === 'kanban' ? 'bg-white/[0.10] text-white' : 'text-white/55 hover:text-white/85'
             }`}
           >
             <LayoutGrid size={13} /> <span className="hidden sm:inline">Kanban</span>
@@ -340,7 +340,7 @@ export function LeadManagement() {
           <button
             onClick={() => setView('table')}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
-              view === 'table' ? 'bg-white shadow-sm text-white' : 'text-white/55 hover:text-gray-800'
+              view === 'table' ? 'bg-white/[0.10] text-white' : 'text-white/55 hover:text-white/85'
             }`}
           >
             <Rows size={13} /> <span className="hidden sm:inline">Tabela</span>
@@ -349,7 +349,7 @@ export function LeadManagement() {
       </div>
 
       {selected.size > 0 && (
-        <div className="px-4 sm:px-6 py-2 bg-gray-900 text-white flex items-center gap-2 sm:gap-3 text-xs overflow-x-auto">
+        <div className="px-4 sm:px-6 py-2 bg-white/[0.10] text-white flex items-center gap-2 sm:gap-3 text-xs overflow-x-auto">
           <span className="font-semibold">{selected.size} selecionado(s)</span>
           <div className="h-4 w-px bg-white/20" />
           <span className="text-white/30">Mover para:</span>
@@ -372,7 +372,7 @@ export function LeadManagement() {
         {loading || catsLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-72 bg-white rounded-2xl animate-pulse border border-white/10" />
+              <div key={i} className="h-72 bg-white/[0.04] rounded-2xl animate-pulse border border-white/10" />
             ))}
           </div>
         ) : filtered.length === 0 ? (
@@ -436,19 +436,19 @@ function StatPill({ label, value, iconName, tone }: { label: string; value: numb
   const Icon = iconName === 'Users' ? Users : resolveIcon(iconName);
   const toneClasses: Record<string, string> = {
     gray: 'bg-white/[0.04] text-white/70',
-    red: 'bg-red-50 text-red-600',
-    amber: 'bg-amber-50 text-amber-700',
-    sky: 'bg-sky-50 text-sky-700',
-    orange: 'bg-orange-50 text-orange-700',
-    emerald: 'bg-emerald-50 text-emerald-700',
-    teal: 'bg-teal-50 text-teal-700',
-    pink: 'bg-pink-50 text-pink-700',
-    cyan: 'bg-cyan-50 text-cyan-700',
+    red: 'bg-red-500/10 text-red-400',
+    amber: 'bg-amber-500/10 text-amber-400',
+    sky: 'bg-sky-500/10 text-sky-400',
+    orange: 'bg-orange-500/10 text-orange-400',
+    emerald: 'bg-emerald-500/10 text-emerald-400',
+    teal: 'bg-teal-500/10 text-teal-400',
+    pink: 'bg-pink-500/10 text-pink-400',
+    cyan: 'bg-cyan-500/10 text-cyan-400',
   };
   const cls = toneClasses[tone] || toneClasses.gray;
 
   return (
-    <div className="flex items-center gap-2 px-3 py-2.5 bg-white border border-white/10 rounded-xl">
+    <div className="flex items-center gap-2 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl">
       <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${cls}`}>
         <Icon size={14} />
       </div>
@@ -463,7 +463,7 @@ function StatPill({ label, value, iconName, tone }: { label: string; value: numb
 function EmptyState({ hasAny, onAdd }: { hasAny: boolean; onAdd: () => void }) {
   return (
     <div className="py-16 flex flex-col items-center justify-center text-center">
-      <div className="w-16 h-16 bg-white border border-white/10 rounded-2xl flex items-center justify-center mb-4">
+      <div className="w-16 h-16 bg-white/[0.06] border border-white/10 rounded-2xl flex items-center justify-center mb-4">
         <Users size={24} className="text-white/40" />
       </div>
       <p className="text-sm font-medium text-white/85">
@@ -535,11 +535,11 @@ function KanbanView({
               setDraggingId(null);
               setDragOverCat(null);
             }}
-            className={`bg-white border rounded-2xl flex flex-col min-h-[420px] min-w-[260px] sm:min-w-0 transition ${
-              over ? 'border-gray-900 shadow-md' : 'border-white/10'
+            className={`bg-surface-2 border rounded-2xl flex flex-col min-h-[420px] min-w-[260px] sm:min-w-0 transition ${
+              over ? 'border-white/20 bg-white/[0.06]' : 'border-white/10'
             }`}
           >
-            <div className="px-3 pt-3 pb-2 border-b border-gray-50 flex items-center justify-between">
+            <div className="px-3 pt-3 pb-2 border-b border-white/[0.06] flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md border ${cat.accent}`}>
                   <CatIcon size={11} />
@@ -599,8 +599,8 @@ function KanbanCard({
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onClick={onOpen}
-      className={`group cursor-pointer bg-white rounded-xl border p-2.5 text-left hover:shadow-md transition ${
-        dragging ? 'opacity-40 border-gray-900' : 'border-white/10'
+      className={`group cursor-pointer bg-surface-1 rounded-xl border p-2.5 text-left hover:bg-white/[0.06] transition ${
+        dragging ? 'opacity-40 border-white/20' : 'border-white/[0.08]'
       }`}
     >
       <div className="flex items-start gap-2">
@@ -613,11 +613,11 @@ function KanbanCard({
               onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
             />
           ) : (
-            <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center text-[11px] font-bold text-white/85">
+            <div className="w-8 h-8 bg-white/[0.10] rounded-full flex items-center justify-center text-[11px] font-bold text-white/85">
               {leadDisplayName(lead).charAt(0).toUpperCase()}
             </div>
           )}
-          <CatIcon size={10} className={`absolute -bottom-0.5 -right-0.5 ${catColor} bg-white rounded-full`} />
+          <CatIcon size={10} className={`absolute -bottom-0.5 -right-0.5 ${catColor} bg-surface-1 rounded-full`} />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1">
@@ -646,7 +646,7 @@ function KanbanCard({
         </div>
       )}
 
-      <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-50">
+      <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/[0.06]">
         <span className="text-[10px] text-white/40 flex items-center gap-1">
           <MessageSquare size={9} /> {lead.message_count ?? 0}
         </span>
@@ -686,13 +686,13 @@ function TableView({
   }
 
   return (
-    <div className="bg-white border border-white/10 rounded-2xl overflow-hidden">
+    <div className="bg-surface-2 border border-white/10 rounded-2xl overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-white/[0.04] border-b border-white/10 text-[11px] uppercase tracking-wide text-white/55">
             <tr>
               <th className="w-10 px-3 py-3">
-                <input type="checkbox" checked={allSelected} onChange={toggleAll} className="rounded border-white/15 text-white focus:ring-gray-900" />
+                <input type="checkbox" checked={allSelected} onChange={toggleAll} className="rounded border-white/15 text-white focus:ring-white/20" />
               </th>
               <th className="px-3 py-3 text-left font-semibold">Contato</th>
               <th className="px-3 py-3 text-left font-semibold">Telefone</th>
@@ -702,13 +702,13 @@ function TableView({
               <th className="px-3 py-3 text-right font-semibold">Ultima atividade</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-50">
+          <tbody className="divide-y divide-white/[0.06]">
             {leads.map((lead) => {
               const isSel = selected.has(lead.id);
               return (
                 <tr key={lead.id} className={`hover:bg-white/[0.04] transition ${isSel ? 'bg-white/[0.04]' : ''}`}>
                   <td className="px-3 py-3">
-                    <input type="checkbox" checked={isSel} onChange={() => toggle(lead.id)} className="rounded border-white/15 text-white focus:ring-gray-900" />
+                    <input type="checkbox" checked={isSel} onChange={() => toggle(lead.id)} className="rounded border-white/15 text-white focus:ring-white/20" />
                   </td>
                   <td className="px-3 py-3">
                     <button onClick={() => onOpen(lead)} className="flex items-center gap-2 text-left">
@@ -730,7 +730,7 @@ function TableView({
                     <select
                       value={lead.category || (categories[0]?.key ?? 'cold')}
                       onChange={(e) => onCategoryChange(lead.id, e.target.value)}
-                      className="text-xs bg-white border border-white/10 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="text-xs bg-surface-2 text-white/85 border border-white/10 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-white/20"
                     >
                       {categories.map((c) => (
                         <option key={c.key} value={c.key}>{c.label}</option>

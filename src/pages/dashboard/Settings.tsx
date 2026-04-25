@@ -43,7 +43,7 @@ export function Settings() {
                   {isActive && (
                     <motion.div
                       layoutId="settings-tab-bg"
-                      className="absolute inset-0 bg-white rounded-lg shadow-sm"
+                      className="absolute inset-0 bg-white/[0.10] rounded-lg"
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}

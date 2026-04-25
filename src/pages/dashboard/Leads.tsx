@@ -367,7 +367,7 @@ export function Leads() {
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`px-4 sm:px-6 py-3 sm:py-4 bg-white border-b border-white/10 flex items-center justify-between shrink-0 ${mobileShowChat ? 'hidden md:flex' : 'flex'}`}
+        className={`px-4 sm:px-6 py-3 sm:py-4 bg-surface-1 border-b border-white/10 flex items-center justify-between shrink-0 ${mobileShowChat ? 'hidden md:flex' : 'flex'}`}
       >
         <div>
           <h1 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
@@ -401,7 +401,7 @@ export function Leads() {
           {loading ? (
             <div className="p-4 space-y-3">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-14 bg-white rounded-2xl animate-pulse" />
+                <div key={i} className="h-14 bg-white/[0.04] rounded-2xl animate-pulse" />
               ))}
             </div>
           ) : (
@@ -424,7 +424,7 @@ export function Leads() {
           {selected && user ? (
             <div className="flex-1 flex flex-col">
               {/* Mobile back button */}
-              <div className="md:hidden flex items-center gap-2 px-3 py-2 bg-white border-b border-white/10">
+              <div className="md:hidden flex items-center gap-2 px-3 py-2 bg-surface-1 border-b border-white/10">
                 <button
                   onClick={() => setSelectedId(null)}
                   className="p-1.5 rounded-lg text-white/55 hover:bg-white/[0.06] transition-colors"
@@ -448,12 +448,12 @@ export function Leads() {
               </div>
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center text-center p-4 sm:p-8 bg-gradient-to-b from-gray-50 to-gray-100">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4">
+            <div className="h-full flex flex-col items-center justify-center text-center p-4 sm:p-8 bg-surface-0">
+              <div className="w-16 h-16 bg-white/[0.06] rounded-full flex items-center justify-center mb-4">
                 {leads.length === 0 ? (
-                  <Users size={24} className="text-gray-300" />
+                  <Users size={24} className="text-white/30" />
                 ) : (
-                  <MessageSquare size={24} className="text-emerald-500" />
+                  <MessageSquare size={24} className="text-emerald-400" />
                 )}
               </div>
               <p className="text-sm font-medium text-white/85">

@@ -159,7 +159,7 @@ export function AuditLogs() {
               </div>
             ) : filtered.length === 0 ? (
               <div className="text-center py-12">
-                <Filter size={28} className="text-gray-200 mx-auto mb-2" />
+                <Filter size={28} className="text-white/20 mx-auto mb-2" />
                 <p className="text-sm text-white/40">Nenhum registro encontrado.</p>
               </div>
             ) : (
@@ -175,7 +175,7 @@ export function AuditLogs() {
                       <th className="w-8"></th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-white/[0.06]">
                     {filtered.map((log) => {
                       const isOpen = expanded === log.id;
                       const hasMeta = Object.keys(log.metadata || {}).length > 0;
@@ -250,7 +250,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-white/10 rounded-2xl bg-white text-white/85 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-300 cursor-pointer"
+        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15 cursor-pointer"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>

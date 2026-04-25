@@ -70,13 +70,13 @@ export function CheckoutSettings() {
       <div className="max-w-2xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
-              <div className="w-10 h-10 bg-gray-900 rounded-2xl flex items-center justify-center">
+            <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/[0.10] rounded-2xl flex items-center justify-center">
                 <Link2 size={18} className="text-white" />
               </div>
               Configuracoes de Checkout
             </h1>
-            <p className="text-sm text-gray-500 mt-1.5 ml-[52px]">
+            <p className="text-sm text-white/55 mt-1.5 ml-[52px]">
               Configure os links de pagamento que serao exibidos na tabela de precos.
             </p>
           </div>
@@ -84,13 +84,13 @@ export function CheckoutSettings() {
           <Card>
             {loading ? (
               <div className="space-y-4">
-                <div className="h-12 bg-gray-50 rounded-xl animate-pulse" />
-                <div className="h-12 bg-gray-50 rounded-xl animate-pulse" />
+                <div className="h-12 bg-white/[0.04] rounded-xl animate-pulse" />
+                <div className="h-12 bg-white/[0.04] rounded-xl animate-pulse" />
               </div>
             ) : (
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     Link de Pagamento -- Plano Mensal (R$49/mes)
                   </label>
                   <div className="relative">
@@ -99,8 +99,8 @@ export function CheckoutSettings() {
                       value={linkMensal}
                       onChange={(e) => setLinkMensal(e.target.value)}
                       placeholder="https://pay.exemplo.com/mensal"
-                      className={`w-full px-4 py-3 text-sm border rounded-2xl bg-white focus:outline-none focus:ring-2 focus:ring-gray-900/10 placeholder:text-gray-400 pr-10 ${
-                        mensalValid ? 'border-gray-200' : 'border-red-300'
+                      className={`w-full px-4 py-3 text-sm border rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 placeholder:text-white/30 pr-10 ${
+                        mensalValid ? 'border-white/10' : 'border-red-500/40'
                       }`}
                     />
                     {linkMensal && (
@@ -108,19 +108,19 @@ export function CheckoutSettings() {
                         href={linkMensal}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 transition-colors"
                       >
                         <ExternalLink size={14} />
                       </a>
                     )}
                   </div>
                   {!mensalValid && (
-                    <p className="text-xs text-red-500 mt-1">URL invalida</p>
+                    <p className="text-xs text-red-400 mt-1">URL invalida</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     Link de Pagamento -- Plano Anual (R$389/ano)
                   </label>
                   <div className="relative">
@@ -129,8 +129,8 @@ export function CheckoutSettings() {
                       value={linkAnual}
                       onChange={(e) => setLinkAnual(e.target.value)}
                       placeholder="https://pay.exemplo.com/anual"
-                      className={`w-full px-4 py-3 text-sm border rounded-2xl bg-white focus:outline-none focus:ring-2 focus:ring-gray-900/10 placeholder:text-gray-400 pr-10 ${
-                        anualValid ? 'border-gray-200' : 'border-red-300'
+                      className={`w-full px-4 py-3 text-sm border rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 placeholder:text-white/30 pr-10 ${
+                        anualValid ? 'border-white/10' : 'border-red-500/40'
                       }`}
                     />
                     {linkAnual && (
@@ -138,14 +138,14 @@ export function CheckoutSettings() {
                         href={linkAnual}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 transition-colors"
                       >
                         <ExternalLink size={14} />
                       </a>
                     )}
                   </div>
                   {!anualValid && (
-                    <p className="text-xs text-red-500 mt-1">URL invalida</p>
+                    <p className="text-xs text-red-400 mt-1">URL invalida</p>
                   )}
                 </div>
 
@@ -155,7 +155,7 @@ export function CheckoutSettings() {
                       <motion.p
                         initial={{ opacity: 0, y: 4 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-sm text-emerald-600 font-medium"
+                        className="text-sm text-emerald-400 font-medium"
                       >
                         Salvo com sucesso
                       </motion.p>
@@ -171,8 +171,8 @@ export function CheckoutSettings() {
                   </Button>
                 </div>
 
-                <div className="pt-4 border-t border-gray-100">
-                  <p className="text-xs text-gray-400">
+                <div className="pt-4 border-t border-white/[0.08]">
+                  <p className="text-xs text-white/40">
                     Esses links serao utilizados nos botoes "Assinar" da tabela de precos exibida aos usuarios
                     quando o periodo de teste expira. Deixe em branco para desativar o botao correspondente.
                   </p>

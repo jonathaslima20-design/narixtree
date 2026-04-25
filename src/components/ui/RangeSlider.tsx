@@ -103,10 +103,10 @@ export function RangeSlider({
       {/* Track */}
       <div ref={trackRef} className="relative h-2 mx-3 my-4">
         {/* Base track */}
-        <div className="absolute inset-0 rounded-full bg-gray-200" />
+        <div className="absolute inset-0 rounded-full bg-white/[0.10]" />
         {/* Active range */}
         <div
-          className="absolute top-0 bottom-0 rounded-full bg-gray-900"
+          className="absolute top-0 bottom-0 rounded-full bg-white/[0.10]"
           style={{ left: `${pct(valueMin)}%`, right: `${100 - pct(valueMax)}%` }}
         />
 
@@ -115,7 +115,7 @@ export function RangeSlider({
           type="button"
           onMouseDown={(e) => { e.preventDefault(); setDragging('min'); }}
           onTouchStart={(e) => { e.preventDefault(); setDragging('min'); }}
-          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border-2 border-gray-900 shadow cursor-grab active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-gray-900/30 transition-shadow"
+          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-surface-2 border-2 border-white/20 shadow cursor-grab active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-white/20 transition-shadow"
           style={{ left: `${pct(valueMin)}%` }}
           aria-label="Intervalo mínimo"
         />
@@ -125,7 +125,7 @@ export function RangeSlider({
           type="button"
           onMouseDown={(e) => { e.preventDefault(); setDragging('max'); }}
           onTouchStart={(e) => { e.preventDefault(); setDragging('max'); }}
-          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white border-2 border-gray-900 shadow cursor-grab active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-gray-900/30 transition-shadow"
+          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-surface-2 border-2 border-white/20 shadow cursor-grab active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-white/20 transition-shadow"
           style={{ left: `${pct(valueMax)}%` }}
           aria-label="Intervalo máximo"
         />
@@ -134,13 +134,13 @@ export function RangeSlider({
       {/* Labels below thumbs */}
       <div className="relative h-6">
         <span
-          className="absolute -translate-x-1/2 text-xs font-semibold text-gray-700"
+          className="absolute -translate-x-1/2 text-xs font-semibold text-white/85"
           style={{ left: `${pct(valueMin)}%` }}
         >
           {fmt(valueMin)}
         </span>
         <span
-          className="absolute -translate-x-1/2 text-xs font-semibold text-gray-700"
+          className="absolute -translate-x-1/2 text-xs font-semibold text-white/85"
           style={{ left: `${pct(valueMax)}%` }}
         >
           {fmt(valueMax)}

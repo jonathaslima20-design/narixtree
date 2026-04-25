@@ -78,11 +78,11 @@ function CategoryRow({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
       onDrop={onDrop}
-      className={`flex items-center gap-4 px-5 py-4 border-b border-gray-50 last:border-b-0 group transition-colors ${
-        isDragOver ? 'bg-white/[0.04] border-t-2 border-t-gray-900' : ''
+      className={`flex items-center gap-4 px-5 py-4 border-b border-white/[0.06] last:border-b-0 group transition-colors ${
+        isDragOver ? 'bg-white/[0.04] border-t-2 border-t-white/20' : ''
       }`}
     >
-      <GripVertical size={16} className="text-gray-300 shrink-0 cursor-grab active:cursor-grabbing" />
+      <GripVertical size={16} className="text-white/30 shrink-0 cursor-grab active:cursor-grabbing" />
 
       {/* Icon picker */}
       <div className="relative">
@@ -102,7 +102,7 @@ function CategoryRow({
                 initial={{ opacity: 0, scale: 0.9, y: -4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: -4 }}
-                className="absolute left-0 top-full mt-2 z-20 bg-white border border-white/10 rounded-2xl shadow-lg p-3 grid grid-cols-5 gap-1.5 w-56"
+                className="absolute left-0 top-full mt-2 z-20 bg-surface-1 border border-white/10 rounded-2xl shadow-lg p-3 grid grid-cols-5 gap-1.5 w-56"
               >
                 {ICON_OPTIONS.map((opt) => {
                   const Ic = opt.component;
@@ -114,7 +114,7 @@ function CategoryRow({
                         setShowIcons(false);
                       }}
                       className={`w-9 h-9 flex items-center justify-center rounded-lg transition-colors hover:bg-white/[0.04] ${
-                        opt.name === cat.icon ? 'ring-2 ring-gray-900 ring-offset-1 bg-white/[0.04]' : ''
+                        opt.name === cat.icon ? 'ring-2 ring-white/30 ring-offset-1 bg-white/[0.04]' : ''
                       }`}
                       title={opt.name}
                     >
@@ -132,7 +132,7 @@ function CategoryRow({
       <div className="relative">
         <button
           onClick={() => setShowColors(!showColors)}
-          className={`w-5 h-5 rounded-full ${colorDot(cat.color)} border-2 border-white shadow-sm transition-transform hover:scale-125`}
+          className={`w-5 h-5 rounded-full ${colorDot(cat.color)} border-2 border-surface-1 shadow-sm transition-transform hover:scale-125`}
           title="Alterar cor"
         />
 
@@ -144,7 +144,7 @@ function CategoryRow({
                 initial={{ opacity: 0, scale: 0.9, y: -4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: -4 }}
-                className="absolute left-0 top-full mt-2 z-20 bg-white border border-white/10 rounded-2xl shadow-lg p-3 grid grid-cols-3 gap-2 w-48"
+                className="absolute left-0 top-full mt-2 z-20 bg-surface-1 border border-white/10 rounded-2xl shadow-lg p-3 grid grid-cols-3 gap-2 w-48"
               >
                 {COLOR_PRESETS.map((preset) => (
                   <button
@@ -154,7 +154,7 @@ function CategoryRow({
                       setShowColors(false);
                     }}
                     className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors hover:bg-white/[0.04] ${
-                      preset.value === cat.color ? 'ring-2 ring-gray-900 ring-offset-1' : ''
+                      preset.value === cat.color ? 'ring-2 ring-white/30 ring-offset-1' : ''
                     }`}
                   >
                     <span className={`w-3 h-3 rounded-full ${colorDot(preset.value)}`} />
@@ -180,7 +180,7 @@ function CategoryRow({
               if (e.key === 'Escape') { setDraft(cat.label); setEditing(false); }
             }}
             maxLength={30}
-            className="w-full text-sm font-medium text-white bg-white/[0.04] border border-white/10 rounded-xl px-3 py-1.5 outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+            className="w-full text-sm font-medium text-white bg-white/[0.04] border border-white/10 rounded-xl px-3 py-1.5 outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all"
           />
         ) : (
           <button
@@ -211,12 +211,12 @@ function CategoryRow({
         )}
       </AnimatePresence>
 
-      <span className="text-xs text-gray-300 font-mono shrink-0 w-16 text-right">{cat.key}</span>
+      <span className="text-xs text-white/30 font-mono shrink-0 w-16 text-right">{cat.key}</span>
 
       <button
         onClick={() => onDelete(cat)}
         disabled={totalCategories <= 2}
-        className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-0 disabled:cursor-not-allowed"
+        className="p-1.5 rounded-lg text-white/30 hover:text-red-400 hover:bg-red-500/10 transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-0 disabled:cursor-not-allowed"
         title="Excluir categoria"
       >
         <Trash2 size={14} />
@@ -346,7 +346,7 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
               <p className="text-xs text-white/40">
                 {categories.length} categoria{categories.length !== 1 ? 's' : ''} configurada{categories.length !== 1 ? 's' : ''}
               </p>
-              <p className="text-xs text-gray-300">As alteracoes sao salvas automaticamente.</p>
+              <p className="text-xs text-white/30">As alteracoes sao salvas automaticamente.</p>
             </div>
           </Card>
 
@@ -438,13 +438,13 @@ export function CategorySettings({ embedded = false }: { embedded?: boolean } = 
       >
         {deleteTarget && (
           <div className="space-y-4">
-            <div className="flex items-start gap-3 p-3 bg-amber-50 border border-amber-100 rounded-xl">
-              <AlertTriangle size={18} className="text-amber-600 shrink-0 mt-0.5" />
+            <div className="flex items-start gap-3 p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+              <AlertTriangle size={18} className="text-amber-400 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-medium text-amber-800">
+                <p className="text-sm font-medium text-amber-300">
                   Excluir a categoria "{deleteTarget.label}"?
                 </p>
-                <p className="text-xs text-amber-600 mt-1">
+                <p className="text-xs text-amber-400/80 mt-1">
                   Todos os leads nessa categoria serao movidos para a categoria selecionada abaixo. Esta acao nao pode ser desfeita.
                 </p>
               </div>

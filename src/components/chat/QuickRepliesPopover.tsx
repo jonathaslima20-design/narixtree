@@ -231,7 +231,7 @@ export function QuickRepliesPopover({ open, onClose, onSelectText, onSelectImage
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 8, scale: 0.98 }}
         transition={{ duration: 0.15 }}
-        className="mx-3 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+        className="mx-3 bg-surface-2 rounded-2xl shadow-xl border border-white/[0.08] overflow-hidden"
         style={{ maxHeight: '420px' }}
       >
         <AnimatePresence mode="wait">
@@ -316,15 +316,15 @@ function PickerView({
 }: PickerViewProps) {
   return (
     <div className="flex flex-col" style={{ maxHeight: '420px' }}>
-      <div className="flex items-center gap-2 px-3 py-2.5 border-b border-gray-100">
+      <div className="flex items-center gap-2 px-3 py-2.5 border-b border-white/[0.08]">
         <div className="flex-1 relative">
-          <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-white/40" />
           <input
             type="text"
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Buscar resposta rapida..."
-            className="w-full pl-8 pr-3 py-1.5 text-xs bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+            className="w-full pl-8 pr-3 py-1.5 text-xs bg-white/[0.03] border border-white/[0.08] rounded-xl focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent"
             autoFocus
           />
         </div>
@@ -336,7 +336,7 @@ function PickerView({
         </button>
         <button
           onClick={onClose}
-          className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-1.5 text-white/40 hover:text-white/70 hover:bg-white/[0.06] rounded-lg transition-colors"
         >
           <X size={14} />
         </button>
@@ -345,11 +345,11 @@ function PickerView({
       <div className="flex-1 overflow-y-auto min-h-0" style={{ maxHeight: '360px' }}>
         {loading ? (
           <div className="p-6 text-center">
-            <div className="w-5 h-5 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin mx-auto" />
+            <div className="w-5 h-5 border-2 border-white/10 border-t-white/70 rounded-full animate-spin mx-auto" />
           </div>
         ) : templates.length === 0 ? (
           <div className="p-6 text-center">
-            <p className="text-xs text-gray-500 mb-2">
+            <p className="text-xs text-white/55 mb-2">
               {search ? 'Nenhum resultado encontrado' : 'Nenhuma resposta rapida'}
             </p>
             {!search && (
@@ -379,7 +379,7 @@ function PickerView({
                       </button>
                       <button
                         onClick={onCancelDelete}
-                        className="px-2 py-1 text-[10px] font-semibold text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50"
+                        className="px-2 py-1 text-[10px] font-semibold text-white/70 bg-surface-2 border border-white/10 rounded-lg hover:bg-white/[0.04]"
                       >
                         Cancelar
                       </button>
@@ -387,41 +387,41 @@ function PickerView({
                   ) : (
                     <button
                       onClick={() => onSelect(t)}
-                      className="w-full flex items-start gap-2.5 px-3 py-2.5 hover:bg-gray-50 transition-colors text-left"
+                      className="w-full flex items-start gap-2.5 px-3 py-2.5 hover:bg-white/[0.04] transition-colors text-left"
                     >
-                      <div className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center shrink-0 mt-0.5">
-                        <Icon size={13} className="text-gray-600" />
+                      <div className="w-7 h-7 rounded-lg bg-white/[0.06] flex items-center justify-center shrink-0 mt-0.5">
+                        <Icon size={13} className="text-white/70" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-semibold text-gray-900 truncate">{t.title}</span>
+                          <span className="text-xs font-semibold text-white truncate">{t.title}</span>
                           {t.shortcut && (
-                            <span className="text-[9px] font-mono font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded shrink-0">
+                            <span className="text-[9px] font-mono font-medium text-white/40 bg-white/[0.06] px-1.5 py-0.5 rounded shrink-0">
                               /{t.shortcut}
                             </span>
                           )}
                         </div>
-                        <p className="text-[11px] text-gray-500 truncate mt-0.5">
+                        <p className="text-[11px] text-white/55 truncate mt-0.5">
                           {t.media_type === 'image' ? (t.body || 'Imagem') : t.media_type === 'audio' ? 'Nota de voz' : t.body}
                         </p>
                       </div>
                       <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                         <button
                           onClick={(e) => { e.stopPropagation(); onEdit(t); }}
-                          className="p-1 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-md"
+                          className="p-1 text-white/40 hover:text-white/85 hover:bg-white/[0.06] rounded-md"
                           title="Editar"
                         >
                           <Pencil size={11} />
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); onDelete(t.id); }}
-                          className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md"
+                          className="p-1 text-white/40 hover:text-red-600 hover:bg-red-50 rounded-md"
                           title="Excluir"
                         >
                           <Trash2 size={11} />
                         </button>
                       </div>
-                      <ChevronRight size={12} className="text-gray-300 shrink-0 mt-1.5" />
+                      <ChevronRight size={12} className="text-white/30 shrink-0 mt-1.5" />
                     </button>
                   )}
                 </div>
@@ -465,21 +465,21 @@ function FormView({
 
   return (
     <div className="flex flex-col" style={{ maxHeight: '420px' }}>
-      <div className="flex items-center gap-2 px-3 py-2.5 border-b border-gray-100">
+      <div className="flex items-center gap-2 px-3 py-2.5 border-b border-white/[0.08]">
         <button
           onClick={onBack}
-          className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-1.5 text-white/40 hover:text-white/70 hover:bg-white/[0.06] rounded-lg transition-colors"
         >
           <ArrowLeft size={14} />
         </button>
-        <span className="text-xs font-semibold text-gray-900 flex-1">
+        <span className="text-xs font-semibold text-white flex-1">
           {editId ? 'Editar resposta rapida' : 'Nova resposta rapida'}
         </span>
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 space-y-3" style={{ maxHeight: '360px' }}>
         {/* Type tabs */}
-        <div className="flex gap-1 p-0.5 bg-gray-100 rounded-xl">
+        <div className="flex gap-1 p-0.5 bg-white/[0.06] rounded-xl">
           {TYPE_TABS.map((tab) => {
             const Icon = tab.icon;
             const active = formType === tab.key;
@@ -488,7 +488,7 @@ function FormView({
                 key={tab.key}
                 onClick={() => onTypeChange(tab.key)}
                 className={`flex-1 flex items-center justify-center gap-1 py-1.5 text-[10px] font-semibold rounded-lg transition-all ${
-                  active ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                  active ? 'bg-surface-3 text-white shadow-sm' : 'text-white/55 hover:text-white/85'
                 }`}
               >
                 <Icon size={11} /> {tab.label}
@@ -499,27 +499,27 @@ function FormView({
 
         {/* Title */}
         <div>
-          <label className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide">Titulo</label>
+          <label className="text-[10px] font-semibold text-white/55 uppercase tracking-wide">Titulo</label>
           <input
             type="text"
             value={formTitle}
             onChange={(e) => onTitleChange(e.target.value)}
             placeholder="Ex: Saudacao inicial"
-            className="w-full mt-1 px-3 py-2 text-xs bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+            className="w-full mt-1 px-3 py-2 text-xs bg-white/[0.03] border border-white/[0.08] rounded-xl focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent"
           />
         </div>
 
         {/* Shortcut */}
         <div>
-          <label className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide">Atalho (opcional)</label>
+          <label className="text-[10px] font-semibold text-white/55 uppercase tracking-wide">Atalho (opcional)</label>
           <div className="relative mt-1">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">/</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-xs">/</span>
             <input
               type="text"
               value={formShortcut}
               onChange={(e) => onShortcutChange(e.target.value.replace(/\s/g, '').toLowerCase())}
               placeholder="ola"
-              className="w-full pl-6 pr-3 py-2 text-xs bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+              className="w-full pl-6 pr-3 py-2 text-xs bg-white/[0.03] border border-white/[0.08] rounded-xl focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent"
             />
           </div>
         </div>
@@ -527,7 +527,7 @@ function FormView({
         {/* Body (for text and link types) */}
         {(formType === 'text' || formType === 'link') && (
           <div>
-            <label className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide">
+            <label className="text-[10px] font-semibold text-white/55 uppercase tracking-wide">
               {formType === 'link' ? 'URL' : 'Mensagem'}
             </label>
             <textarea
@@ -535,7 +535,7 @@ function FormView({
               onChange={(e) => onBodyChange(e.target.value)}
               placeholder={formType === 'link' ? 'https://...' : 'Digite a mensagem...'}
               rows={3}
-              className="w-full mt-1 px-3 py-2 text-xs bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none"
+              className="w-full mt-1 px-3 py-2 text-xs bg-white/[0.03] border border-white/[0.08] rounded-xl focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent resize-none"
             />
           </div>
         )}
@@ -543,7 +543,7 @@ function FormView({
         {/* Caption for image */}
         {formType === 'image' && (
           <div>
-            <label className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide">
+            <label className="text-[10px] font-semibold text-white/55 uppercase tracking-wide">
               Legenda (opcional)
             </label>
             <textarea
@@ -551,7 +551,7 @@ function FormView({
               onChange={(e) => onBodyChange(e.target.value)}
               placeholder="Legenda da imagem..."
               rows={2}
-              className="w-full mt-1 px-3 py-2 text-xs bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none"
+              className="w-full mt-1 px-3 py-2 text-xs bg-white/[0.03] border border-white/[0.08] rounded-xl focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent resize-none"
             />
           </div>
         )}
@@ -568,25 +568,25 @@ function FormView({
             />
 
             {formFilePreview && formType === 'image' && (
-              <div className="mb-2 rounded-xl overflow-hidden border border-gray-100">
+              <div className="mb-2 rounded-xl overflow-hidden border border-white/[0.08]">
                 <img src={formFilePreview} alt="Preview" className="w-full max-h-32 object-cover" />
               </div>
             )}
 
             {formFilePreview && formType === 'audio' && (
-              <div className="mb-2 rounded-xl border border-gray-100 p-2">
+              <div className="mb-2 rounded-xl border border-white/[0.08] p-2">
                 <AudioPlayer src={formFilePreview} durationSeconds={formAudioDuration} variant="in" />
               </div>
             )}
 
             {!formFilePreview && existingMediaUrl && formType === 'image' && (
-              <div className="mb-2 rounded-xl overflow-hidden border border-gray-100">
+              <div className="mb-2 rounded-xl overflow-hidden border border-white/[0.08]">
                 <img src={existingMediaUrl} alt="Atual" className="w-full max-h-32 object-cover" />
               </div>
             )}
 
             {!formFilePreview && existingMediaUrl && formType === 'audio' && (
-              <div className="mb-2 rounded-xl border border-gray-100 p-2">
+              <div className="mb-2 rounded-xl border border-white/[0.08] p-2">
                 <AudioPlayer src={existingMediaUrl} durationSeconds={formAudioDuration} variant="in" />
               </div>
             )}
@@ -594,7 +594,7 @@ function FormView({
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="w-full flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium text-gray-600 bg-gray-50 border border-dashed border-gray-200 rounded-xl hover:bg-gray-100 hover:border-gray-300 transition-colors"
+              className="w-full flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium text-white/70 bg-white/[0.03] border border-dashed border-white/10 rounded-xl hover:bg-white/[0.06] hover:border-white/15 transition-colors"
             >
               <Upload size={13} />
               {formFile ? formFile.name : existingMediaUrl ? 'Trocar arquivo' : formType === 'image' ? 'Selecionar imagem' : 'Selecionar audio'}
@@ -607,10 +607,10 @@ function FormView({
         )}
       </div>
 
-      <div className="flex items-center gap-2 px-3 py-2.5 border-t border-gray-100">
+      <div className="flex items-center gap-2 px-3 py-2.5 border-t border-white/[0.08]">
         <button
           onClick={onBack}
-          className="flex-1 py-2 text-xs font-medium text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
+          className="flex-1 py-2 text-xs font-medium text-white/70 bg-white/[0.06] rounded-xl hover:bg-white/[0.10] transition-colors"
         >
           Cancelar
         </button>

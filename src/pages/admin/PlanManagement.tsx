@@ -280,8 +280,8 @@ export function PlanManagement() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
               <Card>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center">
-                    <DollarSign size={18} className="text-emerald-600" />
+                  <div className="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center">
+                    <DollarSign size={18} className="text-emerald-400" />
                   </div>
                   <div>
                     <p className="text-xl font-bold text-white">{formatBRL(totalMRR)}</p>
@@ -291,8 +291,8 @@ export function PlanManagement() {
               </Card>
               <Card>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center">
-                    <Users size={18} className="text-sky-600" />
+                  <div className="w-10 h-10 bg-sky-500/10 rounded-xl flex items-center justify-center">
+                    <Users size={18} className="text-sky-400" />
                   </div>
                   <div>
                     <p className="text-xl font-bold text-white">
@@ -304,8 +304,8 @@ export function PlanManagement() {
               </Card>
               <Card>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center">
-                    <CreditCard size={18} className="text-amber-600" />
+                  <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center">
+                    <CreditCard size={18} className="text-amber-400" />
                   </div>
                   <div>
                     <p className="text-xl font-bold text-white">
@@ -322,7 +322,7 @@ export function PlanManagement() {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[...Array(2)].map((_, i) => (
-                <div key={i} className="h-64 bg-white rounded-2xl border border-white/10 animate-pulse" />
+                <div key={i} className="h-64 bg-white/[0.04] rounded-2xl border border-white/10 animate-pulse" />
               ))}
             </div>
           ) : plans.length === 0 ? (
@@ -331,7 +331,7 @@ export function PlanManagement() {
                 <CreditCard size={28} className="text-white/40" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-1">Nenhum plano cadastrado</h3>
-              <p className="text-sm text-white/55 mb-6">Crie seu primeiro plano para começar a gerenciar assinaturas.</p>
+              <p className="text-sm text-white/55 mb-6">Crie seu primeiro plano para comecar a gerenciar assinaturas.</p>
               <Button onClick={openCreate}>
                 <Plus size={16} />
                 Criar primeiro plano
@@ -410,8 +410,8 @@ export function PlanManagement() {
                   onClick={() => setForm((f) => ({ ...f, billing_period: 'monthly' }))}
                   className={`flex-1 py-2.5 rounded-2xl text-sm font-medium border transition-all ${
                     form.billing_period === 'monthly'
-                      ? 'bg-gray-900 text-white border-gray-900'
-                      : 'bg-white text-white/70 border-white/10 hover:border-white/15'
+                      ? 'bg-white/[0.10] text-white border-white/20'
+                      : 'bg-white/[0.04] text-white/70 border-white/10 hover:border-white/15'
                   }`}
                 >
                   Mensal
@@ -421,8 +421,8 @@ export function PlanManagement() {
                   onClick={() => setForm((f) => ({ ...f, billing_period: 'yearly' }))}
                   className={`flex-1 py-2.5 rounded-2xl text-sm font-medium border transition-all ${
                     form.billing_period === 'yearly'
-                      ? 'bg-gray-900 text-white border-gray-900'
-                      : 'bg-white text-white/70 border-white/10 hover:border-white/15'
+                      ? 'bg-white/[0.10] text-white border-white/20'
+                      : 'bg-white/[0.04] text-white/70 border-white/10 hover:border-white/15'
                   }`}
                 >
                   Anual
@@ -448,8 +448,8 @@ export function PlanManagement() {
                       }
                       className={`text-xs px-2 py-0.5 rounded-full font-medium transition-colors ${
                         isUnlimited
-                          ? 'bg-emerald-100 text-emerald-700'
-                          : 'bg-white/[0.10] text-white/55 hover:bg-gray-300'
+                          ? 'bg-emerald-500/15 text-emerald-400'
+                          : 'bg-white/[0.10] text-white/55 hover:bg-white/[0.15]'
                       }`}
                     >
                       {isUnlimited ? 'Ilimitado' : 'Limitar'}
@@ -508,7 +508,7 @@ export function PlanManagement() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl"
+              className="bg-surface-1 rounded-2xl p-6 w-full max-w-sm shadow-xl border border-white/[0.08]"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg font-semibold text-white mb-2">Excluir plano?</h3>
@@ -558,7 +558,7 @@ function PlanCard({
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-2xl border border-white/10 p-6 hover:shadow-md transition-shadow"
+      className="bg-surface-2 rounded-2xl border border-white/10 p-6 hover:border-white/15 transition-all"
     >
       <div className="flex items-start justify-between mb-4">
         <div>
@@ -615,7 +615,7 @@ function PlanCard({
         </button>
         <button
           onClick={onDuplicate}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-600 bg-sky-50 hover:bg-sky-100 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sky-400 bg-sky-500/10 hover:bg-sky-500/20 transition-colors"
         >
           <Copy size={12} />
           Duplicar
@@ -624,8 +624,8 @@ function PlanCard({
           onClick={onToggle}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
             plan.is_active
-              ? 'text-amber-600 bg-amber-50 hover:bg-amber-100'
-              : 'text-emerald-600 bg-emerald-50 hover:bg-emerald-100'
+              ? 'text-amber-400 bg-amber-500/10 hover:bg-amber-500/20'
+              : 'text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20'
           }`}
         >
           {plan.is_active ? (
@@ -643,7 +643,7 @@ function PlanCard({
         {subscriberCount === 0 && (
           <button
             onClick={onDelete}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 transition-colors ml-auto"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-red-400 bg-red-500/10 hover:bg-red-500/20 transition-colors ml-auto"
           >
             <Trash2 size={12} />
             Excluir

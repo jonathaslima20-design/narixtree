@@ -140,32 +140,32 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white z-50 shadow-xl flex flex-col"
+            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-surface-1 z-50 shadow-xl flex flex-col"
           >
-            <div className="flex items-center justify-between p-4 border-b border-gray-100">
+            <div className="flex items-center justify-between p-4 border-b border-white/[0.08]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center text-sm font-bold text-gray-700">
+                <div className="w-10 h-10 bg-white/[0.10] rounded-full flex items-center justify-center text-sm font-bold text-white/85">
                   {leadDisplayName(lead).charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">{leadDisplayName(lead)}</p>
-                  <p className="text-xs text-gray-500">{leadPhoneLabel(lead)}</p>
+                  <p className="text-sm font-semibold text-white">{leadDisplayName(lead)}</p>
+                  <p className="text-xs text-white/55">{leadPhoneLabel(lead)}</p>
                 </div>
               </div>
-              <button onClick={onClose} className="p-2 rounded-xl hover:bg-gray-100">
+              <button onClick={onClose} className="p-2 rounded-xl hover:bg-white/[0.06]">
                 <X size={16} />
               </button>
             </div>
 
-            <div className="flex border-b border-gray-100">
+            <div className="flex border-b border-white/[0.08]">
               {tabs.map((t) => (
                 <button
                   key={t.key}
                   onClick={() => setTab(t.key)}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-medium transition-all ${
                     tab === t.key
-                      ? 'text-gray-900 border-b-2 border-gray-900'
-                      : 'text-gray-400 hover:text-gray-600'
+                      ? 'text-white border-b-2 border-white'
+                      : 'text-white/40 hover:text-white/70'
                   }`}
                 >
                   <t.icon size={13} /> {t.label}
@@ -180,7 +180,7 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                     <button
                       onClick={() => update({ is_favorite: !lead.is_favorite })}
                       className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium border transition-colors ${
-                        lead.is_favorite ? 'bg-amber-50 border-amber-200 text-amber-700' : 'border-gray-200 text-gray-600 hover:bg-gray-50'
+                        lead.is_favorite ? 'bg-amber-50 border-amber-200 text-amber-700' : 'border-white/10 text-white/70 hover:bg-white/[0.04]'
                       }`}
                     >
                       <Star size={12} className={lead.is_favorite ? 'fill-amber-400' : ''} /> Favorito
@@ -188,7 +188,7 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                     <button
                       onClick={() => update({ is_archived: !lead.is_archived })}
                       className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium border transition-colors ${
-                        lead.is_archived ? 'bg-gray-100 border-gray-300 text-gray-700' : 'border-gray-200 text-gray-600 hover:bg-gray-50'
+                        lead.is_archived ? 'bg-white/[0.06] border-white/15 text-white/85' : 'border-white/10 text-white/70 hover:bg-white/[0.04]'
                       }`}
                     >
                       <Archive size={12} /> Arquivar
@@ -196,7 +196,7 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                     <button
                       onClick={() => update({ is_blocked: !lead.is_blocked })}
                       className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium border transition-colors ${
-                        lead.is_blocked ? 'bg-red-50 border-red-200 text-red-700' : 'border-gray-200 text-gray-600 hover:bg-gray-50'
+                        lead.is_blocked ? 'bg-red-50 border-red-200 text-red-700' : 'border-white/10 text-white/70 hover:bg-white/[0.04]'
                       }`}
                     >
                       <Ban size={12} /> Bloquear
@@ -204,7 +204,7 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                   </div>
 
                   <div>
-                    <p className="text-xs font-medium text-gray-500 mb-2">Categoria</p>
+                    <p className="text-xs font-medium text-white/55 mb-2">Categoria</p>
                     <div className="grid grid-cols-3 gap-1.5">
                       {categories.map((c) => {
                         const active = lead.category === c.key;
@@ -214,7 +214,7 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                             key={c.key}
                             onClick={() => setCategory(c.key)}
                             className={`px-2 py-1.5 rounded-lg text-[11px] font-medium transition-all flex items-center justify-center gap-1 ${
-                              active ? `${c.color} ring-2 ring-gray-900` : `${c.color} opacity-60 hover:opacity-100`
+                              active ? `${c.color} ring-2 ring-white/20` : `${c.color} opacity-60 hover:opacity-100`
                             }`}
                           >
                             <CatIcon size={11} />
@@ -234,18 +234,18 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                   </div>
                   <button
                     onClick={saveDetails}
-                    className="w-full py-2 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-700 transition-colors"
+                    className="w-full py-2 bg-white/[0.10] text-white text-sm font-medium rounded-xl hover:bg-white/[0.15] transition-colors"
                   >
                     Salvar alteracoes
                   </button>
 
                   <div>
-                    <p className="text-xs font-medium text-gray-500 mb-2 flex items-center gap-1">
+                    <p className="text-xs font-medium text-white/55 mb-2 flex items-center gap-1">
                       <TagIcon size={11} /> Tags
                     </p>
                     <div className="flex flex-wrap gap-1.5 mb-2">
                       {(lead.tags || []).map((t) => (
-                        <span key={t} className="flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-lg">
+                        <span key={t} className="flex items-center gap-1 px-2 py-1 bg-white/[0.06] text-white/85 text-xs rounded-lg">
                           {t}
                           <button onClick={() => removeTag(t)}><X size={10} /></button>
                         </span>
@@ -258,9 +258,9 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                         onChange={(e) => setNewTag(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && addTag()}
                         placeholder="Nova tag"
-                        className="flex-1 px-2.5 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-gray-900"
+                        className="flex-1 px-2.5 py-1.5 bg-white/[0.03] border border-white/[0.08] rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-white/20"
                       />
-                      <button onClick={addTag} className="px-3 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg hover:bg-gray-700">
+                      <button onClick={addTag} className="px-3 py-1.5 bg-white/[0.10] text-white text-xs font-medium rounded-lg hover:bg-white/[0.15]">
                         Adicionar
                       </button>
                     </div>
@@ -283,21 +283,21 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
                       onChange={(e) => setNewNote(e.target.value)}
                       placeholder="Adicionar nota interna..."
                       rows={2}
-                      className="flex-1 px-3 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="flex-1 px-3 py-2 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-white/20"
                     />
                   </div>
-                  <button onClick={addNote} className="w-full py-2 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-700">
+                  <button onClick={addNote} className="w-full py-2 bg-white/[0.10] text-white text-sm font-medium rounded-xl hover:bg-white/[0.15]">
                     Salvar nota
                   </button>
                   <div className="space-y-2">
                     {notes.length === 0 ? (
-                      <p className="text-xs text-gray-400 text-center py-6">Nenhuma nota ainda</p>
+                      <p className="text-xs text-white/40 text-center py-6">Nenhuma nota ainda</p>
                     ) : (
                       notes.map((n) => (
                         <div key={n.id} className="p-3 bg-amber-50 border border-amber-100 rounded-xl">
-                          <p className="text-sm text-gray-800 whitespace-pre-wrap">{n.body}</p>
+                          <p className="text-sm text-white/90 whitespace-pre-wrap">{n.body}</p>
                           <div className="flex items-center justify-between mt-2">
-                            <span className="text-[10px] text-gray-500">{new Date(n.created_at).toLocaleString('pt-BR')}</span>
+                            <span className="text-[10px] text-white/55">{new Date(n.created_at).toLocaleString('pt-BR')}</span>
                             <button onClick={() => deleteNote(n.id)} className="text-[10px] text-red-400 hover:text-red-600">Remover</button>
                           </div>
                         </div>
@@ -310,13 +310,13 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
               {tab === 'activity' && (
                 <div className="space-y-2">
                   {activities.length === 0 ? (
-                    <p className="text-xs text-gray-400 text-center py-6">Nenhuma atividade ainda</p>
+                    <p className="text-xs text-white/40 text-center py-6">Nenhuma atividade ainda</p>
                   ) : (
                     activities.map((a) => (
-                      <div key={a.id} className="flex items-start gap-3 p-2.5 border-l-2 border-gray-200">
+                      <div key={a.id} className="flex items-start gap-3 p-2.5 border-l-2 border-white/10">
                         <div className="flex-1">
-                          <p className="text-xs font-medium text-gray-700">{humanizeAction(a.action)}</p>
-                          <p className="text-[10px] text-gray-400 mt-0.5">{new Date(a.created_at).toLocaleString('pt-BR')}</p>
+                          <p className="text-xs font-medium text-white/85">{humanizeAction(a.action)}</p>
+                          <p className="text-[10px] text-white/40 mt-0.5">{new Date(a.created_at).toLocaleString('pt-BR')}</p>
                         </div>
                       </div>
                     ))
@@ -335,14 +335,14 @@ export function LeadDetailsDrawer({ open, onClose, lead, userId, onLeadUpdated, 
 function Field({ label, value, onChange, icon: Icon }: { label: string; value: string; onChange: (v: string) => void; icon?: typeof Mail }) {
   return (
     <div>
-      <label className="text-xs font-medium text-gray-500 flex items-center gap-1 mb-1">
+      <label className="text-xs font-medium text-white/55 flex items-center gap-1 mb-1">
         {Icon && <Icon size={11} />} {label}
       </label>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+        className="w-full px-3 py-2 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
       />
     </div>
   );

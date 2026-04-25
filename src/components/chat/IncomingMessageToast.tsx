@@ -53,7 +53,7 @@ function ToastCard({
       animate={{ opacity: 1, y: 0, x: 0 }}
       exit={{ opacity: 0, x: 24, transition: { duration: 0.2 } }}
       transition={{ type: 'spring', stiffness: 320, damping: 28 }}
-      className="pointer-events-auto w-80 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+      className="pointer-events-auto w-80 bg-surface-2 rounded-2xl shadow-xl border border-white/[0.08] overflow-hidden"
     >
       <div
         role="button"
@@ -69,24 +69,24 @@ function ToastCard({
             onDismiss(toast.id);
           }
         }}
-        className="w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-gray-50 transition-colors cursor-pointer"
+        className="w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-white/[0.04] transition-colors cursor-pointer"
       >
         <div className="relative w-10 h-10 shrink-0">
           {toast.avatarUrl ? (
             <img
               src={toast.avatarUrl}
               alt={title}
-              className="w-10 h-10 rounded-full object-cover bg-gray-100"
+              className="w-10 h-10 rounded-full object-cover bg-white/[0.06]"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).style.display = 'none';
               }}
             />
           ) : (
-            <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center text-sm font-bold text-gray-700">
+            <div className="w-10 h-10 bg-white/[0.10] rounded-full flex items-center justify-center text-sm font-bold text-white/85">
               {initial}
             </div>
           )}
-          <span className="absolute -bottom-1 -right-1 bg-emerald-500 rounded-full p-1 border-2 border-white">
+          <span className="absolute -bottom-1 -right-1 bg-emerald-500 rounded-full p-1 border-2 border-surface-2">
             <MessageSquare size={9} className="text-white" />
           </span>
         </div>
@@ -94,15 +94,15 @@ function ToastCard({
           <p className="text-xs text-emerald-600 font-semibold uppercase tracking-wide">
             Nova mensagem
           </p>
-          <p className="text-sm font-bold text-gray-900 truncate mt-0.5">{title}</p>
-          <p className="text-xs text-gray-600 truncate mt-0.5">{toast.preview}</p>
+          <p className="text-sm font-bold text-white truncate mt-0.5">{title}</p>
+          <p className="text-xs text-white/70 truncate mt-0.5">{toast.preview}</p>
         </div>
         <button
           onClick={(e) => {
             e.stopPropagation();
             onDismiss(toast.id);
           }}
-          className="shrink-0 p-1 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+          className="shrink-0 p-1 rounded-md text-white/30 hover:text-white/70 hover:bg-white/[0.06] transition-colors"
           aria-label="Dispensar notificação"
         >
           <X size={14} />

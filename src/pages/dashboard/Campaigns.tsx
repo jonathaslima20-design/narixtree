@@ -30,11 +30,11 @@ import { Button } from '../../components/ui/Button';
 
 const STATUS_CONFIG: Record<CampaignStatus, { label: string; color: string; bg: string; icon: typeof Send }> = {
   draft: { label: 'Rascunho', color: 'text-white/70', bg: 'bg-white/[0.06]', icon: FileText },
-  scheduled: { label: 'Agendada', color: 'text-sky-600', bg: 'bg-sky-50', icon: Calendar },
-  sending: { label: 'Enviando', color: 'text-amber-600', bg: 'bg-amber-50', icon: Send },
-  paused: { label: 'Pausada', color: 'text-orange-600', bg: 'bg-orange-50', icon: Pause },
-  completed: { label: 'Concluída', color: 'text-emerald-600', bg: 'bg-emerald-50', icon: CheckCircle2 },
-  failed: { label: 'Falhou', color: 'text-red-600', bg: 'bg-red-50', icon: XCircle },
+  scheduled: { label: 'Agendada', color: 'text-sky-400', bg: 'bg-sky-500/10', icon: Calendar },
+  sending: { label: 'Enviando', color: 'text-amber-400', bg: 'bg-amber-500/10', icon: Send },
+  paused: { label: 'Pausada', color: 'text-orange-400', bg: 'bg-orange-500/10', icon: Pause },
+  completed: { label: 'Concluida', color: 'text-emerald-400', bg: 'bg-emerald-500/10', icon: CheckCircle2 },
+  failed: { label: 'Falhou', color: 'text-red-400', bg: 'bg-red-500/10', icon: XCircle },
   cancelled: { label: 'Cancelada', color: 'text-white/55', bg: 'bg-white/[0.04]', icon: X },
 };
 
@@ -152,7 +152,7 @@ export function Campaigns() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-              <div className="w-10 h-10 bg-gray-900 rounded-2xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-white/[0.10] rounded-2xl flex items-center justify-center">
                 <Megaphone size={18} className="text-white" />
               </div>
               Campanhas de Envio
@@ -170,10 +170,10 @@ export function Campaigns() {
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
           {[
-            { label: 'Total', value: stats.total, color: 'bg-gray-900', textColor: 'text-white' },
-            { label: 'Ativas agora', value: stats.active, color: 'bg-amber-50', textColor: 'text-amber-700' },
-            { label: 'Agendadas', value: stats.scheduled, color: 'bg-sky-50', textColor: 'text-sky-700' },
-            { label: 'Concluídas', value: stats.completed, color: 'bg-emerald-50', textColor: 'text-emerald-700' },
+            { label: 'Total', value: stats.total, color: 'bg-white/[0.06]', textColor: 'text-white' },
+            { label: 'Ativas agora', value: stats.active, color: 'bg-amber-500/10', textColor: 'text-amber-400' },
+            { label: 'Agendadas', value: stats.scheduled, color: 'bg-sky-500/10', textColor: 'text-sky-400' },
+            { label: 'Concluidas', value: stats.completed, color: 'bg-emerald-500/10', textColor: 'text-emerald-400' },
           ].map((s) => (
             <div key={s.label} className={`${s.color} rounded-2xl p-4`}>
               <p className={`text-2xl font-bold ${s.textColor}`}>{s.value}</p>
@@ -184,14 +184,14 @@ export function Campaigns() {
 
         {/* Filter tabs + search */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-6">
-          <div className="flex items-center gap-1 bg-white rounded-xl p-1 border border-white/10 overflow-x-auto">
+          <div className="flex items-center gap-1 bg-white/[0.04] rounded-xl p-1 border border-white/10 overflow-x-auto">
             {filterTabs.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setFilter(tab.key)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                   filter === tab.key
-                    ? 'bg-gray-900 text-white'
+                    ? 'bg-white/[0.10] text-white'
                     : 'text-white/55 hover:text-white/85 hover:bg-white/[0.04]'
                 }`}
               >
@@ -211,7 +211,7 @@ export function Campaigns() {
               placeholder="Buscar campanha..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-xl border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-white/15"
+              className="w-full pl-9 pr-3 py-2 rounded-xl border border-white/10 bg-surface-2 text-white/85 text-sm focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15"
             />
           </div>
         </div>
@@ -221,7 +221,7 @@ export function Campaigns() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl border border-white/10 p-16 text-center"
+            className="bg-surface-2 rounded-2xl border border-white/10 p-16 text-center"
           >
             <div className="w-16 h-16 bg-white/[0.06] rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Megaphone size={28} className="text-white/40" />
@@ -257,7 +257,7 @@ export function Campaigns() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.97 }}
-                    className="bg-white rounded-2xl border border-white/10 p-5 hover:shadow-sm transition-shadow cursor-pointer group"
+                    className="bg-surface-2 rounded-2xl border border-white/10 p-5 hover:border-white/15 transition-all cursor-pointer group"
                     onClick={() => navigate(`/dashboard/campaigns/${c.id}`)}
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
@@ -350,7 +350,7 @@ export function Campaigns() {
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
                               exit={{ opacity: 0, scale: 0.95 }}
-                              className="absolute right-0 top-10 z-30 w-44 bg-white rounded-xl border border-white/10 shadow-lg py-1"
+                              className="absolute right-0 top-10 z-30 w-44 bg-surface-1 rounded-xl border border-white/10 shadow-lg py-1"
                             >
                               <button
                                 onClick={() => { navigate(`/dashboard/campaigns/${c.id}`); setMenuOpen(null); }}
@@ -361,7 +361,7 @@ export function Campaigns() {
                               {c.status === 'sending' && (
                                 <button
                                   onClick={() => { updateStatus(c.id, 'paused'); setMenuOpen(null); }}
-                                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-orange-600 hover:bg-orange-50"
+                                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-orange-400 hover:bg-orange-500/10"
                                 >
                                   <Pause size={14} /> Pausar
                                 </button>
@@ -369,7 +369,7 @@ export function Campaigns() {
                               {c.status === 'paused' && (
                                 <button
                                   onClick={() => { updateStatus(c.id, 'sending'); setMenuOpen(null); }}
-                                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-emerald-600 hover:bg-emerald-50"
+                                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-emerald-400 hover:bg-emerald-500/10"
                                 >
                                   <Play size={14} /> Retomar
                                 </button>
@@ -383,7 +383,7 @@ export function Campaigns() {
                               {(c.status === 'draft' || c.status === 'completed' || c.status === 'cancelled' || c.status === 'failed') && (
                                 <button
                                   onClick={() => setConfirmDelete(c.id)}
-                                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+                                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-500/10"
                                 >
                                   <Trash2 size={14} /> Excluir
                                 </button>
@@ -416,7 +416,7 @@ export function Campaigns() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl"
+              className="bg-surface-1 rounded-2xl p-6 w-full max-w-sm shadow-xl border border-white/[0.08]"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg font-semibold text-white mb-2">Excluir campanha?</h3>

@@ -147,7 +147,7 @@ export function DashboardHome() {
                           <p className="text-xs text-white/40">{leadPhoneLabel(lead)}</p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-white border border-white/10 px-2 py-1 rounded-lg">
+                      <div className="flex items-center gap-1.5 bg-white/[0.04] border border-white/10 px-2 py-1 rounded-lg">
                         <CatIcon size={11} className={catColor} />
                         <span className="text-xs text-white/55">{catLabel}</span>
                       </div>
