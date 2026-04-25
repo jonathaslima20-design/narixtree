@@ -56,7 +56,13 @@ function Navbar() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate('/login')}
-            className="inline-flex sm:inline-flex text-sm text-white/80 hover:text-white px-4 py-2 rounded-lg transition-colors"
+            className="inline-flex sm:hidden text-sm font-medium bg-white text-black hover:bg-white/90 px-4 py-2 rounded-lg transition-all hover:scale-[1.02]"
+          >
+            Login
+          </button>
+          <button
+            onClick={() => navigate('/login')}
+            className="hidden sm:inline-flex text-sm text-white/80 hover:text-white px-4 py-2 rounded-lg transition-colors"
           >
             Login
           </button>
