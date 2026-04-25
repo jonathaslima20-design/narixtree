@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Virtuoso } from 'react-virtuoso';
-import { Search, Star, Archive, Smartphone, ChevronDown } from 'lucide-react';
+import { Search, Star, Archive, Smartphone } from 'lucide-react';
+import { Select } from '../ui/Select';
 import { Lead } from '../../lib/types';
 import { leadDisplayName } from '../../lib/leadDisplay';
 import { useLeadCategories } from '../../lib/useLeadCategories';
@@ -125,19 +126,19 @@ export function ConversationList({
           ))}
         </div>
         {instances.length > 1 && onInstanceFilterChange && (
-          <div className="mt-2 relative">
-            <Smartphone size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
-            <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
-            <select
+          <div className="mt-2">
+            <Select
+              size="sm"
+              fullWidth
               value={instanceFilter}
-              onChange={(e) => onInstanceFilterChange(e.target.value)}
-              className="w-full appearance-none pl-7 pr-6 py-1.5 text-xs bg-white/[0.03] border border-white/[0.08] rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent cursor-pointer"
-            >
-              <option value="all">Todas as instâncias ({instances.length})</option>
-              {instances.map((i) => (
-                <option key={i.id} value={i.id}>{instanceDisplayName(i)}</option>
-              ))}
-            </select>
+              onChange={onInstanceFilterChange}
+              leftIcon={<Smartphone size={13} />}
+              ariaLabel="Filtrar por instância"
+              options={[
+                { value: 'all', label: `Todas as instâncias (${instances.length})` },
+                ...instances.map((i) => ({ value: i.id, label: instanceDisplayName(i) })),
+              ]}
+            />
           </div>
         )}
       </div>

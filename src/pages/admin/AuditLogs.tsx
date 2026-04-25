@@ -7,6 +7,7 @@ import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import { Badge } from '../../components/ui/Badge';
 import { AdminAuditLog, ACTION_LABELS, actionLabel } from '../../lib/adminAudit';
+import { Select } from '../../components/ui/Select';
 
 const PERIOD_OPTIONS = [
   { value: '24h', label: 'Últimas 24h', hours: 24 },
@@ -247,18 +248,5 @@ function SelectFilter({
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
 }) {
-  return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15 cursor-pointer"
-      >
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>{o.label}</option>
-        ))}
-      </select>
-      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
-    </div>
-  );
+  return <Select value={value} onChange={onChange} options={options} />;
 }

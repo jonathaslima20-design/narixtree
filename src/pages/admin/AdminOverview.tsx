@@ -8,7 +8,6 @@ import {
   Activity,
   CreditCard,
   DollarSign,
-  ChevronDown,
   ArrowUpRight,
   ArrowDownRight,
   Minus,
@@ -19,6 +18,7 @@ import {
 import { supabase } from '../../lib/supabase';
 import { Card } from '../../components/ui/Card';
 import { Plan } from '../../lib/types';
+import { Select } from '../../components/ui/Select';
 
 interface Stats {
   totalUsers: number;
@@ -446,20 +446,7 @@ export function AdminOverview() {
 }
 
 function PeriodSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
-  return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15 cursor-pointer"
-      >
-        {PERIOD_OPTIONS.map((o) => (
-          <option key={o.value} value={o.value}>{o.label}</option>
-        ))}
-      </select>
-      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
-    </div>
-  );
+  return <Select value={value} onChange={onChange} options={PERIOD_OPTIONS.map((o) => ({ value: o.value, label: o.label }))} />;
 }
 
 function DeltaBadge({ direction, label }: { direction: 'up' | 'down' | 'flat'; label: string }) {

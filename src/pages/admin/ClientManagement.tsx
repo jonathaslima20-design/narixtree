@@ -14,7 +14,6 @@ import {
   Ban,
   CalendarPlus,
   Save,
-  ChevronDown,
   Send,
   Power,
   RotateCcw,
@@ -31,6 +30,7 @@ import { Plan, Profile, SubscriptionStatus } from '../../lib/types';
 import { useClientSubscriptions } from '../../lib/useClientSubscriptions';
 import { usePlans } from '../../lib/usePlans';
 import { logAdminAction } from '../../lib/adminAudit';
+import { Select } from '../../components/ui/Select';
 
 interface ClientRow extends Profile {
   instance_status?: string;
@@ -416,20 +416,7 @@ function FilterSelect({
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
 }) {
-  return (
-    <div className="relative">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-2.5 text-sm border border-white/10 rounded-2xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/15 cursor-pointer"
-      >
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
-        ))}
-      </select>
-      <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
-    </div>
-  );
+  return <Select value={value} onChange={onChange} options={options} />;
 }
 
 function ClientCard({
@@ -854,18 +841,18 @@ function ClientDetailModal({
                 {changingPlan && (
                   <div className="mt-3 pt-3 border-t border-white/10">
                     <div className="flex items-center gap-2">
-                      <select
-                        value={selectedPlanId}
-                        onChange={(e) => setSelectedPlanId(e.target.value)}
-                        className="flex-1 px-3 py-2 text-sm border border-white/10 rounded-xl bg-surface-2 text-white/85 focus:outline-none focus:ring-2 focus:ring-white/20"
-                      >
-                        <option value="">Selecione um plano</option>
-                        {plans.filter((p) => p.is_active).map((p) => (
-                          <option key={p.id} value={p.id}>
-                            {p.name} - {formatBRL(p.price_cents)}/{p.billing_period === 'monthly' ? 'mes' : 'ano'}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="flex-1">
+                        <Select
+                          value={selectedPlanId}
+                          onChange={setSelectedPlanId}
+                          placeholder="Selecione um plano"
+                          fullWidth
+                          options={plans.filter((p) => p.is_active).map((p) => ({
+                            value: p.id,
+                            label: `${p.name} - ${formatBRL(p.price_cents)}/${p.billing_period === 'monthly' ? 'mes' : 'ano'}`,
+                          }))}
+                        />
+                      </div>
                       <Button
                         size="sm"
                         loading={savingPlan}

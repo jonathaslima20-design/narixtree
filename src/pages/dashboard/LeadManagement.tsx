@@ -13,6 +13,7 @@ import { leadDisplayName, leadPhoneLabel, isPrivateContact } from '../../lib/lea
 import { useLeadCategories } from '../../lib/useLeadCategories';
 import { resolveIcon } from '../../lib/iconMap';
 import { BulkImportLeadsModal } from '../../components/leads/BulkImportLeadsModal';
+import { Select } from '../../components/ui/Select';
 
 type View = 'kanban' | 'table';
 type LeadPatch = Partial<Lead> & { id: string };
@@ -729,15 +730,13 @@ function TableView({
                   </td>
                   <td className="px-3 py-3 text-white/70 text-xs">{leadPhoneLabel(lead)}</td>
                   <td className="px-3 py-3">
-                    <select
+                    <Select
+                      size="sm"
                       value={lead.category || (categories[0]?.key ?? 'cold')}
-                      onChange={(e) => onCategoryChange(lead.id, e.target.value)}
-                      className="text-xs bg-surface-2 text-white/85 border border-white/10 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-white/20"
-                    >
-                      {categories.map((c) => (
-                        <option key={c.key} value={c.key}>{c.label}</option>
-                      ))}
-                    </select>
+                      onChange={(v) => onCategoryChange(lead.id, v)}
+                      options={categories.map((c) => ({ value: c.key, label: c.label }))}
+                      ariaLabel="Categoria do lead"
+                    />
                   </td>
                   <td className="px-3 py-3">
                     <div className="flex flex-wrap gap-1 max-w-[180px]">
