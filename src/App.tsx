@@ -25,6 +25,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<AuthPage />} />
+          <Route path="/cadastro" element={<AuthPage />} />
 
           <Route path="/dashboard" element={<UserLayout />}>
             <Route index element={<DashboardHome />} />

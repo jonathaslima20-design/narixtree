@@ -61,7 +61,7 @@ function Navbar() {
             Login
           </button>
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/cadastro')}
             className="inline-flex items-center gap-1.5 text-sm font-medium bg-white text-black hover:bg-white/90 px-4 py-2 rounded-lg transition-all hover:scale-[1.02]"
           >
             Começar Agora
@@ -139,7 +139,7 @@ function Hero() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/cadastro')}
             className="group inline-flex items-center gap-2 bg-white text-black hover:bg-white/90 font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-white/10 transition-all hover:scale-[1.02]"
           >
             Começar gratuitamente
@@ -507,7 +507,7 @@ function Pricing() {
               </ul>
 
               <button
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/cadastro')}
                 className={`mt-7 w-full font-semibold py-3 rounded-xl transition-all hover:scale-[1.02] ${
                   plan.highlight
                     ? 'bg-white hover:bg-white/90 text-black shadow-lg shadow-white/15'
@@ -549,7 +549,7 @@ function CTA() {
           Crie sua conta gratuita e veja seus leads se transformarem em clientes.
         </p>
         <button
-          onClick={() => navigate('/login')}
+          onClick={() => navigate('/cadastro')}
           className="group mt-8 inline-flex items-center gap-2 bg-white hover:bg-white/90 text-black font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-white/10 transition-all hover:scale-[1.02]"
         >
           Começar Agora
