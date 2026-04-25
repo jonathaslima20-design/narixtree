@@ -47,7 +47,7 @@ export function DashboardHome() {
       const count = allLeads.filter((l) => l.category === cat.key).length;
       const palette = cat.color.match(/text-(\w+)-(\d+)/);
       const colorClass = palette ? `text-${palette[1]}-300` : 'text-white/70';
-      const bgClass = palette ? `bg-${palette[1]}-500/15` : 'bg-white/[0.06]';
+      const bgClass = 'bg-white/[0.08]';
       return { label: cat.label, value: count, iconName: cat.icon, color: colorClass, bg: bgClass };
     }),
   ];
