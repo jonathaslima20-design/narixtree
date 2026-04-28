@@ -14,6 +14,7 @@ import { useLeadCategories } from '../../lib/useLeadCategories';
 import { resolveIcon } from '../../lib/iconMap';
 import { BulkImportLeadsModal } from '../../components/leads/BulkImportLeadsModal';
 import { Select } from '../../components/ui/Select';
+import { normalizeBrPhone } from '../../lib/phoneNormalize';
 
 type View = 'kanban' | 'table';
 type LeadPatch = Partial<Lead> & { id: string };
@@ -185,11 +186,13 @@ export function LeadManagement() {
   async function addLead() {
     if (!addForm.phone.trim()) return;
     setSaving(true);
+    const normalized = normalizeBrPhone(addForm.phone.trim());
+    if (!normalized) { setSaving(false); return; }
     const { data } = await supabase
       .from('leads')
       .insert({
         name: addForm.name.trim(),
-        phone: addForm.phone.trim(),
+        phone: normalized,
         temperature: 'cold',
         user_id: user!.id,
         category: CATEGORIES[0]?.key ?? 'cold',

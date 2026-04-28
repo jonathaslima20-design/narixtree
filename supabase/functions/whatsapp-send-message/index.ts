@@ -17,6 +17,33 @@ function onlyDigits(raw: string): string {
   return (raw || "").replace(/\D/g, "");
 }
 
+function normalizeBrPhone(raw: string): string {
+  const digits = onlyDigits(raw);
+  if (!digits) return "";
+  if (digits.startsWith("55")) {
+    const rest = digits.slice(2);
+    if (rest.length === 10) {
+      const ddd = rest.slice(0, 2);
+      const first = rest.charAt(2);
+      const subscriber = rest.slice(2);
+      if (/[6-9]/.test(first)) return `55${ddd}9${subscriber}`;
+    }
+    return digits;
+  }
+  if (digits.length === 11) {
+    const first = digits.charAt(2);
+    if (/[6-9]/.test(first)) return `55${digits}`;
+  }
+  if (digits.length === 10) {
+    const ddd = digits.slice(0, 2);
+    const first = digits.charAt(2);
+    const subscriber = digits.slice(2);
+    if (/[6-9]/.test(first)) return `55${ddd}9${subscriber}`;
+    return `55${digits}`;
+  }
+  return digits;
+}
+
 function brVariantsWithoutNine(digits: string): string[] {
   // Produce the "without 9" variant for Brazilian mobile numbers so we can
   // probe both representations with Evolution's whatsappNumbers endpoint.
@@ -42,11 +69,13 @@ function brVariantsWithNine(digits: string): string[] {
 function candidateNumbers(phone: string, jid: string): string[] {
   const set = new Set<string>();
   const phoneDigits = onlyDigits(phone);
+  const normalized = normalizeBrPhone(phone);
   const jidDigits = jid && jid.endsWith("@s.whatsapp.net") ? onlyDigits(jid.split("@")[0]) : "";
+  if (normalized) set.add(normalized);
   if (jidDigits) set.add(jidDigits);
   if (phoneDigits) set.add(phoneDigits);
-  for (const v of brVariantsWithoutNine(phoneDigits)) set.add(v);
-  for (const v of brVariantsWithNine(phoneDigits)) set.add(v);
+  for (const v of brVariantsWithoutNine(normalized || phoneDigits)) set.add(v);
+  for (const v of brVariantsWithNine(normalized || phoneDigits)) set.add(v);
   if (jidDigits) {
     for (const v of brVariantsWithoutNine(jidDigits)) set.add(v);
     for (const v of brVariantsWithNine(jidDigits)) set.add(v);
@@ -359,9 +388,10 @@ Deno.serve(async (req: Request) => {
       }
 
       if (!resolvedNumber) {
-        // Fallback: use stored JID digits if it exists, else first candidate.
+        const normalizedPhone = normalizeBrPhone(phoneOriginal);
         const fallback =
           (storedJid.endsWith("@s.whatsapp.net") && onlyDigits(storedJid.split("@")[0])) ||
+          normalizedPhone ||
           candidates[0];
         resolvedNumber = fallback;
         resolvedJid = storedJid || `${fallback}@s.whatsapp.net`;
@@ -378,10 +408,18 @@ Deno.serve(async (req: Request) => {
 
     const numberToSend = resolvedNumber;
 
-    // Cache the verified JID on the lead so future sends skip the probe.
+    // Cache the verified JID and fix unnormalized phone on the lead.
+    const leadPatch: Record<string, unknown> = {};
     if (resolvedJid && resolvedJid !== storedJid && resolvedJid.endsWith("@s.whatsapp.net")) {
+      leadPatch.whatsapp_jid = resolvedJid;
+    }
+    const normalizedPhone = normalizeBrPhone(phoneOriginal);
+    if (normalizedPhone && normalizedPhone !== phoneOriginal) {
+      leadPatch.phone = normalizedPhone;
+    }
+    if (Object.keys(leadPatch).length > 0) {
       try {
-        await admin.from("leads").update({ whatsapp_jid: resolvedJid }).eq("id", leadId);
+        await admin.from("leads").update(leadPatch).eq("id", leadId);
       } catch (_err) {
         // best-effort
       }
