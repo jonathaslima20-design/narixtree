@@ -148,6 +148,7 @@ Deno.serve(async (req: Request) => {
     const body = (await req.json().catch(() => ({}))) as {
       chats?: ChatPayload[];
       category?: string;
+      instance_id?: string;
     };
 
     if (!body.chats || !Array.isArray(body.chats) || body.chats.length === 0) {
@@ -156,11 +157,15 @@ Deno.serve(async (req: Request) => {
 
     const category = body.category || "cold";
 
-    const { data: instance } = await admin
+    const { data: instances } = await admin
       .from("whatsapp_instances")
-      .select("id, profile_name")
+      .select("id, profile_name, status")
       .eq("user_id", user.id)
-      .maybeSingle();
+      .order("created_at", { ascending: true });
+
+    const instance = body.instance_id
+      ? instances?.find((i) => i.id === body.instance_id)
+      : instances?.find((i) => i.status === "connected") || instances?.[0];
     const ownerProfileName =
       (instance?.profile_name as string | null) || "";
 

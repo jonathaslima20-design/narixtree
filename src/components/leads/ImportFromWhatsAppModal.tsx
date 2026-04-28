@@ -102,6 +102,7 @@ export function ImportFromWhatsAppModal({ open, onClose, onComplete }: Props) {
   const { categories, addCategory } = useLeadCategories();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [selectedInstanceId, setSelectedInstanceId] = useState<string>('');
   const [chats, setChats] = useState<ChatEntry[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [search, setSearch] = useState('');
@@ -121,7 +122,17 @@ export function ImportFromWhatsAppModal({ open, onClose, onComplete }: Props) {
   const [pictureStatus, setPictureStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [pictureCount, setPictureCount] = useState(0);
 
-  const connectedInstance = instances.find((i) => i.status === 'connected');
+  const connectedInstances = instances.filter((i) => i.status === 'connected');
+  const activeInstance =
+    connectedInstances.find((i) => i.id === selectedInstanceId) ||
+    connectedInstances[0];
+  const connectedInstance = !!activeInstance;
+
+  useEffect(() => {
+    if (!selectedInstanceId && activeInstance) {
+      setSelectedInstanceId(activeInstance.id);
+    }
+  }, [selectedInstanceId, activeInstance]);
   const effectiveCategory = selectedCategory || categories[0]?.key || 'cold';
 
   const filtered = useMemo(() => {
@@ -169,10 +180,13 @@ export function ImportFromWhatsAppModal({ open, onClose, onComplete }: Props) {
   }
 
   const fetchChats = useCallback(async () => {
+    if (!activeInstance) return;
     setFetchingChats(true);
     setFetchError('');
     try {
-      const data = await callEdgeFunction('whatsapp-list-chats', {});
+      const data = await callEdgeFunction('whatsapp-list-chats', {
+        instance_id: activeInstance.id,
+      });
       const chatsList = (data.chats ?? []) as ChatEntry[];
       setChats(chatsList);
       setSelected(new Set(chatsList.map((c) => c.jid)));
@@ -181,7 +195,7 @@ export function ImportFromWhatsAppModal({ open, onClose, onComplete }: Props) {
     } finally {
       setFetchingChats(false);
     }
-  }, []);
+  }, [activeInstance]);
 
   useEffect(() => {
     if (open && connectedInstance && step === 1 && chats.length === 0 && !fetchingChats && !fetchError) {
@@ -251,6 +265,7 @@ export function ImportFromWhatsAppModal({ open, onClose, onComplete }: Props) {
         const result = await callEdgeFunction('whatsapp-import-selected-chats', {
           chats: batch,
           category: effectiveCategory,
+          instance_id: activeInstance?.id,
         });
         created += (result.created as number) || 0;
         updated += (result.updated as number) || 0;
@@ -293,6 +308,14 @@ export function ImportFromWhatsAppModal({ open, onClose, onComplete }: Props) {
     <Modal open={open} onClose={handleClose} title="Importar do WhatsApp" maxWidth="xl">
       {step === 1 && (
         <StepSelectChats
+          connectedInstances={connectedInstances}
+          activeInstanceId={activeInstance?.id ?? ''}
+          onInstanceChange={(id) => {
+            setSelectedInstanceId(id);
+            setChats([]);
+            setSelected(new Set());
+            setFetchError('');
+          }}
           instancesLoading={instancesLoading}
           connectedInstance={!!connectedInstance}
           fetchingChats={fetchingChats}
@@ -345,6 +368,9 @@ export function ImportFromWhatsAppModal({ open, onClose, onComplete }: Props) {
 /* ------------------------------------------------------------------ */
 
 interface StepSelectChatsProps {
+  connectedInstances: ReturnType<typeof useInstances>['instances'];
+  activeInstanceId: string;
+  onInstanceChange: (id: string) => void;
   instancesLoading: boolean;
   connectedInstance: boolean;
   fetchingChats: boolean;
@@ -374,6 +400,9 @@ interface StepSelectChatsProps {
 }
 
 function StepSelectChats({
+  connectedInstances,
+  activeInstanceId,
+  onInstanceChange,
   instancesLoading,
   connectedInstance,
   fetchingChats,
@@ -471,6 +500,35 @@ function StepSelectChats({
 
   return (
     <div className="space-y-4">
+      {connectedInstances.length > 1 && (
+        <div>
+          <label className="text-xs font-medium text-white/55 block mb-1.5">
+            Instancia do WhatsApp
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {connectedInstances.map((inst) => {
+              const isActive = inst.id === activeInstanceId;
+              const label =
+                inst.label?.trim() || inst.phone_number || inst.instance_name;
+              return (
+                <button
+                  key={inst.id}
+                  type="button"
+                  onClick={() => onInstanceChange(inst.id)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl border transition-all ${
+                    isActive
+                      ? 'border-emerald-400/40 bg-emerald-500/[0.10] text-white'
+                      : 'border-white/10 bg-surface-2 text-white/85 hover:border-white/15'
+                  }`}
+                >
+                  <MessageCircle size={12} /> {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Search + bulk actions */}
       <div className="flex items-center gap-2">
         <div className="relative flex-1">

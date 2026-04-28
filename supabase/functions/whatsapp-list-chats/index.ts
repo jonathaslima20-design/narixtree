@@ -335,18 +335,35 @@ Deno.serve(async (req: Request) => {
 
     const admin = createClient(supabaseUrl, serviceKey);
 
-    const { data: instance } = await admin
+    const url = new URL(req.url);
+    const requestedInstanceId =
+      url.searchParams.get("instance_id") ||
+      (await req
+        .clone()
+        .json()
+        .catch(() => ({}))
+        .then((b: Record<string, unknown>) => b?.instance_id as string | undefined)) ||
+      "";
+
+    const { data: instances } = await admin
       .from("whatsapp_instances")
       .select(
         "id, instance_name, phone_number, profile_name, status, evolution_api_key",
       )
       .eq("user_id", user.id)
-      .maybeSingle();
+      .order("created_at", { ascending: true });
 
-    if (!instance)
+    if (!instances || instances.length === 0)
       return json(400, {
         error: "Nenhuma instancia do WhatsApp encontrada",
       });
+
+    const instance = requestedInstanceId
+      ? instances.find((i) => i.id === requestedInstanceId)
+      : instances.find((i) => i.status === "connected") || instances[0];
+
+    if (!instance)
+      return json(400, { error: "Instancia nao encontrada" });
     if (instance.status !== "connected")
       return json(400, {
         error: "Conecte o WhatsApp antes de buscar os chats",
