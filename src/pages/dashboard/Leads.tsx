@@ -334,6 +334,7 @@ export function Leads() {
 
   const filtered = useMemo(() => {
     return leads
+      .filter((l) => (l.message_count ?? 0) > 0)
       .filter((l) => {
         if (filter === 'unread') return (l.unread_count ?? 0) > 0 && !l.is_archived;
         if (filter === 'archived') return l.is_archived;
@@ -396,7 +397,7 @@ export function Leads() {
             )}
           </h1>
           <p className="text-xs text-white/55 mt-0.5">
-            {leads.length} contatos
+            {filtered.length} conversa{filtered.length !== 1 ? 's' : ''}
           </p>
         </div>
         <button

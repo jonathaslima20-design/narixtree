@@ -78,6 +78,8 @@ export function BulkImportLeadsModal({ open, onClose, onComplete }: Props) {
   const [resultUpdated, setResultUpdated] = useState(0);
   const [resultSkipped, setResultSkipped] = useState(0);
   const [resultErrors, setResultErrors] = useState(0);
+  const [pictureStatus, setPictureStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+  const [pictureCount, setPictureCount] = useState(0);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -110,6 +112,8 @@ export function BulkImportLeadsModal({ open, onClose, onComplete }: Props) {
     setResultUpdated(0);
     setResultSkipped(0);
     setResultErrors(0);
+    setPictureStatus('idle');
+    setPictureCount(0);
   }
 
   function handleClose() {
@@ -304,6 +308,35 @@ export function BulkImportLeadsModal({ open, onClose, onComplete }: Props) {
     setImporting(false);
     setStep(3);
     onComplete?.();
+
+    if (insertedCount + updatedCount > 0) {
+      triggerPictureBackfill();
+    }
+  }
+
+  async function triggerPictureBackfill() {
+    setPictureStatus('loading');
+    try {
+      const { data: session } = await supabase.auth.getSession();
+      const token = session?.session?.access_token;
+      if (!token) { setPictureStatus('error'); return; }
+
+      const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/whatsapp-backfill-pictures`;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ force: false }),
+      });
+      if (!res.ok) { setPictureStatus('error'); return; }
+      const result = await res.json();
+      setPictureCount(result.found_pictures ?? 0);
+      setPictureStatus('done');
+    } catch {
+      setPictureStatus('error');
+    }
   }
 
   return (
@@ -361,6 +394,8 @@ export function BulkImportLeadsModal({ open, onClose, onComplete }: Props) {
           resultUpdated={resultUpdated}
           resultSkipped={resultSkipped}
           resultErrors={resultErrors}
+          pictureStatus={pictureStatus}
+          pictureCount={pictureCount}
           onClose={handleClose}
         />
       )}
@@ -780,10 +815,12 @@ interface StepResultProps {
   resultUpdated: number;
   resultSkipped: number;
   resultErrors: number;
+  pictureStatus: 'idle' | 'loading' | 'done' | 'error';
+  pictureCount: number;
   onClose: () => void;
 }
 
-function StepResult({ resultNew, resultUpdated, resultSkipped, resultErrors, onClose }: StepResultProps) {
+function StepResult({ resultNew, resultUpdated, resultSkipped, resultErrors, pictureStatus, pictureCount, onClose }: StepResultProps) {
   const total = resultNew + resultUpdated;
 
   return (
@@ -829,6 +866,36 @@ function StepResult({ resultNew, resultUpdated, resultSkipped, resultErrors, onC
           </div>
         )}
       </div>
+
+      {pictureStatus !== 'idle' && (
+        <div className="p-3 border border-white/10 rounded-xl flex items-center gap-3">
+          {pictureStatus === 'loading' && (
+            <>
+              <RefreshCw size={16} className="text-white/40 animate-spin shrink-0" />
+              <div>
+                <p className="text-sm font-medium text-white/85">Buscando fotos de perfil...</p>
+                <p className="text-xs text-white/55">Isso pode levar alguns segundos</p>
+              </div>
+            </>
+          )}
+          {pictureStatus === 'done' && (
+            <>
+              <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+              <p className="text-sm text-white/85">
+                {pictureCount > 0
+                  ? `${pictureCount} foto${pictureCount !== 1 ? 's' : ''} de perfil encontrada${pictureCount !== 1 ? 's' : ''}`
+                  : 'Nenhuma foto de perfil encontrada'}
+              </p>
+            </>
+          )}
+          {pictureStatus === 'error' && (
+            <>
+              <AlertTriangle size={16} className="text-amber-500 shrink-0" />
+              <p className="text-sm text-white/70">Nao foi possivel buscar fotos. Verifique se o WhatsApp esta conectado.</p>
+            </>
+          )}
+        </div>
+      )}
 
       <div className="flex justify-center pt-2">
         <Button onClick={onClose}>
