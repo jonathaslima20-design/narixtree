@@ -13,6 +13,8 @@ import { leadDisplayName, leadPhoneLabel, isPrivateContact } from '../../lib/lea
 import { useLeadCategories } from '../../lib/useLeadCategories';
 import { resolveIcon } from '../../lib/iconMap';
 import { BulkImportLeadsModal } from '../../components/leads/BulkImportLeadsModal';
+import { ImportMethodPicker } from '../../components/leads/ImportMethodPicker';
+import { ImportFromWhatsAppModal } from '../../components/leads/ImportFromWhatsAppModal';
 import { Select } from '../../components/ui/Select';
 import { normalizeBrPhone } from '../../lib/phoneNormalize';
 
@@ -80,6 +82,8 @@ export function LeadManagement() {
   const [dragOverCat, setDragOverCat] = useState<string | null>(null);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [showBulkImport, setShowBulkImport] = useState(false);
+  const [showMethodPicker, setShowMethodPicker] = useState(false);
+  const [showWhatsAppImport, setShowWhatsAppImport] = useState(false);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -275,7 +279,7 @@ export function LeadManagement() {
             <Button variant="secondary" size="sm" onClick={exportCSV}>
               <Download size={14} /> <span className="hidden sm:inline">Exportar CSV</span><span className="sm:hidden">CSV</span>
             </Button>
-            <Button variant="secondary" size="sm" onClick={() => setShowBulkImport(true)}>
+            <Button variant="secondary" size="sm" onClick={() => setShowMethodPicker(true)}>
               <Upload size={14} /> <span className="hidden sm:inline">Importar leads</span><span className="sm:hidden">Importar</span>
             </Button>
             <Button size="sm" onClick={() => setShowAdd(true)}>
@@ -430,9 +434,21 @@ export function LeadManagement() {
         </div>
       </Modal>
 
+      <ImportMethodPicker
+        open={showMethodPicker}
+        onClose={() => setShowMethodPicker(false)}
+        onPickFile={() => setShowBulkImport(true)}
+        onPickWhatsApp={() => setShowWhatsAppImport(true)}
+      />
+
       <BulkImportLeadsModal
         open={showBulkImport}
         onClose={() => setShowBulkImport(false)}
+      />
+
+      <ImportFromWhatsAppModal
+        open={showWhatsAppImport}
+        onClose={() => setShowWhatsAppImport(false)}
       />
     </div>
   );
