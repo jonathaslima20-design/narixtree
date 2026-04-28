@@ -36,6 +36,13 @@ import { useSubscriptionCtx } from '../../lib/SubscriptionContext';
 import { PricingModal } from '../../components/ui/PricingModal';
 import { RangeSlider } from '../../components/ui/RangeSlider';
 import { useInstances, instanceDisplayName } from '../../lib/useInstances';
+import {
+  useCampaignDraft,
+  uploadDraftMedia,
+  getDraftMediaSignedUrl,
+  deleteDraftMedia,
+  CampaignDraftMedia,
+} from '../../lib/useCampaignDraft';
 
 const STEPS = ['Mensagem', 'Destinatários', 'Agendamento', 'Revisão'];
 
@@ -116,6 +123,7 @@ export function CampaignBuilder() {
   const { instances } = useInstances();
   const connectedInstances = instances.filter((i) => i.status === 'connected');
   const [step, setStep] = useState(0);
+  const [maxStepReached, setMaxStepReached] = useState(0);
   const [form, setForm] = useState<CampaignForm>(INITIAL_FORM);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
@@ -123,15 +131,104 @@ export function CampaignBuilder() {
   const [submitting, setSubmitting] = useState(false);
   const [leadSearch, setLeadSearch] = useState('');
   const [showPaywall, setShowPaywall] = useState(false);
+  const [draftRestored, setDraftRestored] = useState(false);
+  const [draftMedia, setDraftMedia] = useState<CampaignDraftMedia>({ path: '', type: '', filename: '' });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const recorder = useAudioRecorder();
   const isRecording = recorder.state === 'recording' || recorder.state === 'requesting';
+  const { draft, loading: draftLoading, saveStatus, saveDraft, clearDraft } = useCampaignDraft();
+  const hasRestoredRef = useRef(false);
 
   useEffect(() => {
     return () => {
       if (form.audioObjectUrl) URL.revokeObjectURL(form.audioObjectUrl);
     };
   }, []);
+
+  // Restore draft on mount
+  useEffect(() => {
+    if (draftLoading || hasRestoredRef.current) return;
+    hasRestoredRef.current = true;
+    if (!draft) return;
+
+    const payload = (draft.payload || {}) as Partial<CampaignForm> & {
+      excludedLeadIds?: string[];
+    };
+
+    const restored: CampaignForm = {
+      ...INITIAL_FORM,
+      ...payload,
+      mediaFile: null,
+      mediaPreview: '',
+      audioObjectUrl: '',
+      audioDurationSeconds: payload.audioDurationSeconds ?? 0,
+      excludedLeadIds: new Set(payload.excludedLeadIds ?? []),
+    };
+
+    setForm(restored);
+    setStep(draft.current_step ?? 0);
+    setMaxStepReached(draft.max_step_reached ?? 0);
+    setDraftMedia({
+      path: draft.media_path || '',
+      type: draft.media_type || '',
+      filename: draft.media_filename || '',
+    });
+
+    // Restore media preview from storage
+    if (draft.media_path) {
+      getDraftMediaSignedUrl(draft.media_path).then((url) => {
+        if (!url) return;
+        setForm((f) => {
+          if (draft.media_type.startsWith('image/')) {
+            return { ...f, mediaPreview: url };
+          }
+          if (draft.media_type.startsWith('audio/')) {
+            return { ...f, audioObjectUrl: url };
+          }
+          return f;
+        });
+      });
+    }
+
+    setDraftRestored(true);
+  }, [draft, draftLoading]);
+
+  // Autosave when state changes
+  useEffect(() => {
+    if (draftLoading) return;
+    if (!hasRestoredRef.current) return;
+    if (submitting) return;
+
+    const payload: Record<string, unknown> = {
+      name: form.name,
+      message_type: form.message_type,
+      content: form.content,
+      caption: form.caption,
+      audioDurationSeconds: form.audioDurationSeconds,
+      filter_tags: form.filter_tags,
+      filter_category: form.filter_category,
+      exclude_recent_days: form.exclude_recent_days,
+      excludedLeadIds: Array.from(form.excludedLeadIds),
+      schedule_mode: form.schedule_mode,
+      scheduled_date: form.scheduled_date,
+      scheduled_time: form.scheduled_time,
+      send_window_start: form.send_window_start,
+      send_window_end: form.send_window_end,
+      delay_ms: form.delay_ms,
+      delay_ms_max: form.delay_ms_max,
+      instance_ids: form.instance_ids,
+    };
+
+    saveDraft(payload, step, maxStepReached, draftMedia);
+  }, [
+    draftLoading,
+    submitting,
+    form,
+    step,
+    maxStepReached,
+    draftMedia,
+    saveDraft,
+  ]);
 
   // Fetch all leads for audience selector
   const fetchLeads = useCallback(async () => {
@@ -176,6 +273,15 @@ export function CampaignBuilder() {
     setForm((f) => ({ ...f, ...patch }));
   }
 
+  async function persistMediaFile(file: File) {
+    if (!user) return;
+    if (draftMedia.path) {
+      deleteDraftMedia(draftMedia.path).catch(() => {});
+    }
+    const uploaded = await uploadDraftMedia(user.id, file);
+    if (uploaded) setDraftMedia(uploaded);
+  }
+
   async function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -191,12 +297,18 @@ export function CampaignBuilder() {
     } else {
       updateForm({ mediaFile: file, mediaPreview: '', audioObjectUrl: '', audioDurationSeconds: 0 });
     }
+
+    persistMediaFile(file).catch(() => {});
   }
 
   function clearMedia() {
     if (form.audioObjectUrl) URL.revokeObjectURL(form.audioObjectUrl);
     if (form.mediaPreview) URL.revokeObjectURL(form.mediaPreview);
     updateForm({ mediaFile: null, mediaPreview: '', audioObjectUrl: '', audioDurationSeconds: 0 });
+    if (draftMedia.path) {
+      deleteDraftMedia(draftMedia.path).catch(() => {});
+    }
+    setDraftMedia({ path: '', type: '', filename: '' });
   }
 
   async function startCampaignRecording() {
@@ -211,6 +323,7 @@ export function CampaignBuilder() {
     const file = new File([result.blob], `voice-note.${ext}`, { type: result.mimeType });
     const objectUrl = URL.createObjectURL(result.blob);
     updateForm({ mediaFile: file, audioObjectUrl: objectUrl, audioDurationSeconds: result.durationSeconds, mediaPreview: '' });
+    persistMediaFile(file).catch(() => {});
   }
 
   function cancelCampaignRecording() {
@@ -264,12 +377,16 @@ export function CampaignBuilder() {
     setSubmitting(true);
 
     try {
-      // Upload media if needed
+      // Upload media if needed -- reuse draft media if it was already uploaded
       let mediaUrl = '';
       let mediaType = '';
       let mediaFilename = '';
 
-      if (form.mediaFile) {
+      if (draftMedia.path) {
+        mediaUrl = draftMedia.path;
+        mediaType = draftMedia.type;
+        mediaFilename = draftMedia.filename;
+      } else if (form.mediaFile) {
         const ext = form.mediaFile.name.split('.').pop() || 'bin';
         const path = `${user.id}/${crypto.randomUUID()}.${ext}`;
         const { error: uploadErr } = await supabase.storage
@@ -333,12 +450,35 @@ export function CampaignBuilder() {
         await supabase.from('campaign_recipients').insert(batch);
       }
 
+      await clearDraft();
       navigate(`/dashboard/campaigns/${campaign.id}`);
     } catch (err) {
       console.error(err);
     } finally {
       setSubmitting(false);
     }
+  }
+
+  async function discardDraftAndExit() {
+    if (draftMedia.path) {
+      deleteDraftMedia(draftMedia.path).catch(() => {});
+    }
+    await clearDraft();
+    navigate('/dashboard/campaigns');
+  }
+
+  function startFresh() {
+    if (draftMedia.path) {
+      deleteDraftMedia(draftMedia.path).catch(() => {});
+    }
+    if (form.audioObjectUrl) URL.revokeObjectURL(form.audioObjectUrl);
+    if (form.mediaPreview) URL.revokeObjectURL(form.mediaPreview);
+    clearDraft();
+    setForm(INITIAL_FORM);
+    setStep(0);
+    setMaxStepReached(0);
+    setDraftMedia({ path: '', type: '', filename: '' });
+    setDraftRestored(false);
   }
 
   const estimatedSeconds = filteredLeads.length * (form.delay_ms / 1000);
@@ -355,33 +495,74 @@ export function CampaignBuilder() {
           >
             <ArrowLeft size={18} />
           </button>
-          <div>
-            <h1 className="text-lg sm:text-xl font-bold text-white">Nova Campanha</h1>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3">
+              <h1 className="text-lg sm:text-xl font-bold text-white">Nova Campanha</h1>
+              {saveStatus === 'saving' && (
+                <span className="text-[11px] text-white/45">Salvando...</span>
+              )}
+              {saveStatus === 'saved' && (
+                <span className="text-[11px] text-emerald-400 inline-flex items-center gap-1">
+                  <Check size={11} /> Rascunho salvo
+                </span>
+              )}
+              {saveStatus === 'error' && (
+                <span className="text-[11px] text-amber-400">Falha ao salvar</span>
+              )}
+            </div>
             <p className="text-xs sm:text-sm text-white/55 hidden sm:block">Crie e envie mensagens em massa para seus leads</p>
           </div>
         </div>
 
+        {draftRestored && (
+          <div className="mb-4 p-3 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 min-w-0">
+              <FileText size={14} className="text-emerald-400 shrink-0" />
+              <p className="text-xs text-white/85 truncate">
+                Rascunho restaurado. Voce pode continuar de onde parou.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                if (confirm('Descartar o rascunho e comecar uma nova campanha?')) startFresh();
+              }}
+              className="text-xs font-medium text-white/55 hover:text-white shrink-0"
+            >
+              Comecar do zero
+            </button>
+          </div>
+        )}
+
         {/* Step indicator */}
         <div className="flex items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8 overflow-x-auto pb-1">
-          {STEPS.map((s, i) => (
-            <div key={s} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <button
-                onClick={() => i < step && setStep(i)}
-                disabled={i > step}
-                className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                  i === step
-                    ? 'bg-white/[0.10] text-white'
-                    : i < step
-                      ? 'bg-emerald-500/10 text-emerald-400 cursor-pointer hover:bg-emerald-500/15'
-                      : 'bg-white/[0.06] text-white/40 cursor-not-allowed'
-                }`}
-              >
-                {i < step ? <Check size={14} /> : <span className="w-5 h-5 rounded-full bg-current/10 flex items-center justify-center text-xs">{i + 1}</span>}
-                <span className="hidden sm:inline">{s}</span>
-              </button>
-              {i < STEPS.length - 1 && <div className="w-4 sm:w-8 h-px bg-white/[0.10]" />}
-            </div>
-          ))}
+          {STEPS.map((s, i) => {
+            const reachable = i <= maxStepReached;
+            const isActive = i === step;
+            return (
+              <div key={s} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <button
+                  onClick={() => reachable && i !== step && setStep(i)}
+                  disabled={!reachable}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                    isActive
+                      ? 'bg-white/[0.10] text-white'
+                      : reachable
+                        ? 'bg-emerald-500/10 text-emerald-400 cursor-pointer hover:bg-emerald-500/15'
+                        : 'bg-white/[0.06] text-white/40 cursor-not-allowed'
+                  }`}
+                >
+                  {!isActive && reachable ? (
+                    <Check size={14} />
+                  ) : (
+                    <span className="w-5 h-5 rounded-full bg-current/10 flex items-center justify-center text-xs">{i + 1}</span>
+                  )}
+                  <span className="hidden sm:inline">{s}</span>
+                </button>
+                {i < STEPS.length - 1 && <div className="w-4 sm:w-8 h-px bg-white/[0.10]" />}
+              </div>
+            );
+          })}
         </div>
 
         <AnimatePresence mode="wait">
@@ -1207,7 +1388,22 @@ export function CampaignBuilder() {
         <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/10">
           <Button
             variant="ghost"
-            onClick={() => (step === 0 ? navigate('/dashboard/campaigns') : setStep(step - 1))}
+            onClick={() => {
+              if (step !== 0) {
+                setStep(step - 1);
+                return;
+              }
+              const hasContent =
+                form.name.trim() ||
+                form.content.trim() ||
+                form.mediaFile ||
+                draftMedia.path;
+              if (hasContent) {
+                if (confirm('Sair e descartar o rascunho?')) discardDraftAndExit();
+              } else {
+                discardDraftAndExit();
+              }
+            }}
           >
             <ArrowLeft size={16} />
             {step === 0 ? 'Cancelar' : 'Voltar'}
@@ -1221,7 +1417,15 @@ export function CampaignBuilder() {
               </Button>
             )}
             {step < 3 ? (
-              <Button onClick={() => setStep(step + 1)} disabled={!canProceed()} fullWidth>
+              <Button
+                onClick={() => {
+                  const next = step + 1;
+                  setStep(next);
+                  setMaxStepReached((m) => Math.max(m, next));
+                }}
+                disabled={!canProceed()}
+                fullWidth
+              >
                 Próximo
                 <ArrowRight size={16} />
               </Button>
