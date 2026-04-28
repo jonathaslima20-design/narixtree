@@ -926,7 +926,7 @@ Deno.serve(async (req: Request) => {
         } else if (existingLead) {
           const newCount = (existingLead.message_count ?? 0) + 1;
           const newUnread = fromMe
-            ? existingLead.unread_count ?? 0
+            ? 0
             : (existingLead.unread_count ?? 0) + 1;
 
           const updates: Record<string, unknown> = {

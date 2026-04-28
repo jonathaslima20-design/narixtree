@@ -230,6 +230,26 @@ export function Leads() {
           const msg = payload.new as Message;
           const isIncoming = msg.direction === 'in';
 
+          if (!isIncoming) {
+            setLeads((l) => {
+              const idx = l.findIndex((x) => x.id === msg.lead_id);
+              if (idx === -1) return l;
+              const current = l[idx];
+              const preview = msg.content || (msg.media_type === 'audio' ? 'Mensagem de voz' : current.last_message);
+              const updated: Lead = {
+                ...current,
+                last_message: preview,
+                last_activity_at: msg.created_at,
+                message_count: (current.message_count || 0) + 1,
+                unread_count: 0,
+              };
+              const next = [...l];
+              next[idx] = updated;
+              return sortLeads(next);
+            });
+            return;
+          }
+
           if (isIncoming) {
             setLeads((l) => {
               const idx = l.findIndex((x) => x.id === msg.lead_id);

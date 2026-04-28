@@ -542,6 +542,7 @@ Deno.serve(async (req: Request) => {
         last_message: content,
         last_activity_at: new Date().toISOString(),
         message_count: (lead.message_count || 0) + 1,
+        unread_count: 0,
         ...(leadInstanceId ? {} : { instance_id: (instance as { id: string }).id }),
       })
       .eq("id", leadId);
