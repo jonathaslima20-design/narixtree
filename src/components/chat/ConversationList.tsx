@@ -56,18 +56,18 @@ export function ConversationList({
     { key: 'archived', label: 'Arquivados' },
   ];
 
-  const activityRef = useRef<Map<string, string | undefined>>(new Map());
+  const unreadRef = useRef<Map<string, number>>(new Map());
   const [flashing, setFlashing] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const changed: string[] = [];
     for (const lead of leads) {
-      const prev = activityRef.current.get(lead.id);
-      const curr = lead.last_activity_at || lead.updated_at;
-      if (prev !== undefined && prev !== curr && (lead.unread_count ?? 0) > 0) {
+      const prevUnread = unreadRef.current.get(lead.id);
+      const currUnread = lead.unread_count ?? 0;
+      if (prevUnread !== undefined && currUnread > prevUnread) {
         changed.push(lead.id);
       }
-      activityRef.current.set(lead.id, curr);
+      unreadRef.current.set(lead.id, currUnread);
     }
     if (changed.length > 0) {
       setFlashing((prev) => {

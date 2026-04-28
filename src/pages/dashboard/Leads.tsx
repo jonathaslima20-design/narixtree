@@ -228,30 +228,31 @@ export function Leads() {
         { event: 'INSERT', schema: 'public', table: 'messages', filter: `user_id=eq.${user!.id}` },
         (payload) => {
           const msg = payload.new as Message;
-          setLeads((l) => {
-            const idx = l.findIndex((x) => x.id === msg.lead_id);
-            if (idx === -1) return l;
-            const current = l[idx];
-            const isOpen = selectedIdRef.current === msg.lead_id && document.visibilityState === 'visible';
-            const preview = msg.content || (msg.media_type === 'audio' ? 'Mensagem de voz' : current.last_message);
-            const updated: Lead = {
-              ...current,
-              last_message: preview,
-              last_activity_at: msg.created_at,
-              message_count: (current.message_count || 0) + 1,
-              unread_count:
-                msg.direction === 'in' && !isOpen ? (current.unread_count ?? 0) + 1 : current.unread_count ?? 0,
-            };
-            const next = [...l];
-            next[idx] = updated;
-            return sortLeads(next);
-          });
+          const isIncoming = msg.direction === 'in';
 
-          if (selectedIdRef.current === msg.lead_id && msg.direction === 'in' && document.visibilityState === 'visible') {
-            supabase.from('leads').update({ unread_count: 0 }).eq('id', msg.lead_id).then(() => {});
-          }
+          if (isIncoming) {
+            setLeads((l) => {
+              const idx = l.findIndex((x) => x.id === msg.lead_id);
+              if (idx === -1) return l;
+              const current = l[idx];
+              const isOpen = selectedIdRef.current === msg.lead_id && document.visibilityState === 'visible';
+              const preview = msg.content || (msg.media_type === 'audio' ? 'Mensagem de voz' : current.last_message);
+              const updated: Lead = {
+                ...current,
+                last_message: preview,
+                last_activity_at: msg.created_at,
+                message_count: (current.message_count || 0) + 1,
+                unread_count: isOpen ? 0 : (current.unread_count ?? 0) + 1,
+              };
+              const next = [...l];
+              next[idx] = updated;
+              return sortLeads(next);
+            });
 
-          if (msg.direction === 'in') {
+            if (selectedIdRef.current === msg.lead_id && document.visibilityState === 'visible') {
+              supabase.from('leads').update({ unread_count: 0 }).eq('id', msg.lead_id).then(() => {});
+            }
+
             const isOpen = selectedIdRef.current === msg.lead_id && document.visibilityState === 'visible';
             if (!isOpen) {
               const lead = leadsRef.current.find((x) => x.id === msg.lead_id);
