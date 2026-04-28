@@ -94,10 +94,6 @@ export function CampaignDetail() {
     const error = await startSending();
     if (error) {
       setSendError(error);
-      await supabase.from('campaigns').update({
-        status: 'paused',
-        updated_at: new Date().toISOString(),
-      }).eq('id', campaign.id);
     }
     setSending(false);
   }

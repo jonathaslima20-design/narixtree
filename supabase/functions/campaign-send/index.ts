@@ -228,12 +228,13 @@ Deno.serve(async (req: Request) => {
     }
 
     if (liveInstances.length === 0) {
-      await admin
-        .from("campaigns")
-        .update({ status: "paused", updated_at: new Date().toISOString() })
-        .eq("id", campaignId);
       return json(409, {
-        error: "Nenhuma instância conectada disponível. Campanha pausada.",
+        error: "Nenhuma instância conectada disponível. Tentando novamente em breve.",
+        retryable: true,
+        completed: false,
+        sent: 0,
+        failed: 0,
+        remaining: -1,
       });
     }
 
@@ -257,6 +258,13 @@ Deno.serve(async (req: Request) => {
         }
       }
     }
+
+    // Reset recipients stuck in "sending" from a previous interrupted batch
+    await admin
+      .from("campaign_recipients")
+      .update({ status: "pending" })
+      .eq("campaign_id", campaignId)
+      .eq("status", "sending");
 
     const { data: recipients } = await admin
       .from("campaign_recipients")
@@ -307,15 +315,16 @@ Deno.serve(async (req: Request) => {
     let sentCount = 0;
     let failedCount = 0;
     let rrIndex = 0;
+    let breakReason: "budget" | "window" | "user_stopped" | "" = "";
 
     for (const recipient of recipients) {
       const ctx = liveInstances[rrIndex % liveInstances.length];
       rrIndex++;
       const instanceName = ctx.instance_name;
       const evoHeaders = ctx.headers;
-      if (Date.now() - startTime > BUDGET_MS) break;
+      if (Date.now() - startTime > BUDGET_MS) { breakReason = "budget"; break; }
 
-      if (!isWithinWindow(campaign.send_window_start, campaign.send_window_end)) break;
+      if (!isWithinWindow(campaign.send_window_start, campaign.send_window_end)) { breakReason = "window"; break; }
 
       const { data: freshCampaign } = await admin
         .from("campaigns")
@@ -328,6 +337,7 @@ Deno.serve(async (req: Request) => {
         freshCampaign.status === "paused" ||
         freshCampaign.status === "cancelled"
       ) {
+        breakReason = "user_stopped";
         break;
       }
 
@@ -551,15 +561,19 @@ Deno.serve(async (req: Request) => {
       })
       .eq("id", campaignId);
 
+    const retryable = !isComplete && breakReason !== "user_stopped";
+
     return json(200, {
       completed: isComplete,
       sent: sentCount,
       failed: failedCount,
       remaining: finalPending,
+      retryable,
+      break_reason: breakReason || undefined,
       elapsed_ms: Date.now() - startTime,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Erro desconhecido";
-    return json(500, { error: message });
+    return json(500, { error: message, retryable: true });
   }
 });
